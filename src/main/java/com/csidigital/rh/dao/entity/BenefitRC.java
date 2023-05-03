@@ -1,6 +1,7 @@
 package com.csidigital.rh.dao.entity;
 
 import com.csidigital.rh.shared.enumeration.ContractBenifitType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,8 @@ public class BenefitRC {
     @Column(name = "contractBenifitType")
     private ContractBenifitType contractBenifitType;
 
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_contract")
     private Contract contract;

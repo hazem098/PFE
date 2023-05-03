@@ -1,8 +1,7 @@
 package com.csidigital.rh.management.service.impl;
 
-import com.csidigital.rh.dao.entity.Certification;
-import com.csidigital.rh.dao.entity.Contract;
-import com.csidigital.rh.dao.entity.Resource;
+import com.csidigital.rh.dao.entity.*;
+import com.csidigital.rh.dao.repository.ArticleUpdatedRepository;
 import com.csidigital.rh.dao.repository.CertificationRepository;
 import com.csidigital.rh.dao.repository.ContractRepository;
 import com.csidigital.rh.dao.repository.ResourceRepository;
@@ -28,23 +27,60 @@ public class ContractImpl implements ContractService {
     @Autowired
     private ContractRepository contractRepository;
     @Autowired
+    private ArticleUpdatedRepository articleUpdatedRepository;
+    @Autowired
 
     private ResourceRepository resourceRepository;
     @Autowired
     private ModelMapper modelMapper;
 
+
+    /*
     @Override
+    @Transactional
     public ContractResponse createContract(ContractRequest request) {
-       Resource resource = null;
+        List<ArticleUpdated> articleUpdatedList = new ArrayList<>();
+        articleUpdatedList = request.getArticles();
+        Resource resource = null;
        if (request.getResourceId() != null) {
            resource = resourceRepository.findById(request.getResourceId())
                    .orElseThrow();}
 
         Contract contract = modelMapper.map(request, Contract.class);
 
-      contract.setResource(resource);
-      contract.setContractStatus(Status.STILL_PENDING);
+       ArticleUpdated articleUpdated = modelMapper.map(request ,ArticleUpdated.class);
+
+        articleUpdatedList.add(articleUpdated);
+        contract.setArticles( articleUpdatedList);
+        contract.setResource(resource);
+        contract.setContractStatus(Status.STILL_PENDING);
         Contract contractSaved = contractRepository.save(contract);
+
+       List<ArticleUpdated>  articlesUpdatedSaved = articleUpdatedRepository.saveAll(articleUpdatedList);
+
+        return modelMapper.map(contractSaved, ContractResponse.class);
+    }
+*/
+    @Override
+    @Transactional
+    public ContractResponse createContract(ContractRequest request) {
+        Resource resource = null;
+        if (request.getResourceId() != null) {
+            resource = resourceRepository.findById(request.getResourceId())
+                    .orElseThrow();
+        }
+
+        Contract contract = modelMapper.map(request, Contract.class);
+        contract.setContractStatus(Status.STILL_PENDING);
+        Contract contractSaved = contractRepository.save(contract);
+
+
+        for (int i =0 ; i< request.getArticles().size(); i++) {
+            request.getArticles().get(i).setContract(contract);
+            request.getArticles().get(i).setId(null);
+            articleUpdatedRepository.save(request.getArticles().get(i));
+       }
+
         return modelMapper.map(contractSaved, ContractResponse.class);
     }
 

@@ -24,7 +24,4 @@ public class Article {
     private String description;
 
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "articles")
-    private List<Contract> contracts = new ArrayList<>();
 }

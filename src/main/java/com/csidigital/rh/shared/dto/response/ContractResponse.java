@@ -1,6 +1,7 @@
 package com.csidigital.rh.shared.dto.response;
 
 import com.csidigital.rh.dao.entity.Article;
+import com.csidigital.rh.dao.entity.ArticleUpdated;
 import com.csidigital.rh.dao.entity.BenefitRC;
 import com.csidigital.rh.dao.entity.ExceptionalFee;
 import com.csidigital.rh.shared.enumeration.Status;
@@ -24,8 +25,7 @@ public class ContractResponse {
     private String contractIntroduction;
     private LocalDate contractDate;
     private Byte[] entrepriseSignature;
-
-    private List<Article> articles ;
+    private List<ArticleUpdated> articles ;
     private String commentContract;
     private Status contractStatus;
     private List<BenefitRC> benefitRCSList;

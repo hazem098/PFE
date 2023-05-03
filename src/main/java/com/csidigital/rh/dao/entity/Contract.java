@@ -45,19 +45,18 @@ public class Contract {
     @JsonIgnore
     @ManyToOne @JoinColumn(name = "id_resource")
     private Resource resource;
-/*
-    @OneToMany(mappedBy = "contract")
-    private List<Article> articles;*/
+
+
+   // @JsonIgnore
+    @OneToMany(mappedBy = "contract",cascade = CascadeType.MERGE)
+    private List<ArticleUpdated> articles = new ArrayList<ArticleUpdated>();
+
+
     @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-        name = "AssContractArticle",
-        joinColumns = @JoinColumn(name = "id_contract"),
-        inverseJoinColumns = @JoinColumn(name = "id_article"))
-    private List<Article> articles = new ArrayList<>();
     @OneToMany(mappedBy = "contract")
     private List<BenefitRC> benefitRCSList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "contract")
     private List< ExceptionalFee>  ExceptionalFeeList;
 

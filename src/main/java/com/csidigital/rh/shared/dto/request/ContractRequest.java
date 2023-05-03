@@ -1,6 +1,7 @@
 package com.csidigital.rh.shared.dto.request;
 
 import com.csidigital.rh.dao.entity.Article;
+import com.csidigital.rh.dao.entity.ArticleUpdated;
 import com.csidigital.rh.dao.entity.BenefitRC;
 import com.csidigital.rh.dao.entity.ExceptionalFee;
 import com.csidigital.rh.shared.enumeration.Status;
@@ -25,7 +26,8 @@ public class ContractRequest {
     private String commentContract;
     private String contractIntroduction;
 
-    private List<Article> articles ;
+
+    private List<ArticleUpdated> articles  ;
     private Status contractStatus;
     private List<BenefitRC> benefitRCSList;
     private List<ExceptionalFee>  ExceptionalFeeList;

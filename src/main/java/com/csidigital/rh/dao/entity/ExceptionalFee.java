@@ -2,6 +2,7 @@ package com.csidigital.rh.dao.entity;
 
 import com.csidigital.rh.shared.enumeration.Currency;
 import com.csidigital.rh.shared.enumeration.FeeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,6 +25,8 @@ public class ExceptionalFee {
     private Currency currency;
     private String name;
 
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_contract")
     private Contract contract;

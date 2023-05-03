@@ -1,6 +1,7 @@
 package com.csidigital.rh.dao.entity;
 
 import com.csidigital.rh.shared.enumeration.Provenance;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Candidate{
     private String employeeSerialNumber;
 
 
+    @JsonIgnore
     @OneToMany(mappedBy = "candidate")
     private List<OfferCandidate> offerCandidateList;
 
