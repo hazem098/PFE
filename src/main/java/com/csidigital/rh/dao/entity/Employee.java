@@ -52,6 +52,7 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private WorkLocation workLocation;
 
+    private String locationName;
 
     @Enumerated(EnumType.STRING)
     private Departement departement;

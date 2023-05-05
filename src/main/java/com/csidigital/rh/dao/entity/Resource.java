@@ -26,6 +26,7 @@ public class Resource extends Employee{
     private Long productivity;
     private String nationalIdentity;
     private LocalDate recruitmentDate;
+    private Boolean isEmployee;
 
     @OneToMany(mappedBy = "resource")
     private List<Contract> contractsList;

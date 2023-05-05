@@ -38,6 +38,9 @@ public class EmployeeResponse {
     @Enumerated(EnumType.STRING)
     private WorkLocation workLocation;
 
+
+    private String locationName;
+
     private String serialNumber;
 
     private Set<Long> offer;

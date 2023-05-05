@@ -21,5 +21,7 @@ public class ResourceRequest extends EmployeeRequest{
     private String nationalIdentity;
     private LocalDate recruitmentDate;
 
+    private Boolean isEmployee;
+
     private List<Contract> contractsList;
 }

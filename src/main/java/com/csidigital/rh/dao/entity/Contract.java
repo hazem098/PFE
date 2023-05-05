@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -48,16 +49,16 @@ public class Contract {
 
 
    // @JsonIgnore
-    @OneToMany(mappedBy = "contract",cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "contract" )
     private List<ArticleUpdated> articles = new ArrayList<ArticleUpdated>();
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "contract")
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
     private List<BenefitRC> benefitRCSList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "contract")
+    @OneToMany(mappedBy = "contract" , cascade = CascadeType.ALL)
     private List< ExceptionalFee>  ExceptionalFeeList;
 
 

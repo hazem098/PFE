@@ -29,6 +29,7 @@ public class EmployeeRequest {
     private String experienceDetails ;
     @Enumerated(EnumType.STRING)
     private WorkLocation workLocation;
+    private String locationName;
 
     @Enumerated(EnumType.STRING)
     private Provenance provenance;

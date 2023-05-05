@@ -21,5 +21,6 @@ public class ResourceResponse extends EmployeeResponse {
     private Long productivity;
     private String nationalIdentity;
     private LocalDate recruitmentDate;
+    private Boolean isEmployee;
     private List<Contract> contractsList;
 }

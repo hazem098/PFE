@@ -12,6 +12,7 @@ import com.csidigital.rh.shared.dto.response.CertificationResponse;
 import com.csidigital.rh.shared.dto.response.ContractResponse;
 import com.csidigital.rh.shared.enumeration.Status;
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,7 +117,17 @@ public class ContractImpl implements ContractService {
     }
 
     @Override
-    public void deleteContract(Long id) {contractRepository.deleteById(id);
+    public void deleteContract(Long id) {
+        /*contractRepository.deleteById(id);*/
+        Contract contract = contractRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Contract not found"));
+
+        // Set the contract field to null for all associated articles
+        for (ArticleUpdated article : contract.getArticles()) {
+            article.setContract(null);
+        }
+
+        // Delete the contract
+        contractRepository.delete(contract);
     }
 
     @Override
