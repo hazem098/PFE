@@ -58,4 +58,14 @@ public class ContractController {
     void updateStatusToRefusedById(Long id){
         contract.updateStatusToRefusedById(id);
     }
+    @GetMapping("/{id}/getContractFee")
+    public  void getContractFee(@PathVariable Long id)
+    {
+       contract.getContractFee(id);
+    }
+    @GetMapping("/{id}/getContractBenefits")
+    public  void getContractBenefits(@PathVariable Long id)
+    {
+        contract.getContractBenefits(id);
+    }
 }

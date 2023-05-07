@@ -1,5 +1,7 @@
 package com.csidigital.rh.management.service;
 
+import com.csidigital.rh.dao.entity.BenefitRC;
+import com.csidigital.rh.dao.entity.ExceptionalFee;
 import com.csidigital.rh.shared.dto.request.ExceptionalFeeRequest;
 import com.csidigital.rh.shared.dto.response.ExceptionalFeeResponse;
 
@@ -13,4 +15,5 @@ public interface ExceptionalFeeService {
     ExceptionalFeeResponse updateExceptionalFee(ExceptionalFeeRequest request, Long id);
 
     void deleteExceptionalFee(Long id);
+
 }

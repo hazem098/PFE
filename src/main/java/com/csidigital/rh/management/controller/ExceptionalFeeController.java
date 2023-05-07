@@ -39,4 +39,6 @@ public class ExceptionalFeeController {
     public void deleteExceptionalFee(@PathVariable Long id){
         ExceptionalFeeService.deleteExceptionalFee(id);
     }
+
+
 }

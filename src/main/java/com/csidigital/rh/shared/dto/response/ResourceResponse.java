@@ -15,7 +15,7 @@ public class ResourceResponse extends EmployeeResponse {
 
     private String socialSecurityNumber;
     private String bankAccountNumber;
-    private Byte[] photo;
+    private String  photo;
     private Double leaveBalanceRest;
     private Double leaveBalance;
     private Long productivity;

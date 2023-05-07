@@ -146,4 +146,23 @@ public class ContractImpl implements ContractService {
         contractRepository.updateStatusToRefusedById(id);
 
     }
+    @Override
+    public List<BenefitRC> getContractBenefits(Long id) {
+        Contract contract = contractRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Contract with id " + id + " not found"));
+        List<BenefitRC> benefitRC = contract.getBenefitRCSList();
+
+        return benefitRC;
+    }
+
+    @Override
+    public List<ExceptionalFee> getContractFee(Long id) {
+
+            Contract contract = contractRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Contract with id " + id + " not found"));
+            List<ExceptionalFee> exceptionalFee = contract.getExceptionalFeeList();
+
+            return exceptionalFee;
+        }
+
 }

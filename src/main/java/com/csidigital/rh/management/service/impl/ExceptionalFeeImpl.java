@@ -1,5 +1,6 @@
 package com.csidigital.rh.management.service.impl;
 
+import com.csidigital.rh.dao.entity.BenefitRC;
 import com.csidigital.rh.dao.entity.Contract;
 import com.csidigital.rh.dao.entity.ExceptionalFee;
 import com.csidigital.rh.dao.entity.Resource;
@@ -79,4 +80,6 @@ public class ExceptionalFeeImpl implements ExceptionalFeeService {
     public void deleteExceptionalFee(Long id) {
         exceptionalFeeRepository.deleteById(id);
     }
+
+
 }

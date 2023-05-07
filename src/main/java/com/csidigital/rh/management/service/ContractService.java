@@ -1,5 +1,7 @@
 package com.csidigital.rh.management.service;
 
+import com.csidigital.rh.dao.entity.BenefitRC;
+import com.csidigital.rh.dao.entity.ExceptionalFee;
 import com.csidigital.rh.shared.dto.request.CertificationRequest;
 import com.csidigital.rh.shared.dto.request.ContractRequest;
 import com.csidigital.rh.shared.dto.response.CertificationResponse;
@@ -19,4 +21,6 @@ public interface ContractService {
     void updateStatusById(Long id, String contractStatus);
     void updateStatusToAcceptedById(Long id);
     void updateStatusToRefusedById(Long id);
+    public List<BenefitRC> getContractBenefits(Long id);
+    public List<ExceptionalFee> getContractFee(Long id);
 }

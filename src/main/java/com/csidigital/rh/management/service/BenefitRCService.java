@@ -1,5 +1,6 @@
 package com.csidigital.rh.management.service;
 
+import com.csidigital.rh.dao.entity.BenefitRC;
 import com.csidigital.rh.shared.dto.request.BenefitRCRequest;
 import com.csidigital.rh.shared.dto.response.BenefitRCResponse;
 
@@ -13,5 +14,6 @@ public interface BenefitRCService {
     BenefitRCResponse updateBenefitRC(BenefitRCRequest request, Long id);
 
     void deleteBenefitRC(Long id);
+
 
 }
