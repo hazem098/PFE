@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ViewResourceComponent implements OnInit {
 public resource : Resource;
 public id : number;
+photoUrl : any
   constructor(private resourceService : ResourceService,
     private route : ActivatedRoute) { }
 
@@ -21,6 +22,7 @@ public id : number;
 getResource(){
   this.resourceService.getItem(this.id).subscribe((data: any) => {
     this.resource = data;
+    console.log(data)
 
   });
 }

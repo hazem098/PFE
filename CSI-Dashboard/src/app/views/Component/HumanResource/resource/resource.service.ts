@@ -20,8 +20,9 @@ getItems(): Observable<Resource[]> {
     catchError(this.handleError)
   );
 }
+
 getItem(id: number): Observable<Resource> {
-  const url = `${this.apiUrl}/${id}`;
+  const url = `${this.apiUrl}/get/${id}`;
   return this.http.get<Resource>(url).pipe(
     catchError(this.handleError)
   );

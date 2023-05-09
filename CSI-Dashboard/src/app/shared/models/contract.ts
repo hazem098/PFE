@@ -19,6 +19,7 @@ export class contract {
 
 export enum ContractStatus{
   STILL_PENDING,
+  SENT,
   REFUSED,
   ACCEPTED
 
