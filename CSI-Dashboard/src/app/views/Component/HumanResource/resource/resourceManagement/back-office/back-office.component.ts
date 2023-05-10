@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Resource } from 'app/shared/models/Resource';
+import { Employee } from 'app/shared/models/Employee';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { Subscription } from 'rxjs';
@@ -21,7 +21,7 @@ export class BackOfficeComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   
 
-  public dataSource:MatTableDataSource<Resource>;
+  public dataSource:MatTableDataSource<Employee>;
   public displayedColumns: any;
   public getItemSub: Subscription;
  
@@ -33,7 +33,7 @@ export class BackOfficeComponent implements OnInit {
     private resourceService: ResourceService ,
     private confirmService: AppConfirmService,
     private loader: AppLoaderService
-  ) {     this.dataSource = new MatTableDataSource<Resource>([]);}
+  ) {     this.dataSource = new MatTableDataSource<Employee>([]);}
 
 
   

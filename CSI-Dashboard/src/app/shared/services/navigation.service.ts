@@ -65,8 +65,9 @@ export class NavigationService {
       tooltip: 'RH',
       icon: 'group',
       sub: [
-        { name: 'Candidats', state: 'cruds/ngx-table' },
-        { name: 'Entretiens & Recrutement', state: 'cruds/ngx-table' },
+        { name: 'Candidats', state: 'candidat/CandidatCrud-table' },
+        { name: 'Offers', state: 'tableOffer/offerTable' },
+	{ name: 'Entretiens & Recrutement', state: 'entretienTable/tableEntretien' },
         { name: 'Ressources', state: 'resource/resource-crud' },
         { name: 'BackOfficeRessources', state: 'backOfficeResource/backOfficeResource-crud' },
         { name: 'ExternalRessources', state: 'externalResource/externalResource-crud' },

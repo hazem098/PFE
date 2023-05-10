@@ -2,7 +2,7 @@
 import { AddResourceService } from '../add-resource.service';
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
-import { Civility, Country, EmployeeStatus, MaritalSituation, Provenance, Resource, Title, WorkLocation } from 'app/shared/models/Resource';
+import { Civility, Country, EmployeeStatus, MaritalSituation, Provenance, Employee, Title, WorkLocation } from 'app/shared/models/Employee';
 import { FileUploader } from 'ng2-file-upload';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Currency, FeeType } from 'app/shared/models/avantagesContrat';
@@ -38,7 +38,7 @@ export class AddResourceComponent implements OnInit {
   myFormContract:FormGroup;
   myFormExceptionalFee:FormGroup;
 
-  listResource : Resource [] =[];
+  listResource : Employee[] =[];
 
   civilities = Object.keys(Civility).filter((element) => {
     return isNaN(Number(element));

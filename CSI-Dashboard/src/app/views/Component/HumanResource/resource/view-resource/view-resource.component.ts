@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ResourceService } from '../resource.service';
-import { Resource } from 'app/shared/models/Resource';
+import { Employee } from 'app/shared/models/Employee';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./view-resource.component.scss']
 })
 export class ViewResourceComponent implements OnInit {
-public resource : Resource;
+public resource :Employee;
 public id : number;
 photoUrl : any
   constructor(private resourceService : ResourceService,

@@ -1,7 +1,7 @@
 import { contact } from '../../../../../shared/models/contact';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Resource } from 'app/shared/models/Resource';
+import { Employee, EmployeeStatus } from 'app/shared/models/Employee';
 import { contract } from 'app/shared/models/contract';
 import { Observable, catchError, throwError } from 'rxjs';
 
@@ -19,17 +19,17 @@ export class AddResourceService {
   }
 
 /******* Implement your APIs   Ressource ********/
-  getItems(): Observable<Resource[]> {
-    return this.http.get<Resource[]>(this.apiUrl).pipe(
+  getItems(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.apiUrl).pipe(
       catchError(this.handleError)
     );
   }
 
   
    // GET an item by id
-   getItem(id: number): Observable<Resource> {
+   getItem(id: number): Observable<Employee> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.get<Resource>(url).pipe(
+    return this.http.get<Employee>(url).pipe(
       catchError(this.handleError)
     );
   }
@@ -42,17 +42,17 @@ export class AddResourceService {
   }
   
    // PUT an existing item
-   updateItem(id: number, resource: Resource): Observable<Resource> {
+   updateItem(id: number, resource: Employee): Observable<Employee> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.put<Resource>(url, resource).pipe(
+    return this.http.put<Employee>(url, resource).pipe(
       catchError(this.handleError)
     );
   }
 
   // DELETE an item by id
-  deleteItem(id: number): Observable<Resource> {
+  deleteItem(id: number): Observable<Employee> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.delete<Resource>(url).pipe(
+    return this.http.delete<Employee>(url).pipe(
       catchError(this.handleError)
     );
   }

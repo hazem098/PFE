@@ -8,7 +8,7 @@ import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.s
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { ResourceService } from '../../resource.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { Resource } from 'app/shared/models/Resource';
+import { Employee } from 'app/shared/models/Employee';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class ResourceComponent implements OnInit,OnDestroy{
   @ViewChild(MatSort) sort: MatSort;
   
 
-  public dataSource:MatTableDataSource<Resource>;
+  public dataSource:MatTableDataSource<Employee>;
   public displayedColumns: any;
   public getItemSub: Subscription;
  
@@ -33,7 +33,7 @@ export class ResourceComponent implements OnInit,OnDestroy{
     private resourceService: ResourceService ,
     private confirmService: AppConfirmService,
     private loader: AppLoaderService
-  ) {     this.dataSource = new MatTableDataSource<Resource>([]);}
+  ) {     this.dataSource = new MatTableDataSource<Employee>([]);}
 
 
   

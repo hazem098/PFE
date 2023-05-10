@@ -1,4 +1,4 @@
-import { Resource } from "./Resource";
+import { Employee } from "./Employee";
 import { article } from "./article";
 
 export class contract {
@@ -9,7 +9,7 @@ export class contract {
     startDate?: Date;
     endDate?: Date;
     entrepriseSignature?: string;
-    resource?: Resource;
+    //resource?: Resource;
     articles?: article[];
     resourceId?: number;
     contractStatus?:ContractStatus;
