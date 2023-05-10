@@ -15,8 +15,8 @@ public class Language implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @Enumerated(EnumType.STRING)
-    private com.csidigital.rh.shared.enumeration.Language language;
+
+    private String language;
     private String additionalInformation;
 
 

@@ -12,18 +12,9 @@ import java.util.Set;
 
 @Data
 public class OfferResponse {
-    @jakarta.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Long Id;
+    private Long id ;
     private String title;
     private String reference;
-    private Date startDate;
-    private Date endDate;
-    private Date closingDate;
-    private Integer candidateNumber;
-    @Enumerated(EnumType.STRING)
-    private OfferStatus offerStatus;
-    private Set<Long> candidate;
+    private String description ;
 
 }

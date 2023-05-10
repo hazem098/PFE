@@ -1,5 +1,6 @@
 package com.csidigital.rh.shared.dto.response;
 
+import com.csidigital.rh.dao.entity.Evaluation;
 import com.csidigital.rh.shared.enumeration.AvailabilityEnum;
 import com.csidigital.rh.shared.enumeration.ContractType;
 import com.csidigital.rh.shared.enumeration.Experience;
@@ -10,9 +11,7 @@ import java.time.LocalDate;
 
 @Data
 public class AdministrativeDataResponse {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id ;
     @Enumerated(EnumType.STRING)
     private ContractType contractType;
     private double currentSalary;
@@ -22,5 +21,6 @@ public class AdministrativeDataResponse {
     private LocalDate availabilityDate;
     @Enumerated(EnumType.STRING)
     private Experience experience;
+    private Evaluation evaluation;
 
-    }
+}

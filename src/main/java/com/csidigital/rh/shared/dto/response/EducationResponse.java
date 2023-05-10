@@ -4,13 +4,13 @@ import lombok.Data;
 
 import java.time.LocalDate;
 @Data
-
 public class EducationResponse {
-    private Long Id ;
+    private Long id ;
     private String diploma;
     private String institution;
     private LocalDate obtainedDate;
     private LocalDate startYear;
     private String score;
     private Boolean actual;
+    private Long technicalFileId;
 }

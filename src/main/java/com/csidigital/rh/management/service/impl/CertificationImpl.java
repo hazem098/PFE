@@ -1,12 +1,14 @@
 package com.csidigital.rh.management.service.impl;
 
 import com.csidigital.rh.dao.entity.Certification;
+import com.csidigital.rh.dao.entity.Education;
 import com.csidigital.rh.dao.entity.TechnicalFile;
 import com.csidigital.rh.dao.repository.CertificationRepository;
 import com.csidigital.rh.dao.repository.TechnicalFileRepository;
 import com.csidigital.rh.management.service.CertificationService;
 import com.csidigital.rh.shared.dto.request.CertificationRequest;
 import com.csidigital.rh.shared.dto.response.CertificationResponse;
+import com.csidigital.rh.shared.dto.response.EducationResponse;
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;

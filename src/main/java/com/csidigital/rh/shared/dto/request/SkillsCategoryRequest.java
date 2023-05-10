@@ -13,6 +13,6 @@ import java.util.List;
 @Data
 public class SkillsCategoryRequest {
 
-    private String title;
-    /*private List<Skills> skillsList;*/
+    private String skillsCategoryTitle;
+   /* private List<Skills> skillsList;*/
 }

@@ -7,9 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 @Data
 public class SkillsResponse {
-    @jakarta.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id ;
+    private String skillsTitle;
 
-    private Long Id;
-    private String title;
+    private Long technicalFileId ;
+    //  private Long skillsCategoryId ;
 }

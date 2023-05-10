@@ -16,14 +16,14 @@ public class AssQuestionInterview {
     private Long id;
     @Column(name = "mark")
     private Integer mark;
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_question")
     private Question question;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "id_interview")
+    @ManyToOne @JoinColumn(name = "id_interview")
     private Interview interview;
 
 }

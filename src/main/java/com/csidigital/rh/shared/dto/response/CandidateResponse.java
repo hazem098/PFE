@@ -7,9 +7,15 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class CandidateResponse {
-    @jakarta.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    private Set<Long> offer;
+public class CandidateResponse  {
+    private Long id;
+    private Provenance provenance;
+    private String employeeFirstName;
+    private String employeeLastName;
+    private String employeeSerialNumber;
+    private Long AssOfferCandidateId;
+
+
+
+
 }

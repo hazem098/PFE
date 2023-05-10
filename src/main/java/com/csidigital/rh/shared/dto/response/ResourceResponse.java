@@ -15,7 +15,7 @@ public class ResourceResponse extends EmployeeResponse {
 
     private String socialSecurityNumber;
     private String bankAccountNumber;
-    private String  photo;
+
     private Double leaveBalanceRest;
     private Double leaveBalance;
     private Long productivity;
@@ -23,4 +23,5 @@ public class ResourceResponse extends EmployeeResponse {
     private LocalDate recruitmentDate;
     private Boolean isEmployee;
     private List<Contract> contractsList;
+
 }

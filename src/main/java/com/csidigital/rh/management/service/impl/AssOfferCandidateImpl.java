@@ -1,13 +1,7 @@
 package com.csidigital.rh.management.service.impl;
 
-import com.csidigital.rh.dao.entity.Candidate;
-import com.csidigital.rh.dao.entity.Employee;
-import com.csidigital.rh.dao.entity.Offer;
-import com.csidigital.rh.dao.entity.OfferCandidate;
-import com.csidigital.rh.dao.repository.AssOfferCandidateRepository;
-import com.csidigital.rh.dao.repository.CandidateRepository;
-import com.csidigital.rh.dao.repository.EmployeeRepository;
-import com.csidigital.rh.dao.repository.OfferRepository;
+import com.csidigital.rh.dao.entity.*;
+import com.csidigital.rh.dao.repository.*;
 import com.csidigital.rh.management.service.AssOfferCandidateService;
 import com.csidigital.rh.shared.dto.request.AssOfferCandidateRequest;
 import com.csidigital.rh.shared.dto.response.AssOfferCandidateResponse;
@@ -35,15 +29,21 @@ public class AssOfferCandidateImpl implements AssOfferCandidateService {
     private OfferRepository offerRepository;
 
     @Autowired
-    private CandidateRepository candidateRepository;
+    private EmployeeRepository employeeRepository;
+    @Autowired
+    private EvaluationRepository evaluationRepository;
 
     @Override
     public AssOfferCandidateResponse createAssOfferCandidate(AssOfferCandidateRequest request) {
+        Evaluation evaluation = null ;
+        if (request.getEvaluationNum()!= null){
+            evaluation = evaluationRepository.findById(request.getEvaluationNum()).orElseThrow();}
         Offer offer = offerRepository.findById(request.getOfferNum()).orElseThrow();
-        Candidate candidate = candidateRepository.findById(request.getCandidateNum()).orElseThrow();
+        Employee employee = employeeRepository.findById(request.getEmployeeNum()).orElseThrow();
         OfferCandidate offerCandidate = modelMapper.map(request, OfferCandidate.class);
-        offerCandidate.setCandidate(candidate);
+        offerCandidate.setEmployee(employee);
         offerCandidate.setOffer(offer);
+        offerCandidate.setEvaluation(evaluation);
         OfferCandidate offerCandidateSaved = assOfferCandidateRepository.save(offerCandidate);
         return modelMapper.map(offerCandidateSaved, AssOfferCandidateResponse.class);
     }
@@ -85,4 +85,3 @@ public class AssOfferCandidateImpl implements AssOfferCandidateService {
     }
 
 }
-

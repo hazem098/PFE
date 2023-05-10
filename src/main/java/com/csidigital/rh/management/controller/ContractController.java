@@ -1,6 +1,8 @@
 package com.csidigital.rh.management.controller;
 
+import com.csidigital.rh.dao.entity.BenefitRC;
 import com.csidigital.rh.dao.entity.Employee;
+import com.csidigital.rh.dao.entity.ExceptionalFee;
 import com.csidigital.rh.management.service.impl.CertificationImpl;
 import com.csidigital.rh.management.service.impl.ContractImpl;
 import com.csidigital.rh.shared.dto.request.CertificationRequest;
@@ -59,13 +61,13 @@ public class ContractController {
         contract.updateStatusToRefusedById(id);
     }
     @GetMapping("/{id}/getContractFee")
-    public  void getContractFee(@PathVariable Long id)
+    public  List<ExceptionalFee> getContractFee(@PathVariable Long id)
     {
-       contract.getContractFee(id);
+       return contract.getContractFee(id);
     }
     @GetMapping("/{id}/getContractBenefits")
-    public  void getContractBenefits(@PathVariable Long id)
+    public  List<BenefitRC> getContractBenefits(@PathVariable Long id)
     {
-        contract.getContractBenefits(id);
+       return contract.getContractBenefits(id);
     }
 }

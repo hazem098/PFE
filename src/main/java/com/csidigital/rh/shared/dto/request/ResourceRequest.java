@@ -14,7 +14,7 @@ public class ResourceRequest extends EmployeeRequest{
 
     private String socialSecurityNumber;
     private String bankAccountNumber;
-    private String photo;
+
     private Double leaveBalanceRest;
     private Double leaveBalance;
     private Long productivity;

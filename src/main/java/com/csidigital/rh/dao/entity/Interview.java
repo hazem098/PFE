@@ -33,4 +33,3 @@ public class Interview {
     private List<AssQuestionInterview> assQuestionInterviewList;
 }
 
-

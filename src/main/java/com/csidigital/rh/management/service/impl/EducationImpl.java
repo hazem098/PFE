@@ -21,13 +21,13 @@ import java.util.List;
 @AllArgsConstructor
 
 public class EducationImpl implements EducationService {
-   @Autowired
-   private ModelMapper modelMapper ;
-   @Autowired
-   private EducationRepository educationRepository ;
+    @Autowired
+    private ModelMapper modelMapper ;
+    @Autowired
+    private EducationRepository educationRepository ;
 
-   @Autowired
-   private TechnicalFileRepository technicalFileRepository;
+    @Autowired
+    private TechnicalFileRepository technicalFileRepository;
     @Override
     public EducationResponse createEducation(EducationRequest request) {
         TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();

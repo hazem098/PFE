@@ -30,11 +30,11 @@ public class OfferCandidate {
     private Offer offer;
 
     @JsonIgnore
-    @ManyToOne @JoinColumn(name = "id_candidate")
-    private Candidate candidate;
+    @ManyToOne @JoinColumn(name = "id_employee")
+    private Employee employee;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "evaluation_id", referencedColumnName = "id")
     private Evaluation evaluation;
 

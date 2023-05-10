@@ -16,16 +16,17 @@ public class Skills {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long Id;
-    @Column(name = "title")
-    private String title;
+    @Column(name = "skillsTitle")
+    private String skillsTitle;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
-    @ManyToOne
     @JoinColumn(name = "technicalFileId")
     private TechnicalFile technicalFile;
 
-    /*@ManyToOne
+
+  /*  @ManyToOne
     @JoinColumn(name = "skillsCategoryId")
     private SkillsCategory skillsCategory;*/
 }

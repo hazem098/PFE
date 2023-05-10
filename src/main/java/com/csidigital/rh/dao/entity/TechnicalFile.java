@@ -22,43 +22,39 @@ public class TechnicalFile{
     private  String reference;
     @Column(name = "description")
     private String description;
-    @Column(name = "title")
-    private String title;
     @Column(name = "objective")
     private String objective;
     @Column(name = "driverLicense")
     private String driverLicense;
-    @Column(name = "nationality")
-    @Enumerated(EnumType.STRING)
-    private Nationality nationality;
 
 
 
 
     @JsonIgnore
     @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
-    private List<Skills> skillsList;
+    private List<Skills> skills;
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
-    private List<Experience> experienceList;
+    private List<Experience> experiences;
 
     @JsonIgnore
     @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
-    private List<Language> languageList;
+    private List<Language> languages;
 
     @JsonIgnore
     @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
-    private List<Certification> certificationList;
+    private List<Certification> certifications;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
-    private List<Education> educationList;
+    private List<Education> educations;
 
     @OneToOne (
             fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "technicalFile")
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "employeeId")
     private Employee employee;
 
 

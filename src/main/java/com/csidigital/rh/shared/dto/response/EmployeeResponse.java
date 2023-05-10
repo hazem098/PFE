@@ -1,11 +1,15 @@
 package com.csidigital.rh.shared.dto.response;
 
+import com.csidigital.rh.dao.entity.Experience;
+import com.csidigital.rh.dao.entity.TechnicalFile;
 import com.csidigital.rh.shared.enumeration.*;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -24,7 +28,7 @@ public class EmployeeResponse {
     private String address;
     private Integer postCode;
     private String city;
-    private Country country;
+    private String country;
     private MaritalSituation maritalSituation;
     private Integer recommendationMark ;
     private Integer experience ;
@@ -45,4 +49,7 @@ public class EmployeeResponse {
 
     private Set<Long> offer;
     private Departement departement;
+    private TechnicalFile technicalFile ;
+
+    private String  photo;
 }

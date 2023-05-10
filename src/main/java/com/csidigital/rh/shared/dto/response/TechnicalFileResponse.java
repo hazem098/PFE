@@ -10,25 +10,15 @@ import java.util.List;
 
 @Data
 public class TechnicalFileResponse {
-    @jakarta.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Long Id;
+    private Long id ;
     private  String reference;
     private String description;
-    private String title;
     private String objective;
     private String driverLicense;
-    private Nationality nationality;
-
-
-    
-    private List<Education> educationList;
-    private List<Experience> experienceList;
-    private List<Skills> skillsList;
-    private List<Language> languageList;
-    private List<Certification> certificationList;
-
-
-
+    private List<Skills> skills;
+    private List<Experience> experiences;
+    private List <Language> languages;
+    private List<Certification> certifications;
+    private List<Education> educations;
+    private Long employeeId;
 }

@@ -1,5 +1,7 @@
 package com.csidigital.rh.shared.dto.request;
 
+import com.csidigital.rh.dao.entity.Employee;
+import com.csidigital.rh.dao.entity.Evaluation;
 import com.csidigital.rh.shared.enumeration.AvailabilityEnum;
 import com.csidigital.rh.shared.enumeration.ContractType;
 import com.csidigital.rh.shared.enumeration.Experience;
@@ -18,5 +20,6 @@ public class AdministrativeDataRequest {
     private AvailabilityEnum availability;
     private LocalDate availabilityDate;
     private Experience experience;
+    private Long employeeId;
 
 }

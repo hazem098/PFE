@@ -24,9 +24,7 @@ public class Candidate{
     private String employeeSerialNumber;
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "candidate")
-    private List<OfferCandidate> offerCandidateList;
+
 
 
 }
