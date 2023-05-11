@@ -4,7 +4,7 @@ import { Experience } from 'app/shared/models/Experience';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
+import { Employee, MaritalSituation, ResourceType } from '../../../../../shared/models/Employee';
 import { Inject, Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray, AbstractControl, UntypedFormArray } from '@angular/forms';
 import {FormControl} from '@angular/forms';
@@ -62,6 +62,7 @@ export class cvcandidatComponent implements OnInit {
   title :any[]= Object.values(Title);
   Civility :string []= Object.values(Civility);
   MaritalSituation :any []= Object.values(MaritalSituation);
+ resourceType :any []= Object.values(ResourceType);
   Service :string []= Object.values(Service);
   Availability : string [] = Object.values(Availability);
   RequirementStatus  :string []= Object.values(RequirementStatus);
@@ -144,7 +145,8 @@ export class cvcandidatComponent implements OnInit {
       city: new UntypedFormControl('', []),
       postCode: new UntypedFormControl('', []),
       emailTwo: new UntypedFormControl('', ),
-      phoneNumberTwo: new UntypedFormControl('', [])
+      phoneNumberTwo: new UntypedFormControl('', []),
+      resourceType : new UntypedFormControl('',[])
 
     })
       this.cvForm = new UntypedFormGroup({

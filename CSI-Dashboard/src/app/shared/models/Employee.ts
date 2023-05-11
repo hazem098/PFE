@@ -30,6 +30,7 @@ export class Employee {
     photo?:string;
     workLocation?:WorkLocation;
     locationName?:string;
+    resourceType?:ResourceType
 }
 
 export enum Departement{
@@ -46,6 +47,10 @@ export enum Departement{
     JURIDIQUE ,
     SUPPORT 
 } 
+export enum ResourceType{
+    RESOURCE_INTERNE , 
+    RESOURCE_BACKOFFICE
+}
 
 export enum WorkLocation{
     MAIN ,

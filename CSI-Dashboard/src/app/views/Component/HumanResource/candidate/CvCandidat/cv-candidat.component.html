@@ -67,7 +67,18 @@
                     </mat-form-field>
                   </div>
                 </mat-grid-tile>
-              
+                <mat-grid-tile>
+                  <!--Maritial Situation -->
+                  <div class="pb-16">
+                    <mat-form-field appearance="outline" [style.width.cm]=10>
+                    <mat-label>Type de ressource</mat-label>
+                    <mat-select formControlName="resourceType" >
+                      <mat-option *ngFor="let ress of resourceType" [value]="ress">{{ress}}</mat-option>
+                      
+                    </mat-select>
+                    </mat-form-field>
+                  </div>
+                </mat-grid-tile>
                   <mat-grid-tile>
                     <!--Birthdate-->
                     <div class="pb-16">
