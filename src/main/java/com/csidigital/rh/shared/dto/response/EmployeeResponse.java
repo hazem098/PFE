@@ -50,6 +50,6 @@ public class EmployeeResponse {
     private Set<Long> offer;
     private Departement departement;
     private TechnicalFile technicalFile ;
-
+    private ResourceType resourceType;
     private String  photo;
 }

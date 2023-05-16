@@ -29,6 +29,8 @@ public class Employee {
     private Title title;
     @Enumerated(EnumType.STRING)
     private EmployeeType employeeType;
+    @Enumerated(EnumType.STRING)
+    private ResourceType resourceType;
     private LocalDate birthDate;
     private String emailOne;
     private String emailTwo;

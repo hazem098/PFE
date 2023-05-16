@@ -24,6 +24,7 @@ public class EmployeeRequest {
     private Integer phoneNumberOne;
     private Integer phoneNumberTwo;
     private String address;
+    private ResourceType resourceType;
     private Integer postCode;
     private String city;
     private String country;
