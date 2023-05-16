@@ -26,12 +26,10 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
 import { Ng2TelInputModule } from "ng2-tel-input";
-import { OfferRoutes } from "./offer.routing";
-import { OfferService } from "./offer.service";
-import { OfferCrudTableComponent } from "./offer_data_table/offer-crud-table.component";
-import { DetailCrudComponent } from "./offer-detail-crud/detail-crud.component";
-import { OfferPopupComponent } from "./offer-popup/offer-popup.component";
-import { affichageOfferComponent } from "./affichage_offer/affichage_offer.component";
+import { ProjetPopupComponent } from "./add projet/projetPopup/ProjetPopup.component";
+import { ProjetRoutes } from "./task.routing";
+import { ProjetComponent } from "./add projet/projet.component";
+import { ProjetService } from "./projet.service";
 
 
 
@@ -65,10 +63,9 @@ import { affichageOfferComponent } from "./affichage_offer/affichage_offer.compo
     MatDatepickerModule,
     MatExpansionModule,
     MatTabsModule,
-    RouterModule.forChild(OfferRoutes)
+    RouterModule.forChild(ProjetRoutes),
   ],
-  declarations: [ OfferCrudTableComponent,DetailCrudComponent,OfferPopupComponent],
-  providers: [
-    OfferService,]
+  declarations: [ ProjetComponent , ProjetPopupComponent],
+  providers: [ ProjetService,]
 })
-export class OfferCrudModule { }
+export class ProjetModule { }

@@ -1,0 +1,108 @@
+<h1 matDialogTitle>{{data.title}}</h1>
+
+  <form [formGroup]="itemForm" (ngSubmit)="submit()" >
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <mat-label>Type du projet</mat-label>
+        <mat-select  [formControlName]="'projectType'">
+            <mat-option *ngFor="let x of ProjectType" [value]="x">{{ x }}</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!--div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        name="projectReference"
+        type="text"
+        [formControlName]="'projectReference'"
+        placeholder="Reference">
+      </mat-form-field>
+    </div-->
+    <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          name="projectReference"
+          type="text"
+          [formControlName]="'name'"
+          placeholder="Titre">
+        </mat-form-field>
+      </div>
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        name="description"
+        [formControlName]="'description'"
+        placeholder="description">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        name="budget"
+        [formControlName]="'budget'"
+        placeholder="budget">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        type="date"
+        name="startDate"
+        [formControlName]="'startDate'"
+        placeholder="Date début">
+      </mat-form-field>
+    </div>
+
+   
+
+          <div fxFlex="50"  class="pr-16">
+            <mat-form-field class="full-width">
+              <input
+              matInput
+              name="endDate"
+              type="date"
+              [formControlName]="'endDate'"
+              placeholder="Date fin">
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50"  class="pr-16">
+
+            <mat-form-field class="full-width">
+              <mat-label>projectStatus</mat-label>
+              <mat-select  [formControlName]="'projectStatus'">
+                <mat-option *ngFor="let x of ProjectStatus" [value]="x">{{ x }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+
+        
+
+
+      
+      
+
+   
+
+     
+        
+  
+
+
+    <div fxFlex="100" class="mt-16">
+      <button mat-raised-button color="primary" >{{"SAVE" | translate }}</button>
+      <span fxFlex></span>
+      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+    </div>
+  </div>
+  </form>
+

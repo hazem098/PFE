@@ -77,7 +77,8 @@ export class NavigationService {
         { name: 'Feuille de Temps', state: 'shop/cart' },
         { name: 'Congés', state: 'time-off/time-off-crud' },
         { name: 'Congés Empoyées', state: 'time-off-employee/timeOffEmployee-crud' },
-        { name: 'Rapports', state: 'shop/checkout' }
+        { name: 'Rapports', state: 'shop/checkout' },
+        { name :'Projet' , state : 'projets/projet'}
       ]
     },
 
