@@ -1,8 +1,10 @@
 package com.csidigital.rh.management.service;
 
 
+import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.shared.dto.request.ProjectDtoRequest;
 import com.csidigital.rh.shared.dto.response.ProjectDtoResponse;
+import com.csidigital.rh.shared.dto.response.ResourceResponse;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ public interface ProjectService {
 
     ProjectDtoResponse updateProject(Long id, ProjectDtoRequest projectDtoRequest);
 
-
+     List<Resource> getProjectResource(Long id);
     //delete project by id
     void deleteProjectById(Long id);
 }

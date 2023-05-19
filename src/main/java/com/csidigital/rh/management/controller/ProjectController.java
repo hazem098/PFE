@@ -3,9 +3,11 @@ package com.csidigital.rh.management.controller;
 
 
 
+import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.management.service.impl.ProjectServiceImpl;
 import com.csidigital.rh.shared.dto.request.ProjectDtoRequest;
 import com.csidigital.rh.shared.dto.response.ProjectDtoResponse;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Transactional
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/project")
@@ -31,6 +33,8 @@ public class ProjectController {
     public ResponseEntity<ProjectDtoResponse> getProjectById(@PathVariable Long id) {
         return new ResponseEntity<>(projectService.getProjectById(id), HttpStatus.OK);
     }
+
+
     @PostMapping("/add")
     public ResponseEntity<ProjectDtoResponse> createProject(@Valid @RequestBody ProjectDtoRequest projectDtoRequest) {
         return new ResponseEntity<>(projectService.createProject(projectDtoRequest), HttpStatus.OK);
@@ -46,4 +50,9 @@ public class ProjectController {
         projectService.deleteProjectById(id);
 
     }
+    @GetMapping("/getResources/{id}")
+    public List<Resource> getProjectResource(@PathVariable Long id) {
+        return projectService.getProjectResource(id);
+    }
+
 }

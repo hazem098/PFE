@@ -1,6 +1,7 @@
 package com.csidigital.rh.dao.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,7 +32,12 @@ public class Resource extends Employee{
     @OneToMany(mappedBy = "resource")
     private List<Contract> contractsList;
 
-
+    @JsonIgnore
+    @ManyToOne
+    private Project project;
+   @JsonIgnore
+    @OneToOne
+   private Project prj;
 
 
 }

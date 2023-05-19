@@ -1,10 +1,8 @@
 package com.csidigital.rh.management.controller;
 
-import com.csidigital.rh.management.service.impl.RecommendationRewardImpl;
+import com.csidigital.rh.dao.entity.Employee;
 import com.csidigital.rh.management.service.impl.ResourceImpl;
-import com.csidigital.rh.shared.dto.request.RecommendationRewardRequest;
 import com.csidigital.rh.shared.dto.request.ResourceRequest;
-import com.csidigital.rh.shared.dto.response.RecommendationRewardResponse;
 import com.csidigital.rh.shared.dto.response.ResourceResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,10 @@ public class ResourceController {
     public List<ResourceResponse> getAllResources(){
         return resource.getAllResources();
     }
-
+    @GetMapping("/chefs")
+    public List<Employee> getChefs(){
+        return resource.getChefs();
+    }
     @GetMapping("/getResource/{id}")
     public ResourceResponse  getResourceById(@PathVariable Long id){
         return resource.getResourceById(id);
@@ -44,4 +45,7 @@ public class ResourceController {
     public void deleteResource(@PathVariable Long id){
         resource.deleteResource(id);
     }
+
+
+
 }

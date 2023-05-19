@@ -3,6 +3,7 @@ package com.csidigital.rh.dao.entity;
 import com.csidigital.rh.shared.enumeration.ProjectStatus;
 import com.csidigital.rh.shared.enumeration.ProjectType;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +15,8 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.Date;
-
-
+import java.util.List;
+import java.util.Locale;
 
 
 @NoArgsConstructor
@@ -33,9 +34,9 @@ public class Project implements Serializable {
     private String description;
     private Double budget;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
-    private Date startDate;
+    private LocalDate startDate;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
-    private Date endDate;
+    private LocalDate endDate;
     @Enumerated(EnumType.STRING)
 
     private ProjectType projectType;
@@ -43,7 +44,12 @@ public class Project implements Serializable {
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "project")
+    List<Resource> resources ;
+    @JsonIgnore
+    @OneToOne(mappedBy = "prj")
+    private Resource responsable;
 
 }
 

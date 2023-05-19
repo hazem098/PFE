@@ -1,6 +1,7 @@
 package com.csidigital.rh.shared.dto.request;
 
 import com.csidigital.rh.dao.entity.Contract;
+import com.csidigital.rh.dao.entity.Project;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
@@ -24,4 +25,7 @@ public class ResourceRequest extends EmployeeRequest{
     private Boolean isEmployee;
 
     private List<Contract> contractsList;
+    private Long projectNum ;
+
+    private  Long PrjNum;
 }

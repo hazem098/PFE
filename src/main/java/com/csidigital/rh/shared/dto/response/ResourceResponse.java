@@ -23,5 +23,6 @@ public class ResourceResponse extends EmployeeResponse {
     private LocalDate recruitmentDate;
     private Boolean isEmployee;
     private List<Contract> contractsList;
-
+    private Long projectId ;
+    private Long prjId ;
 }
