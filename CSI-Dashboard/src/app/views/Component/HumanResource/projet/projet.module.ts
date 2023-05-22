@@ -27,9 +27,11 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
 import { Ng2TelInputModule } from "ng2-tel-input";
 import { ProjetPopupComponent } from "./add projet/projetPopup/ProjetPopup.component";
-import { ProjetRoutes } from "./task.routing";
+import { ProjetRoutes } from "./projet.routing";
 import { ProjetComponent } from "./add projet/projet.component";
 import { ProjetService } from "./projet.service";
+import { ViewProjetComponent } from "./viewProjet/viewProjet.component";
+import { AffectationComponent } from "./viewProjet/affectationResource/affecatation.component";
 
 
 
@@ -65,7 +67,7 @@ import { ProjetService } from "./projet.service";
     MatTabsModule,
     RouterModule.forChild(ProjetRoutes),
   ],
-  declarations: [ ProjetComponent , ProjetPopupComponent],
+  declarations: [ ProjetComponent , ProjetPopupComponent, ViewProjetComponent, AffectationComponent],
   providers: [ ProjetService,]
 })
 export class ProjetModule { }

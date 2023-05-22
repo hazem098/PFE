@@ -22,3 +22,8 @@ export enum ProjectType{
     INTERN="INTERN" ,
     EXTERN="EXTERN"
 }
+export enum Devise{
+    DINAR="DT" ,
+    EURO="EUR",
+    DOLLAR="DLR"
+}

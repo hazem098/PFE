@@ -9,11 +9,12 @@ import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.serv
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
+import { Civility, Employee, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Projet } from 'app/shared/models/Projet';
 import { ProjetService } from '../projet.service';
 import { ProjetPopupComponent } from './projetPopup/ProjetPopup.component';
+import { ResourceService } from '../../resource/resource.service';
 
 
 @Component({
@@ -47,7 +48,7 @@ export class ProjetComponent implements OnInit {
   public dataSource: MatTableDataSource<Projet>;
   public displayedColumns: any;
   public getItemSub: Subscription;
- 
+  resources : Employee[] =[];
 
 
   constructor(
@@ -55,6 +56,7 @@ export class ProjetComponent implements OnInit {
     private dialog: MatDialog,
     private snack: MatSnackBar,
     private crudService: ProjetService,
+    private resourceService: ResourceService,
     private confirmService: AppConfirmService,
     private loader: AppLoaderService
   ) {     this.dataSource = new MatTableDataSource<Projet>([]);}
@@ -62,6 +64,7 @@ export class ProjetComponent implements OnInit {
   ngOnInit() {
    this.displayedColumns = this.getDisplayedColumns();
     this.getItems()  
+    
   }
 
   getDisplayedColumns() {
@@ -95,7 +98,7 @@ export class ProjetComponent implements OnInit {
     let dialogRef: MatDialogRef<any> = this.dialog.open(ProjetPopupComponent, {
       width: '1000px',
       disableClose: true,
-      data: { title: title, payload: data }
+      data: { title: title, payload: data , isNew: isNew }
     })
     dialogRef.afterClosed()
       .subscribe(res => {
@@ -128,7 +131,7 @@ export class ProjetComponent implements OnInit {
 
 
 deleteItem(row) {
-    this.confirmService.confirm({message: `Delete ${row.name}?`})
+    this.confirmService.confirm({message: `étes vous sure de supprission ?`})
       .subscribe(res => {
         if (res) {
           this.loader.open('Supprssion du projet');
@@ -148,5 +151,5 @@ deleteItem(row) {
      this.dataSource.filter = FilterValue.trim().toLowerCase();
  
  }
-
+ 
 }

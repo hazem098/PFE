@@ -267,7 +267,7 @@ export const rootRouterConfig: Routes = [
       {
         path:'projets',
         loadChildren: () => import('./views/Component/HumanResource/projet/projet.module').then(m => m.ProjetModule),
-        data: { title: 'projet list', breadcrumb: 'Liste des projets'}
+        data: { title: 'projet list', breadcrumb: ''}
       }
       
     ]

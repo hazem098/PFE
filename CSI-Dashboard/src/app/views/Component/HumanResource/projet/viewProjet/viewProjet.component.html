@@ -1,0 +1,85 @@
+<mat-card class="p-0">
+    <mat-card-title class="">
+       <div class="card-title-text"><mat-icon>
+        info_outline </mat-icon>informations générales </div>
+      <mat-divider></mat-divider>
+    </mat-card-title>
+    <mat-card-content>
+      <div fxLayout="row wrap">
+        <div fxFlex="300" fxFlex.gt-sm="200">
+          
+            <mat-card class="p-0">
+                <mat-card-content>
+              <div class="profile-title text-center mb-16">
+                <div class="main-title"> <strong>Reference:</strong>{{ projet.projectReference }}</div>
+                <div class="subtitle mb-8"><strong>Titre:</strong> {{ projet.name }}</div>
+                <div class="subtitle mb-8"><strong>Description: </strong>  {{ projet.description }}</div>
+                </div>
+                </mat-card-content>
+                </mat-card>
+                
+                <div fxFlex="100" fxFlex.gt-sm="50">
+                    <mat-card class="p-0">
+                    <mat-card-content>
+              
+                    <div class="profile-title text-center mb-16">
+                      <div class="main-title"> <strong>Budget:</strong>{{ projet.budget }}</div>
+                      <div class="subtitle mb-8"><strong>Date du début:</strong> {{ projet.startDate }}</div>
+                      <div class="subtitle mb-8"><strong>Date du fin: </strong>  {{ projet.endDate }}</div>
+                      </div>
+                      </mat-card-content>
+                      </mat-card>
+            </div>
+            </div>
+            </div>
+            </mat-card-content>
+            </mat-card>
+            
+            <div class="m-12" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
+
+
+                <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)="openPopUp({},true)"> Affecter ressource </button>
+              
+                
+               
+              
+              <mat-card  style="border: 5px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
+                <mat-card-content class="p-0">
+                  <mat-table [dataSource]="dataSource" matSort  >
+                    <ng-container matColumnDef="Reference">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Nom
+                          <div style="padding-left: 20px;">
+                            
+                           </div>
+                         </mat-header-cell>
+                        <mat-cell *matCellDef="let row"  [style.color]="row.color">{{row.lastName}} </mat-cell>
+                      </ng-container>
+                <ng-container matColumnDef="Titre">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Prenom
+                    <div style="padding-left: 20px;">
+                     
+                     </div> </mat-header-cell>
+                  <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.firstName}} </mat-cell>
+                </ng-container>
+              
+                
+              
+                <ng-container matColumnDef="Date début">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Poste
+                      <div style="padding-left: 20px;">
+                        
+                       </div>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.title}} </mat-cell>
+                  </ng-container>
+                   
+                
+                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+               </mat-table>
+               <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+              
+              </mat-card-content>
+              </mat-card>
+              </div>
+         

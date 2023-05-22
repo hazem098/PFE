@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Employee } from "app/shared/models/Employee";
 import { EgretCalendarEvent } from "app/shared/models/event.model";
 import { Projet } from "app/shared/models/Projet";
 import { catchError, Observable } from "rxjs";
@@ -18,6 +19,10 @@ export class ProjetService {
     const apiUrlWithAdd = this.apiUrl + '/add'; // Append /add to the apiUrl
     return this.http.post<any>(apiUrlWithAdd, projet).pipe();
   }
+  getItem(id: number): Observable<Projet> {
+    const url = `${this.apiUrl+ '/getById'}/${id}`;
+    return this.http.get<Projet>(url).pipe();
+  }
   updateItem(id: number, projet: Projet): Observable<Projet> {
     const url = `${this.apiUrl +'/updateById'}/${id}`;
     return this.http.put<Projet>(url, projet).pipe()
@@ -29,4 +34,12 @@ export class ProjetService {
     const url = `${this.apiUrl+'/deleteById'}/${id}`;
     return this.http.delete<Projet>(url).pipe();
   }
-}
+  getResources(id: number): Observable<Employee[]> {
+    const url = `${this.apiUrl+ '/getResources'}/${id}`;
+    return this.http.get<any>(url).pipe();
+  }
+  addResourceToProject(projectId: number, resourceId: number) {
+    const url = `${this.apiUrl}/${projectId}/${resourceId}/resources`;
+    return this.http.post(url, null);
+  }
+  }
