@@ -72,6 +72,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
     @Override
     public ProjectDtoResponse createProject(ProjectDtoRequest projectDtoRequest) {
+
         ProjectReferenceSequence sequence = sequenceRepository.findById(1L)
                 .orElse(null) ;
         if (sequence == null) {
@@ -85,7 +86,7 @@ public class ProjectServiceImpl implements ProjectService {
         for(Resource res : existingResources) {
             res.setProject(project);
         }
-        Resource responsable = resourceRepository.findById(projectDtoRequest.getResponsableNum()).orElseThrow();
+     Resource responsable = resourceRepository.findById(projectDtoRequest.getResponsableNum()).orElseThrow();
         project.setResources(existingResources);
       //  project.setResponsable(responsable);
         responsable.setProject(project);
@@ -99,23 +100,75 @@ public class ProjectServiceImpl implements ProjectService {
         return modelMapper.map(ProjectSaved, ProjectDtoResponse.class);
     }
 
+    public void addResourceToProject(Long projectId, Long resourceId) {
+        Project project = projectRepository.findById(projectId).orElseThrow(() -> new RuntimeException("Project not found"));
+        Resource resource = resourceRepository.findById(resourceId).orElseThrow();
+        // Add the resource to the project's resource list
+        project.getResources().add(resource);
+
+        // Save the updated project
+        projectRepository.save(project);
+    }
+
     @Override
     public ProjectDtoResponse updateProject(Long id, ProjectDtoRequest projectDtoRequest) {
+        Resource responsable =null;
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Project with id: " + id + " not found"));
+
+        modelMapper.map(projectDtoRequest, project);
+
+        List<Resource> existingResources = new ArrayList<>();
+
+        for (Long resourceId : projectDtoRequest.getResourceIds()) {
+            Resource resource = resourceRepository.findById(resourceId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Resource with id: " + resourceId + " not found"));
+            existingResources.add(resource);
+        }
+    if (resourceRepository.findById(projectDtoRequest.getResponsableNum())!=null) {
+        responsable = resourceRepository.findById(projectDtoRequest.getResponsableNum())
+                .orElseThrow(() -> new ResourceNotFoundException("Resource with id: " + projectDtoRequest.getResponsableNum() + " not found"));
+        if (responsable.getId() == null) {
+            responsable = resourceRepository.save(responsable);
+        }
+    }
+        // Save new resources if necessary
+        for (Resource resource : existingResources) {
+            if (resource.getId() == null) {
+                resource = resourceRepository.save(resource);
+            }
+            resource.setProject(project);
+        }
+
+        // Save responsible resource if necessary
+
+        responsable.setProject(project);
+
+        project.setResources(existingResources);
+        project.setResponsable(responsable);
+
+        Project updatedProject = projectRepository.save(project);
+        return modelMapper.map(updatedProject, ProjectDtoResponse.class);
+    }
+
+    /*public ProjectDtoResponse updateProject(Long id, ProjectDtoRequest projectDtoRequest) {
         Project project = projectRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Project with id: " + id + " not found"));
         modelMapper.map(projectDtoRequest, project);
         List<Resource> existingResources = resourceRepository.findAllById(projectDtoRequest.getResourceIds());
-       Resource responsable = resourceRepository.findById(projectDtoRequest.getResponsableNum()).orElseThrow();
+
         for(Resource res : existingResources) {
             res.setProject(project);
         }
-        project.setResponsable(responsable);
-        project.setResources(existingResources);
+        Resource responsable = resourceRepository.findById(projectDtoRequest.getResponsableNum()).orElseThrow();
         responsable.setProject(project);
-        resourceRepository.save(responsable);
+        Resource resp= resourceRepository.save(responsable);
+        project.setResources(existingResources);
+        project.setResponsable(resp);
+
         Project updatedProject = projectRepository.save(project);
         return modelMapper.map(updatedProject, ProjectDtoResponse.class);
-    }
+    }*/
 
     @Override
     public void deleteProjectById(Long id) {

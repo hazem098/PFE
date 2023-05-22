@@ -3,6 +3,7 @@ package com.csidigital.rh.management.controller;
 
 
 
+import com.csidigital.rh.dao.entity.Project;
 import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.management.service.impl.ProjectServiceImpl;
 import com.csidigital.rh.shared.dto.request.ProjectDtoRequest;
@@ -55,4 +56,9 @@ public class ProjectController {
         return projectService.getProjectResource(id);
     }
 
+    @PostMapping("/{projectId}/{resourceId}/resources")
+    public ResponseEntity<?> addResourceToProject(@PathVariable Long projectId, @PathVariable Long resourceId) {
+        projectService.addResourceToProject(projectId, resourceId);
+        return ResponseEntity.ok("Resource added to the project successfully.");
+    }
 }

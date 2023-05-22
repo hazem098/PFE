@@ -1,6 +1,8 @@
 package com.csidigital.rh.management.controller;
 
 import com.csidigital.rh.dao.entity.Employee;
+import com.csidigital.rh.dao.entity.Project;
+import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.management.service.impl.ResourceImpl;
 import com.csidigital.rh.shared.dto.request.ResourceRequest;
 import com.csidigital.rh.shared.dto.response.ResourceResponse;
