@@ -11,7 +11,8 @@ import { Employee, Title } from 'app/shared/models/Employee';
 
 @Component({
   selector: 'app-ngx-table-popup',
-  templateUrl: './Projetpopup.component.html'
+  templateUrl: './Projetpopup.component.html',
+ 
 })
 export class ProjetPopupComponent implements OnInit {
   public itemForm: FormGroup;;
@@ -27,6 +28,7 @@ export class ProjetPopupComponent implements OnInit {
   submitted=false;
   resources : Employee[]
   responsables : Employee[] = []
+  Noresponsables : Employee[] = []
  
   formWidth = 200; // declare and initialize formWidth property
   formHeight = 700; // declare and initialize formHeight property
@@ -64,7 +66,7 @@ export class ProjetPopupComponent implements OnInit {
       responsableNum:[item.responsableId||'',Validators.required],
       
 
-       });
+       },);
        this.itemForm.get('startDate').valueChanges.subscribe((value) => {
         // If startDate is set, update the endDate control to disable all dates before the selected startDate
         if (value) {
@@ -92,6 +94,7 @@ export class ProjetPopupComponent implements OnInit {
     this.getResources()
     this.buildItemForm(this.data.payload)
 this.getChefs()
+this.getNoChefs()
 
     this.formRessource = this.fb.group({
       value : new FormArray([])
@@ -101,21 +104,36 @@ this.getChefs()
     }));
   }
 
-  submit() {
+  /*submit() {
     this.dialogRef.close(this.itemForm.value)
-  }
+  }*/
+  errorMessage : String 
+  submit() {
+    const startDateControl = this.itemForm.get('startDate');
+    const endDateControl = this.itemForm.get('endDate');
   
- 
+    if (startDateControl.valid && endDateControl.valid) {
+      this.dialogRef.close(this.itemForm.value);
+    } else {
+      if (startDateControl.invalid) {
+        this.errorMessage = 'Please select a valid start date.';
+      } else if (endDateControl.invalid) {
+        this.errorMessage = 'Please select a valid end date.';
+      } else {
+        this.errorMessage = 'Please fill in all required fields and ensure the date is valid.';
+      }
+    }
+  }
   endDateValidator(startDate: Date) {
     return (endDateControl) => {
       const endDate = new Date(endDateControl.value);
-      if (endDate < startDate) {
+      if (endDate < new Date(startDate)) {
         return { 'min': true };
       }
       return null;
     };
   }
- 
+  
    getResources(){
     this.resourceService.getItems().subscribe((data :any )=>{
       this.resources = data
@@ -127,6 +145,11 @@ this.getChefs()
       this.responsables = data;
      });
     }
+    getNoChefs(){
+      this.resourceService.getItemNoResponsable().subscribe((data: any) => {
+        this.Noresponsables = data;
+       });
+      }
     dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
       const startDate = control.get('startDate')?.value;
       const endDate = control.get('endDate')?.value;

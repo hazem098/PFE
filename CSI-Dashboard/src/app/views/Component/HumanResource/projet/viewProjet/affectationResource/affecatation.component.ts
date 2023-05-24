@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { FormGroup, FormBuilder, Validators, UntypedFormGroup, UntypedFormControl, FormArray, AbstractControl } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { Employee } from "app/shared/models/Employee";
+import { Employee, Title } from "app/shared/models/Employee";
 import { ProjectStatus, ProjectType, Devise } from "app/shared/models/Projet";
 import { ResourceService } from "../../../resource/resource.service";
 import { ProjetService } from "../../projet.service";

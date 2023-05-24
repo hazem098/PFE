@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { ProjetComponent } from "./add projet/projet.component";
+import { KanbanBoardComponent } from "./viewProjet/tasks/KanbanBoard.component";
 import { ViewProjetComponent } from "./viewProjet/viewProjet.component";
 
 
@@ -13,6 +14,11 @@ export const ProjetRoutes: Routes = [
       {
         path: ":id",
         component:ViewProjetComponent ,
+        pathMatch: "full"
+      },
+      {
+        path: "tache/:id",
+        component:KanbanBoardComponent ,
         pathMatch: "full"
       }
     

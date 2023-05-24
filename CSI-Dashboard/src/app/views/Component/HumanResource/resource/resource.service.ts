@@ -54,6 +54,10 @@ getItemResponsable():Observable<Employee[]>{
   return this.http.get<Employee[]>(this.apiUrl + '/chefs').pipe(
     catchError(this.handleError))
 }
+getItemNoResponsable():Observable<Employee[]>{
+  return this.http.get<Employee[]>(this.apiUrl + '/Nochefs').pipe(
+    catchError(this.handleError))
+}
 
 private handleError(error: HttpErrorResponse) {
   if (error.error instanceof ErrorEvent) {

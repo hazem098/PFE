@@ -15,6 +15,7 @@ import { Projet } from 'app/shared/models/Projet';
 import { ProjetService } from '../projet.service';
 import { ProjetPopupComponent } from './projetPopup/ProjetPopup.component';
 import { ResourceService } from '../../resource/resource.service';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -58,7 +59,8 @@ export class ProjetComponent implements OnInit {
     private crudService: ProjetService,
     private resourceService: ResourceService,
     private confirmService: AppConfirmService,
-    private loader: AppLoaderService
+    private loader: AppLoaderService,
+    private datePipe: DatePipe,
   ) {     this.dataSource = new MatTableDataSource<Projet>([]);}
 
   ngOnInit() {
@@ -151,5 +153,6 @@ deleteItem(row) {
      this.dataSource.filter = FilterValue.trim().toLowerCase();
  
  }
+ 
  
 }

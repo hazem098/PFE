@@ -5,20 +5,21 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSnackBar } from "@angular/material/snack-bar";
-
+import { Employee, Title } from 'app/shared/models/Employee';
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Employee } from "app/shared/models/Employee";
+
 import { Projet } from "app/shared/models/Projet";
 import { AppLoaderService } from "app/shared/services/app-loader/app-loader.service";
 import { LoaderDialogComponent } from "app/views/app-dialogs/loader-dialog/loader-dialog.component";
 
-import { Title } from "chart.js";
+
 import { Subscription } from "rxjs";
 import { ResourceService } from "../../resource/resource.service";
 import { ProjetService } from "../projet.service";
 import { AffectationComponent } from "./affectationResource/affecatation.component";
+import { DatePipe } from "@angular/common";
 
 @Component({
     selector: 'Viewprojet-crud',
@@ -46,7 +47,8 @@ import { AffectationComponent } from "./affectationResource/affecatation.compone
       private dialog: MatDialog,
       private loader : AppLoaderService,
       private crudService: ProjetService,
-      private resourceService: ResourceService
+      private resourceService: ResourceService,
+      private datePipe: DatePipe
      
     ) {this.dataSource = new MatTableDataSource<Employee>([]); }
   
@@ -69,6 +71,11 @@ import { AffectationComponent } from "./affectationResource/affecatation.compone
     this.dataSource=data
         })
     }
+    TitleMap = {
+        [Title.CRM]:'CRM',
+        [Title.PROJECT_MANAGER]:'Chef du projet',
+       
+      }
     openPopUp(data: any, isNew?) {
         let title = isNew ? 'Nouveau projet' : 'Modifier projet';
         let dialogRef: MatDialogRef<any> = this.dialog.open(AffectationComponent, {
@@ -83,16 +90,18 @@ import { AffectationComponent } from "./affectationResource/affecatation.compone
             return;
           }
       
-          if (isNew) {
-            this.loader.open('ajout en cours');
-            this.crudService.addResourceToProject(this.id, res.resourceId).subscribe((data: any) => {
+         // if (isNew) {
+            const resourceId = res.resourceId;
+            
+            this.crudService.addResourceToProject(this.id, resourceId).subscribe((data: any) => {
               this.dataSource = data;
               this.loader.close();
               this.snack.open('resource affecté avec succès!', 'OK', { duration: 2000 });
-              this.getRessources();
+              this.getRessources()
             });
           }
-        });
+        //}
+        );
       }
       
     }

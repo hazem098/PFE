@@ -38,8 +38,8 @@ export class ProjetService {
     const url = `${this.apiUrl+ '/getResources'}/${id}`;
     return this.http.get<any>(url).pipe();
   }
-  addResourceToProject(projectId: number, resourceId: number) {
-    const url = `${this.apiUrl}/${projectId}/${resourceId}/resources`;
-    return this.http.post(url, null);
+  addResourceToProject(projectId: number, resourceIds: number[]) {
+    const url = `${this.apiUrl}/${projectId}/resources`;
+    return this.http.post(url, resourceIds);
   }
   }

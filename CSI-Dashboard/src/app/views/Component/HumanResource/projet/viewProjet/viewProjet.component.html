@@ -24,8 +24,8 @@
               
                     <div class="profile-title text-center mb-16">
                       <div class="main-title"> <strong>Budget:</strong>{{ projet.budget }}</div>
-                      <div class="subtitle mb-8"><strong>Date du début:</strong> {{ projet.startDate }}</div>
-                      <div class="subtitle mb-8"><strong>Date du fin: </strong>  {{ projet.endDate }}</div>
+                      <div class="subtitle mb-8"><strong>Date du début:</strong> {{ projet.startDate  | date:'dd-MM-yyyy' }}</div>
+                      <div class="subtitle mb-8"><strong>Date du fin: </strong>  {{ projet.endDate | date:'dd-MM-yyyy' }}</div>
                       </div>
                       </mat-card-content>
                       </mat-card>
@@ -70,7 +70,7 @@
                         
                        </div>
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.title}} </mat-cell>
+                    <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color">{{TitleMap[row.title]}}</mat-cell>
                   </ng-container>
                    
                 

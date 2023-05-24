@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -32,6 +32,7 @@ import { ProjetComponent } from "./add projet/projet.component";
 import { ProjetService } from "./projet.service";
 import { ViewProjetComponent } from "./viewProjet/viewProjet.component";
 import { AffectationComponent } from "./viewProjet/affectationResource/affecatation.component";
+import { KanbanBoardComponent } from "./viewProjet/tasks/KanbanBoard.component";
 
 
 
@@ -67,7 +68,7 @@ import { AffectationComponent } from "./viewProjet/affectationResource/affecatat
     MatTabsModule,
     RouterModule.forChild(ProjetRoutes),
   ],
-  declarations: [ ProjetComponent , ProjetPopupComponent, ViewProjetComponent, AffectationComponent],
-  providers: [ ProjetService,]
+  declarations: [ ProjetComponent , ProjetPopupComponent, ViewProjetComponent, AffectationComponent, KanbanBoardComponent],
+  providers: [ ProjetService,DatePipe]
 })
 export class ProjetModule { }

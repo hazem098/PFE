@@ -54,7 +54,7 @@ export class ResourceComponent implements OnInit,OnDestroy{
   }
 
   getDisplayedColumns() {
-    return ['photo', 'serialNumber','firstName', 'lastName',  'title', 'departement','actions'];
+    return [ 'serialNumber','firstName', 'lastName',  'title', 'departement','actions'];
   }
   
   getItems() {    

@@ -1,0 +1,11 @@
+<div class="kanban-board">
+    <div class="column" *ngFor="let status of statuses">
+      <h3>{{ status }}</h3>
+      <div class="card" *ngFor="let task of getTasksByStatus(status)" (dragstart)="onDragStart($event, task)">
+        <h4>{{ task.title }}</h4>
+        <p>{{ task.description }}</p>
+        <p><strong>Assignee:</strong> {{ task.assignee }}</p>
+      </div>
+    </div>
+  </div>
+  
