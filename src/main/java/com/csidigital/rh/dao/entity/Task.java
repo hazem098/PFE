@@ -30,4 +30,10 @@ public class Task implements Serializable {
     private Priority priority;
     @Enumerated(EnumType.STRING)
     private TaskPhase taskPhase;
+    @ManyToOne
+    private Resource resource;
+
+    @ManyToOne
+    private Project project;
+
 }

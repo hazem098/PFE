@@ -82,29 +82,37 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = modelMapper.map(projectDtoRequest, Project.class);
         String projectReference = String.format("PR_%04d", sequence.getNextValue());
         project.setProjectReference(projectReference);
+
         List<Resource> existingResources = resourceRepository.findAllById(projectDtoRequest.getResourceIds());
         for(Resource res : existingResources) {
-            res.setProject(project);
+            res.getProjects().add(project);
+            //resourceRepository.save(res);
         }
      Resource responsable = resourceRepository.findById(projectDtoRequest.getResponsableNum()).orElseThrow();
+
         project.setResources(existingResources);
-      //  project.setResponsable(responsable);
-        responsable.setProject(project);
-       Resource resp= resourceRepository.save(responsable);
-        project.setResponsable(resp);
+        project.setResponsable(responsable);
         project = projectRepository.save(project);
+
+        responsable.getProjects().add(project);
+       resourceRepository.save(responsable);
+        resourceRepository.saveAll(existingResources);
+
+
         sequence.incrementNextValue();
         sequenceRepository.save(sequence);
-
         Project ProjectSaved = projectRepository.save(project);
         return modelMapper.map(ProjectSaved, ProjectDtoResponse.class);
     }
 
-    public void addResourceToProject(Long projectId, Long resourceId) {
+    public void addResourceToProject(Long projectId, List<Long> resourceIds) {
         Project project = projectRepository.findById(projectId).orElseThrow(() -> new RuntimeException("Project not found"));
-        Resource resource = resourceRepository.findById(resourceId).orElseThrow();
+        List<Resource> resources = resourceRepository.findAllById(resourceIds);
+        for(Resource res : resources){
+            res.getProjects().add(project);
+        }
         // Add the resource to the project's resource list
-        project.getResources().add(resource);
+        project.getResources().addAll(resources);
 
         // Save the updated project
         projectRepository.save(project);
@@ -137,13 +145,13 @@ public class ProjectServiceImpl implements ProjectService {
             if (resource.getId() == null) {
                 resource = resourceRepository.save(resource);
             }
-            resource.setProject(project);
+            resource.getProjects().add(project);
         }
 
         // Save responsible resource if necessary
 
-        responsable.setProject(project);
-
+        responsable.getProjects().add(project);
+        resourceRepository.save(responsable);
         project.setResources(existingResources);
         project.setResponsable(responsable);
 
@@ -174,17 +182,12 @@ public class ProjectServiceImpl implements ProjectService {
     public void deleteProjectById(Long id) {
         Project project = projectRepository.findById(id).orElse(null);
 
-        if (project != null) {
-            // Remove the project reference from associated employees
-            List<Resource> resources = project.getResources();
-            for (Resource res : resources) {
-                res.setProject(null);
-            }
+
 
             projectRepository.deleteById(id);
 
     }
 }
 
-}
+
 

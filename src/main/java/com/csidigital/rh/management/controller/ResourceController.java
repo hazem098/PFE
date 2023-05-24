@@ -27,6 +27,10 @@ public class ResourceController {
     public List<Employee> getChefs(){
         return resource.getChefs();
     }
+    @GetMapping("/Nochefs")
+    public List<Employee> getNoChefs(){
+        return resource.getNoChefs();
+    }
     @GetMapping("/getResource/{id}")
     public ResourceResponse  getResourceById(@PathVariable Long id){
         return resource.getResourceById(id);

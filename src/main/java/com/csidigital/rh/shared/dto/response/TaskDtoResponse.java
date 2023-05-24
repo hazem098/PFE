@@ -2,6 +2,9 @@ package com.csidigital.rh.shared.dto.response;
 
 
 
+import com.csidigital.rh.dao.entity.AssResourceProjet;
+import com.csidigital.rh.dao.entity.Project;
+import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.shared.enumeration.Priority;
 import com.csidigital.rh.shared.enumeration.TaskPhase;
 import com.csidigital.rh.shared.enumeration.TaskType;
@@ -24,4 +27,5 @@ public class TaskDtoResponse {
     private TaskType taskType;
     private Priority priority;
     private TaskPhase taskPhase;
+    private AssResourceProjet assResourceProjet ;
 }

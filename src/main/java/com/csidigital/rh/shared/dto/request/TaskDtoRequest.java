@@ -22,4 +22,6 @@ public class TaskDtoRequest {
     private TaskType taskType;
     private Priority priority;
     private TaskPhase taskPhase;
+    private Long ProjectNum ;
+    private Long ResourceNum ;
 }

@@ -34,16 +34,16 @@ public class ResourceImpl implements ResourceService {
 
     @Override
     public ResourceResponse createResource(ResourceRequest request) {
-        Project projet = null ;
+        List<Project> projet = null ;
         Project responsable = null ;
-        if (request.getProjectNum()!=null) {
-            projet = projectRepository.findById(request.getProjectNum()).orElseThrow();
+        if (request.getProjectNums()!=null) {
+            projet = projectRepository.findAllById(request.getProjectNums());
         }
         if (request.getPrjNum()!=null) {
             responsable = projectRepository.findById(request.getPrjNum()).orElseThrow();
         }
         Resource resource = modelMapper.map(request, Resource.class);
-        resource.setProject(projet);
+        resource.setProjects(projet);
         resource.setPrj(responsable);
         Resource resourceSaved = resourceRepository.save(resource);
         return modelMapper.map(resourceSaved, ResourceResponse.class);
@@ -72,6 +72,20 @@ public class ResourceImpl implements ResourceService {
 
                 if(emp.getTitle().equals(Title.PROJECT_MANAGER)){
             employeeList.add(emp);}
+        }
+
+        return employeeList;
+    }
+    public List<Employee> getNoChefs() {
+        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employeeList= new ArrayList<>();
+
+        for (Employee emp : employees) {
+
+
+
+            if (!emp.getTitle().equals(Title.PROJECT_MANAGER)){
+                employeeList.add(emp);}
         }
 
         return employeeList;

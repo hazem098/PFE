@@ -3,7 +3,9 @@ package com.csidigital.rh.management.service.impl;
 
 
 
+import com.csidigital.rh.dao.entity.AssResourceProjet;
 import com.csidigital.rh.dao.entity.Task;
+import com.csidigital.rh.dao.repository.AssResourceProjetRepository;
 import com.csidigital.rh.dao.repository.TaskRepository;
 import com.csidigital.rh.management.service.TaskService;
 import com.csidigital.rh.shared.dto.request.TaskDtoRequest;
@@ -22,6 +24,7 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskRepository taskRepository;
     @Autowired
+    private AssResourceProjetRepository assResourceProjetRepository;
     private ModelMapper modelMapper;
     @Override
     public List<TaskDtoResponse> getAllTasks() {
@@ -46,7 +49,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDtoResponse createTask(TaskDtoRequest taskDtoRequest) {
+
         Task task = modelMapper.map(taskDtoRequest, Task.class);
+
         Task TaskSaved = taskRepository.save(task);
         return modelMapper.map(TaskSaved, TaskDtoResponse.class);
     }

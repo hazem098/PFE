@@ -56,9 +56,11 @@ public class ProjectController {
         return projectService.getProjectResource(id);
     }
 
-    @PostMapping("/{projectId}/{resourceId}/resources")
-    public ResponseEntity<?> addResourceToProject(@PathVariable Long projectId, @PathVariable Long resourceId) {
-        projectService.addResourceToProject(projectId, resourceId);
+
+
+    @PostMapping("/{projectId}/resources")
+    public ResponseEntity<?> addResourceToProject(@PathVariable Long projectId,  @RequestBody List<Long> resourceIds) {
+        projectService.addResourceToProject(projectId, resourceIds);
         return ResponseEntity.ok("Resource added to the project successfully.");
     }
 }
