@@ -1,3 +1,8 @@
+.add-task-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 .kanban-board {
     display: flex;
     justify-content: space-around;
@@ -6,7 +11,7 @@
   
   .column {
     flex: 1;
-    background-color: #f2f2f2;
+    
     padding: 10px;
     border-radius: 5px;
   }
@@ -44,4 +49,17 @@
   strong {
     font-weight: bold;
   }
+  .kanbanCard{
+    margin-top: 10px;
+  }
+  .status-todo {
+    background-color: red; /* Red */
+  }
   
+  .status-in-progress {
+    background-color: #bbdefb; /* Blue */
+  }
+  
+  .status-done {
+    background-color: #c8e6c9; /* Green */
+  }

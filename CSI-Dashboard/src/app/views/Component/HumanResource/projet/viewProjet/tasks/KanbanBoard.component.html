@@ -1,11 +1,71 @@
+<mat-card class="p-0">
+  <mat-card-title>
+    <div class="card-title-text">
+      <mat-icon>info_outline</mat-icon>
+      informations projet
+    </div>
+    <mat-divider></mat-divider>
+  </mat-card-title>
+  <mat-card-content>
+    <div fxLayout="row wrap">
+      <div fxFlex="100" fxFlex.gt-sm="50">
+        <mat-card class="p-0">
+          <mat-card-content>
+            <div fxLayout="row wrap">
+              <div class="profile-title text-center mb-16">
+                <div class="main-title">
+                  <strong>Reference:</strong>{{ projet.projectReference }}
+                </div>
+                <div class="subtitle mb-8">
+                  <strong>Titre:</strong> {{ projet.name }}
+                </div>
+                <div class="subtitle mb-8">
+                  <strong>Description: </strong> {{ projet.description }}
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="p-0">
+          <mat-card-content>
+            <div fxLayout="row wrap">
+              <div class="profile-title text-center mb-16">
+                <div class="main-title">
+                  <strong>Budget:</strong>{{ projet.budget }}
+                </div>
+                <div class="subtitle mb-8">
+                  <strong>Date du début:</strong> {{ projet.startDate | date:'dd-MM-yyyy' }}
+                </div>
+                <div class="subtitle mb-8">
+                  <strong>Date du fin: </strong> {{ projet.endDate | date:'dd-MM-yyyy' }}
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+          <mat-card class="kanbanCard">
+            <mat-card-content>
+              <div dir="rtl" fxLayoutGap="20px">
+              <button class="add-task-button"
+         mat-icon-button
+         
+        color="primary"
+>
+         <mat-icon>add_circle_outline</mat-icon>
+       </button>  </div>
 <div class="kanban-board">
-    <div class="column" *ngFor="let status of statuses">
+    <div class="column" *ngFor="let status of statuses" [class]="getStatusClass(status)">
       <h3>{{ status }}</h3>
-      <div class="card" *ngFor="let task of getTasksByStatus(status)" (dragstart)="onDragStart($event, task)">
+      <div class="card" *ngFor="let task of getTasksByStatus(status)"  (dragstart)="onDragStart($event, task)">
         <h4>{{ task.title }}</h4>
-        <p>{{ task.description }}</p>
-        <p><strong>Assignee:</strong> {{ task.assignee }}</p>
+        <p><strong>Description:</strong>{{ task.description }}</p>
+        <p><strong>Employé:</strong> {{ task.assignee }}</p>
       </div>
     </div>
   </div>
+  <mat-card-content>
   
