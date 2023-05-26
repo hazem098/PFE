@@ -85,7 +85,7 @@ public class ProjectServiceImpl implements ProjectService {
 
         List<Resource> existingResources = resourceRepository.findAllById(projectDtoRequest.getResourceIds());
         for(Resource res : existingResources) {
-            res.getProjects().add(project);
+            res.setProject(project);
             //resourceRepository.save(res);
         }
      Resource responsable = resourceRepository.findById(projectDtoRequest.getResponsableNum()).orElseThrow();
@@ -94,7 +94,7 @@ public class ProjectServiceImpl implements ProjectService {
         project.setResponsable(responsable);
         project = projectRepository.save(project);
 
-        responsable.getProjects().add(project);
+        responsable.setProject(project);
        resourceRepository.save(responsable);
         resourceRepository.saveAll(existingResources);
 
@@ -109,10 +109,11 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findById(projectId).orElseThrow(() -> new RuntimeException("Project not found"));
         List<Resource> resources = resourceRepository.findAllById(resourceIds);
         for(Resource res : resources){
-            res.getProjects().add(project);
+            res.setProject(project);
+            project.getResources().add(res);
         }
         // Add the resource to the project's resource list
-        project.getResources().addAll(resources);
+
 
         // Save the updated project
         projectRepository.save(project);
@@ -145,12 +146,12 @@ public class ProjectServiceImpl implements ProjectService {
             if (resource.getId() == null) {
                 resource = resourceRepository.save(resource);
             }
-            resource.getProjects().add(project);
+            resource.setProject(project);
         }
 
         // Save responsible resource if necessary
 
-        responsable.getProjects().add(project);
+        responsable.setProject(project);
         resourceRepository.save(responsable);
         project.setResources(existingResources);
         project.setResponsable(responsable);

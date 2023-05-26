@@ -33,16 +33,13 @@ public class Resource extends Employee{
     private List<Contract> contractsList;
 
     @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name = "task",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id")
-    )
-    private List<Project> projects;
+    @ManyToOne
+    private Project project;
    @JsonIgnore
     @OneToOne
    private Project prj;
 
-
+    @JsonIgnore
+    @OneToMany
+    private List<Task> tasks;
 }

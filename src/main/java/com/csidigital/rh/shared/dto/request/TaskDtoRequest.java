@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -16,12 +17,12 @@ import java.util.Date;
 public class TaskDtoRequest {
     private String title;
     private String description;
-    private Date startDate;
+    private LocalDate startDate;
+    private LocalDate EndDate;
     private Long estimation;
-    private String reference;
+
     private TaskType taskType;
     private Priority priority;
     private TaskPhase taskPhase;
-    private Long ProjectNum ;
     private Long ResourceNum ;
 }

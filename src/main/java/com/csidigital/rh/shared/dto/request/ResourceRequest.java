@@ -25,7 +25,7 @@ public class ResourceRequest extends EmployeeRequest{
     private Boolean isEmployee;
 
     private List<Contract> contractsList;
-    private List<Long> projectNums ;
+    private Long projectNum ;
 
     private  Long PrjNum;
 }

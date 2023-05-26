@@ -34,16 +34,16 @@ public class ResourceImpl implements ResourceService {
 
     @Override
     public ResourceResponse createResource(ResourceRequest request) {
-        List<Project> projet = null ;
+        Project projet = null ;
         Project responsable = null ;
-        if (request.getProjectNums()!=null) {
-            projet = projectRepository.findAllById(request.getProjectNums());
+        if (request.getProjectNum()!=null) {
+            projet = projectRepository.findById(request.getProjectNum()).orElseThrow();
         }
         if (request.getPrjNum()!=null) {
             responsable = projectRepository.findById(request.getPrjNum()).orElseThrow();
         }
         Resource resource = modelMapper.map(request, Resource.class);
-        resource.setProjects(projet);
+        resource.setProject(projet);
         resource.setPrj(responsable);
         Resource resourceSaved = resourceRepository.save(resource);
         return modelMapper.map(resourceSaved, ResourceResponse.class);

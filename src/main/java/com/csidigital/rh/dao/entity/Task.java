@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -23,9 +24,10 @@ public class Task implements Serializable {
     private Long id;
     private String title;
     private String description;
-    private Date startDate;
+    private LocalDate startDate;
+    private LocalDate EndDate;
     private Long estimation;
-    private String reference;
+
     private TaskType taskType;
     private Priority priority;
     @Enumerated(EnumType.STRING)
@@ -33,7 +35,6 @@ public class Task implements Serializable {
     @ManyToOne
     private Resource resource;
 
-    @ManyToOne
-    private Project project;
+
 
 }
