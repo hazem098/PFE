@@ -8,12 +8,21 @@ import { catchError, Observable } from "rxjs";
 @Injectable()
 export class ProjetService {
   private apiUrl = 'http://localhost:8084/project';
+  private apiUrl2 = 'http://localhost:8084/task';
  
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
   getItems(): Observable<Projet[]> {
     const apiUrlWithGET = this.apiUrl + '/getAll';
     return this.http.get<any>(apiUrlWithGET).pipe();
+  }
+  getTask(): Observable<any[]> {
+    const apiUrlWithGET = this.apiUrl2 + '/getAll';
+    return this.http.get<any>(apiUrlWithGET).pipe();
+  }
+  addTask(task:any): Observable<any> {
+    const apiUrlWithGET = this.apiUrl2 + '/add';
+    return this.http.post<any>(apiUrlWithGET,task).pipe();
   }
   addItem(projet: any): Observable<any> {
     const apiUrlWithAdd = this.apiUrl + '/add'; // Append /add to the apiUrl

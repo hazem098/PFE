@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ActivatedRoute } from '@angular/router';
 import { ProjetService } from '../../projet.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { TaskPopupComponent } from './taskPopup/taskPopup.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 
 
 @Component({
@@ -13,10 +17,13 @@ import { ProjetService } from '../../projet.service';
 export class KanbanBoardComponent implements OnInit {
   id :number
   projet : any
+  private tasks: any[]
   constructor(
     private router : ActivatedRoute,
     private crudService: ProjetService,
-    
+    private snack: MatSnackBar,
+      private dialog: MatDialog,
+      private loader : AppLoaderService,
     
    
   ) { }
@@ -24,13 +31,19 @@ export class KanbanBoardComponent implements OnInit {
   ngOnInit() {
     this.id = this.router.snapshot.params['id'];
     this.getItem()
+    this.gettask()
+    
   }
+  gettask(){
+    this.crudService.getTask().subscribe((data:any) =>{
+this.tasks=data
+    })}
   getItem(){
     this.crudService.getItem(this.id).subscribe((data:any) =>{
 this.projet=data
     })
 }
-  tasks: any[] = [
+ /* tasks: any[] = [
     {
       
       title: 'Tache 1',
@@ -66,15 +79,15 @@ this.projet=data
       status: 'Test',
       assignee: 'Hazem'
     }
-  ];
+  ];*/
 
-  statuses: string[] = ['A faire', 'En cours','Test' ,'Terminé'];
+  statuses: string[] = ['A_FAIRE', 'EN_COURS','TEST','TERMINE'];
 
   getTasksByStatus(status: string): Task[] {
-    return this.tasks.filter(task => task.status === status);
+    return this.tasks.filter(task => task.taskPhase === status);
   }
 
-  /*onDragStart(event: DragEvent, task: Task): void {
+  onDragStart(event: DragEvent, task: any): void {
     event.dataTransfer!.setData('text/plain', task.id.toString());
   }
 
@@ -83,7 +96,7 @@ this.projet=data
     const taskIndex = this.tasks.findIndex(task => task.id === taskId);
     this.tasks[taskIndex].status = status;
     moveItemInArray(this.tasks, taskIndex, event.currentIndex);
-  }*/
+  }
   getStatusClass(status: string): string {
     switch (status) {
       case 'A faire':
@@ -96,4 +109,31 @@ this.projet=data
         return '';
     }
   }
+  openPopUp(data:  any , isNew?) {
+    let title = isNew ? 'Nouveau projet' : 'Modifier projet';
+    let dialogRef: MatDialogRef<any> = this.dialog.open(TaskPopupComponent, {
+      width: '1000px',
+      disableClose: true,
+      data: { title: title, payload: data , isNew: isNew }
+    })
+    dialogRef.afterClosed()
+      .subscribe(res => {
+        if(!res) {
+          // If user press cancel
+          return;
+        
+         }
+        if (isNew) {
+          this.loader.open('Ajout en cours');
+          this.crudService.addTask(res)
+            .subscribe((data :any)=> {
+              this.tasks = data;
+              this.loader.close();
+              this.snack.open('tache ajouté avec succès!', 'OK', { duration: 2000 });
+              this.gettask()
+            })
+        } 
+      })
+  }
+
 }

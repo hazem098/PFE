@@ -33,6 +33,7 @@ import { ProjetService } from "./projet.service";
 import { ViewProjetComponent } from "./viewProjet/viewProjet.component";
 import { AffectationComponent } from "./viewProjet/affectationResource/affecatation.component";
 import { KanbanBoardComponent } from "./viewProjet/tasks/KanbanBoard.component";
+import { TaskPopupComponent } from "./viewProjet/tasks/taskPopup/taskPopup.component";
 
 
 
@@ -68,7 +69,7 @@ import { KanbanBoardComponent } from "./viewProjet/tasks/KanbanBoard.component";
     MatTabsModule,
     RouterModule.forChild(ProjetRoutes),
   ],
-  declarations: [ ProjetComponent , ProjetPopupComponent, ViewProjetComponent, AffectationComponent, KanbanBoardComponent],
+  declarations: [ ProjetComponent , ProjetPopupComponent, ViewProjetComponent, AffectationComponent, KanbanBoardComponent, TaskPopupComponent],
   providers: [ ProjetService,DatePipe]
 })
 export class ProjetModule { }

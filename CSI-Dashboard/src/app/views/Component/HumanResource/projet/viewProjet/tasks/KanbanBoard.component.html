@@ -8,8 +8,8 @@
   </mat-card-title>
   <mat-card-content>
     <div fxLayout="row wrap">
-      <div fxFlex="100" fxFlex.gt-sm="50">
-        <mat-card class="p-0">
+      <div fxFlex="100" fxFlex.gt-sm="50" fxLayout="row">
+        <mat-card class="p-0" width="250px">
           <mat-card-content>
             <div fxLayout="row wrap">
               <div class="profile-title text-center mb-16">
@@ -47,6 +47,7 @@
     </div>
   </mat-card-content>
 </mat-card>
+
           <mat-card class="kanbanCard">
             <mat-card-content>
               <div dir="rtl" fxLayoutGap="20px">
@@ -54,6 +55,8 @@
          mat-icon-button
          
         color="primary"
+
+        (click)="openPopUp({},true)"
 >
          <mat-icon>add_circle_outline</mat-icon>
        </button>  </div>
@@ -63,7 +66,7 @@
       <div class="card" *ngFor="let task of getTasksByStatus(status)"  (dragstart)="onDragStart($event, task)">
         <h4>{{ task.title }}</h4>
         <p><strong>Description:</strong>{{ task.description }}</p>
-        <p><strong>Employé:</strong> {{ task.assignee }}</p>
+       
       </div>
     </div>
   </div>

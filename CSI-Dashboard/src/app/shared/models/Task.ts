@@ -1,8 +1,16 @@
 export interface Task{
-  status: string;
+ 
   id: any;
    title: string;
    description : string;
-   assignee : string;
-
+   estimation : string;
+   startDate : string ;
+   endDate : string;
+   taskPhase : taskPhase
 }
+   export enum taskPhase{
+    A_FAIRE = "A_FAIRE"
+   }
+  
+
+

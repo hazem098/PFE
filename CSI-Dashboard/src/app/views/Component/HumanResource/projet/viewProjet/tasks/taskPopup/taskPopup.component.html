@@ -1,0 +1,83 @@
+<h1 matDialogTitle>{{data.title}}</h1>
+
+  <form [formGroup]="itemForm" (ngSubmit)="submit()" >
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+    
+    <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          name="title"
+          type="text"
+          [formControlName]="'title'"
+          placeholder="Titre">
+        </mat-form-field>
+      </div>
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        name="description"
+        [formControlName]="'description'"
+        placeholder="description">
+      </mat-form-field>
+    </div>
+    
+    
+    
+    
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+     
+        <mat-label>Date  début</mat-label>
+        <input matInput name="startDate" formControlName="startDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
+        <mat-datepicker-toggle matSuffix [for]="appDatepicker1"></mat-datepicker-toggle>
+      </mat-form-field>
+      <mat-datepicker #appDatepicker1></mat-datepicker>
+    </div>
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <mat-label>Date fin</mat-label>
+        <input matInput name="endDate" formControlName="endDate"  placeholder="Date fin" [matDatepicker]="endDatePicker" />
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      </mat-form-field>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+     
+      <mat-error *ngIf="itemForm.get('endDate').errors?.min">
+        La date de fin doit être postérieure à la date de début.
+      </mat-error>
+    </div>
+          <!--div fxFlex="50"  class="pr-16">
+
+            <mat-form-field class="full-width">
+              <mat-label>Status du projet</mat-label>
+              <mat-select  [formControlName]="'projectStatus'" [disabled]="!isFieldEnabled()">
+                <mat-option *ngFor="let x of ProjectStatus" [value]="x">{{ x }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+            
+          </div-->
+            <div fxFlex="50"  class="pr-16">
+            <mat-form-field class="full-width">
+              <mat-label>Resource</mat-label>
+              <mat-select  [formControlName]="'resourceNum'">
+                <mat-option *ngFor="let resource of Noresponsables" [value]="resource.id">{{resource.lastName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+           
+        </div>
+        <div fxFlex="50"  class="pr-16">
+            <mat-form-field class="full-width">
+              <mat-label>status du tache</mat-label>
+              <mat-select  [formControlName]="'taskPhase'">
+                  <mat-option *ngFor="let x of taskPhase" [value]="x">{{ x }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+          </div>
+    <div fxFlex="100" class="mt-16">
+      <button mat-raised-button color="primary" >{{"SAVE" | translate }}</button>
+      <span fxFlex></span>
+      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+    </div>
+  </div>
+  </form>
