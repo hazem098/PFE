@@ -8,8 +8,9 @@
   </mat-card-title>
   <mat-card-content>
     <div fxLayout="row wrap">
-      <div fxFlex="100" fxFlex.gt-sm="50" fxLayout="row">
-        <mat-card class="p-0" width="250px">
+      <div fxFlex="200" fxFlex.gt-sm="100" fxLayout="row">
+      
+        <mat-card class="p-0" style="width: 400px; padding-right:70px;" >
           <mat-card-content>
             <div fxLayout="row wrap">
               <div class="profile-title text-center mb-16">
@@ -26,7 +27,7 @@
             </div>
           </mat-card-content>
         </mat-card>
-        <mat-card class="p-0">
+        <mat-card class="p-0" style="width:400px;">
           <mat-card-content>
             <div fxLayout="row wrap">
               <div class="profile-title text-center mb-16">
@@ -63,9 +64,13 @@
 <div class="kanban-board">
     <div class="column" *ngFor="let status of statuses" [class]="getStatusClass(status)">
       <h3>{{ status }}</h3>
-      <div class="card" *ngFor="let task of getTasksByStatus(status)"  (dragstart)="onDragStart($event, task)">
-        <h4>{{ task.title }}</h4>
-        <p><strong>Description:</strong>{{ task.description }}</p>
+      <div class="card" *ngFor="let task of getTasksByStatus(status)"  (dragstart)="onDragStart($event, task)" [class]="task.isInDelay">
+        <h2>{{ task.title }}</h2>
+        <p><strong>Description:</strong>{{ task.description}}</p>
+        <p><strong>Assignée a:</strong>{{ task.resourceN }}</p>
+        <p><strong>Date debut:</strong>{{ task.startDate | date:'dd-MM-yyyy'}}</p>
+        <p><strong>Date fin:</strong>{{ task.endDate | date:'dd-MM-yyyy' }}</p>
+       
        
       </div>
     </div>

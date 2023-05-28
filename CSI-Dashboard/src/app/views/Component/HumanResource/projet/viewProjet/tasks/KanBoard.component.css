@@ -63,3 +63,10 @@
   .status-done {
     background-color: #c8e6c9; /* Green */
   }
+  .satuts-test {
+    background-color: orange;
+  }
+  .card.in-delay {
+    background-color: red; /* or any other color of your choice */
+    /* Add any additional styling as needed */
+  }

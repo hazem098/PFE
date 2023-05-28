@@ -74,6 +74,10 @@ import { DatePipe } from "@angular/common";
     TitleMap = {
         [Title.CRM]:'CRM',
         [Title.PROJECT_MANAGER]:'Chef du projet',
+        [Title.BACK_END_DEVELOPER]:'Développeur back-end',
+        [Title.FULLSTACK_DEVELOPER]:'Développeur fullStack',
+        [Title.DEVOPS_ENGINEER]: 'Développeur devops',
+        [Title.FRONT_END_DEVELOPER]: 'Développeur frontEnd '
        
       }
     openPopUp(data: any, isNew?) {

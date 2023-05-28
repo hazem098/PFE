@@ -1,5 +1,5 @@
 // kanban-board.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ActivatedRoute } from '@angular/router';
 import { ProjetService } from '../../projet.service';
@@ -24,7 +24,7 @@ export class KanbanBoardComponent implements OnInit {
     private snack: MatSnackBar,
       private dialog: MatDialog,
       private loader : AppLoaderService,
-    
+      private elementRef: ElementRef
    
   ) { }
 
@@ -81,9 +81,16 @@ this.projet=data
     }
   ];*/
 
-  statuses: string[] = ['A_FAIRE', 'EN_COURS','TEST','TERMINE'];
+ statuses: string[] = ['A_FAIRE', 'EN_COURS','TEST','TERMINE'];
+  // TypeScript code
+
+
+// Store the statuses in local storage
+
+
 
   getTasksByStatus(status: string): Task[] {
+    const currentDate = new Date();
     return this.tasks.filter(task => task.taskPhase === status);
   }
 
@@ -99,22 +106,24 @@ this.projet=data
   }
   getStatusClass(status: string): string {
     switch (status) {
-      case 'A faire':
+      case 'A_FAIRE':
         return 'status-todo';
-      case 'En cours':
+      case 'EN_COURS':
         return 'status-in-progress';
-      case 'Terminé':
+      case 'TERMINE':
         return 'status-done';
-      default:
-        return '';
+       default:
+        return 'status-test';
     }
   }
   openPopUp(data:  any , isNew?) {
-    let title = isNew ? 'Nouveau projet' : 'Modifier projet';
+    let title = isNew ? 'Nouvelle tache' : 'Modifier projet';
+    this.crudService.getResources(this.id).subscribe((resources: any) => {
     let dialogRef: MatDialogRef<any> = this.dialog.open(TaskPopupComponent, {
       width: '1000px',
+
       disableClose: true,
-      data: { title: title, payload: data , isNew: isNew }
+      data: { title: title, payload: data , isNew: isNew , resources : resources  }
     })
     dialogRef.afterClosed()
       .subscribe(res => {
@@ -131,9 +140,15 @@ this.projet=data
               this.loader.close();
               this.snack.open('tache ajouté avec succès!', 'OK', { duration: 2000 });
               this.gettask()
-            })
+            });
         } 
-      })
+      });
+    });
   }
-
+  isTaskInDelay(task: any) : boolean {
+    const currentDate = new Date();
+    return task.endDate < currentDate 
+  
+    }
+   
 }
