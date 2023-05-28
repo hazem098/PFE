@@ -44,7 +44,9 @@ public class TaskServiceImpl implements TaskService {
 
         for (Task task : tasks) {
             TaskDtoResponse taskDtoResponse = modelMapper.map(task,TaskDtoResponse.class);
+
             taskList.add(taskDtoResponse);
+            taskDtoResponse.setResourceN(task.getResource().getLastName());
         }
 
         return taskList;
@@ -55,6 +57,7 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Task with id " +id+ " not found"));
         TaskDtoResponse taskDtoResponse = modelMapper.map(task, TaskDtoResponse.class);
+
         return taskDtoResponse;
     }
 
@@ -69,7 +72,10 @@ public class TaskServiceImpl implements TaskService {
         Task task = modelMapper.map(taskDtoRequest, Task.class);
         resource.getTasks().add(task);
         task.setResource(resource);
+
+
         Task TaskSaved = taskRepository.save(task);
+        resourceRepository.save(resource);
         return modelMapper.map(TaskSaved, TaskDtoResponse.class);
     }
 
