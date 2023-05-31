@@ -5,6 +5,7 @@ package com.csidigital.rh.dao.entity;
 import com.csidigital.rh.shared.enumeration.Priority;
 import com.csidigital.rh.shared.enumeration.TaskPhase;
 import com.csidigital.rh.shared.enumeration.TaskType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,9 +33,12 @@ public class Task implements Serializable {
     private Priority priority;
     @Enumerated(EnumType.STRING)
     private TaskPhase taskPhase;
+   @JsonIgnore
     @ManyToOne
     private Resource resource;
 
-
-
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 }

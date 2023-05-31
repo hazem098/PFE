@@ -31,5 +31,6 @@ public class TaskDtoResponse {
     private TaskPhase taskPhase;
     private AssResourceProjet assResourceProjet ;
     private Long resourceId;
+    private Long projectId;
     private String ResourceN;
 }

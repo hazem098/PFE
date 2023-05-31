@@ -33,8 +33,8 @@ public class Resource extends Employee{
     private List<Contract> contractsList;
 
     @JsonIgnore
-    @ManyToOne
-    private Project project;
+    @ManyToMany
+    private List<Project> project;
    @JsonIgnore
     @OneToOne
    private Project prj;

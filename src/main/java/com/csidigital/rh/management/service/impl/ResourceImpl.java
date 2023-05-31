@@ -34,10 +34,10 @@ public class ResourceImpl implements ResourceService {
 
     @Override
     public ResourceResponse createResource(ResourceRequest request) {
-        Project projet = null ;
+        List<Project> projet = null ;
         Project responsable = null ;
         if (request.getProjectNum()!=null) {
-            projet = projectRepository.findById(request.getProjectNum()).orElseThrow();
+            projet = projectRepository.findAllById(request.getProjectNum());
         }
         if (request.getPrjNum()!=null) {
             responsable = projectRepository.findById(request.getPrjNum()).orElseThrow();

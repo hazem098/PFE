@@ -5,6 +5,7 @@ package com.csidigital.rh.management.service.impl;
 
 import com.csidigital.rh.dao.entity.ProjectReferenceSequence;
 import com.csidigital.rh.dao.entity.Resource;
+import com.csidigital.rh.dao.entity.Task;
 import com.csidigital.rh.dao.repository.ProjectReferenceSequenceRepository;
 import com.csidigital.rh.dao.repository.ResourceRepository;
 import com.csidigital.rh.management.service.ProjectService;
@@ -85,7 +86,7 @@ public class ProjectServiceImpl implements ProjectService {
 
         List<Resource> existingResources = resourceRepository.findAllById(projectDtoRequest.getResourceIds());
         for(Resource res : existingResources) {
-            res.setProject(project);
+            res.getProject().add(project);
             //resourceRepository.save(res);
         }
      Resource responsable = resourceRepository.findById(projectDtoRequest.getResponsableNum()).orElseThrow();
@@ -94,7 +95,7 @@ public class ProjectServiceImpl implements ProjectService {
         project.setResponsable(responsable);
         project = projectRepository.save(project);
 
-        responsable.setProject(project);
+        responsable.getProject().add(project);
        resourceRepository.save(responsable);
         resourceRepository.saveAll(existingResources);
 
@@ -109,7 +110,7 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findById(projectId).orElseThrow(() -> new RuntimeException("Project not found"));
         List<Resource> resources = resourceRepository.findAllById(resourceIds);
         for(Resource res : resources){
-            res.setProject(project);
+            res.getProject().add(project);
             project.getResources().add(res);
         }
         // Add the resource to the project's resource list
@@ -146,12 +147,12 @@ public class ProjectServiceImpl implements ProjectService {
             if (resource.getId() == null) {
                 resource = resourceRepository.save(resource);
             }
-            resource.setProject(project);
+            resource.getProject().add(project);
         }
 
         // Save responsible resource if necessary
 
-        responsable.setProject(project);
+        responsable.getProject().add(project);
         resourceRepository.save(responsable);
         project.setResources(existingResources);
         project.setResponsable(responsable);
@@ -187,6 +188,18 @@ public class ProjectServiceImpl implements ProjectService {
 
             projectRepository.deleteById(id);
 
+    }
+    public List<Task> getTasksForProject(Long projectId) {
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new IllegalArgumentException("Project not found with ID: " + projectId));
+
+        List<Task> tasks = new ArrayList<>();
+
+        for (Resource resource : project.getResources()) {
+            tasks.addAll(resource.getTasks());
+        }
+
+        return tasks;
     }
 }
 

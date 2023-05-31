@@ -45,11 +45,13 @@ public class Project implements Serializable {
     private ProjectStatus projectStatus;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "project")
+    @ManyToMany(mappedBy = "project")
     List<Resource> resources ;
     @JsonIgnore
     @OneToOne(mappedBy = "prj")
     private Resource responsable;
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "project")
+    private List<Task> tasks;
 }
 

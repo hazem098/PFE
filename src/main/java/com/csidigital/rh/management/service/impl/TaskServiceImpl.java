@@ -68,14 +68,21 @@ public class TaskServiceImpl implements TaskService {
             resource = resourceRepository.findById(taskDtoRequest.getResourceNum()).orElseThrow();
 
         }
+        Project project = null ;
+        if (projectRepository.findById(taskDtoRequest.getProjectNum()).orElseThrow() !=null) {
+            project = projectRepository.findById(taskDtoRequest.getProjectNum()).orElseThrow();
 
+        }
         Task task = modelMapper.map(taskDtoRequest, Task.class);
         resource.getTasks().add(task);
+        project.getTasks().add(task);
         task.setResource(resource);
+        task.setProject(project);
 
 
         Task TaskSaved = taskRepository.save(task);
         resourceRepository.save(resource);
+        projectRepository.save(project);
         return modelMapper.map(TaskSaved, TaskDtoResponse.class);
     }
 
