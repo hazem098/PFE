@@ -38,10 +38,21 @@ export class ProjetService {
       
     
   }
+  updateTask(id: number, projet: any): Observable<any> {
+    const url = `${this.apiUrl2 +'/updateById'}/${id}`;
+    return this.http.put<any>(url, projet).pipe()
+      
+    
+  }
   deleteItem(id: number): Observable<Projet> {
  
     const url = `${this.apiUrl+'/deleteById'}/${id}`;
     return this.http.delete<Projet>(url).pipe();
+  }
+  deleteTask(id: number): Observable<any> {
+ 
+    const url = `${this.apiUrl2+'/deleteById'}/${id}`;
+    return this.http.delete<any>(url).pipe();
   }
   getResources(id: number): Observable<Employee[]> {
     const url = `${this.apiUrl+ '/getResources'}/${id}`;
@@ -50,5 +61,9 @@ export class ProjetService {
   addResourceToProject(projectId: number, resourceIds: number[]) {
     const url = `${this.apiUrl}/${projectId}/resources`;
     return this.http.post(url, resourceIds);
+  }
+  ProjectTask(projectId: number) {
+    const url = `${this.apiUrl}/${projectId}/tasks`;
+    return this.http.get(url).pipe();
   }
   }

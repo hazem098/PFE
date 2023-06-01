@@ -8,7 +8,10 @@
     justify-content: space-around;
     gap: 20px;
   }
-  
+  .expired-row {
+    background-color: rgb(184, 121, 121);  /* Apply red background color for expired rows */
+    color: white;           /* Apply white text color for expired rows */
+  }
   .column {
     flex: 1;
     
@@ -53,11 +56,11 @@
     margin-top: 10px;
   }
   .status-todo {
-    background-color: red; /* Red */
+    background-color: rgb(4, 0, 255); /* Red */
   }
   
   .status-in-progress {
-    background-color: #bbdefb; /* Blue */
+    background-color: #edfbbb; /* Blue */
   }
   
   .status-done {
@@ -67,6 +70,6 @@
     background-color: orange;
   }
   .card.in-delay {
-    background-color: red; /* or any other color of your choice */
+    background-color: rgb(47, 0, 255); /* or any other color of your choice */
     /* Add any additional styling as needed */
   }

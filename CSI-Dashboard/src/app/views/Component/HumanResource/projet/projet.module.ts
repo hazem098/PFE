@@ -38,6 +38,7 @@ import { TaskPopupComponent } from "./viewProjet/tasks/taskPopup/taskPopup.compo
 
 
 
+
 @NgModule({
   imports: [
     
@@ -66,6 +67,7 @@ import { TaskPopupComponent } from "./viewProjet/tasks/taskPopup/taskPopup.compo
     MatSelectModule,
     MatDatepickerModule,
     MatExpansionModule,
+   
     MatTabsModule,
     RouterModule.forChild(ProjetRoutes),
   ],

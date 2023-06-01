@@ -74,6 +74,16 @@
                 </mat-select>
             </mat-form-field>
           </div>
+          <div fxFlex="50"  class="pr-16">
+            <mat-form-field class="full-width">
+              <input
+              matInput
+              name="progression"
+              type="number"
+              [formControlName]="'progression'"
+              placeholder="Progression">
+            </mat-form-field>
+          </div>
     <div fxFlex="100" class="mt-16">
       <button mat-raised-button color="primary" >{{"SAVE" | translate }}</button>
       <span fxFlex></span>

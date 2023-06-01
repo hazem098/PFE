@@ -38,7 +38,8 @@ import { ProjetService } from "../../../projet.service";
             estimation : [item.estimation || Validators.required],
           resourceNum:[item.resourceNum|| '', Validators.required],
           taskPhase:[item.taskPhase|| '', Validators.required],
-          
+          progression:[item.progression||''],
+          projectNum:[this.data.projectId]
           
     
            },)}

@@ -1,3 +1,5 @@
+import { Employee } from "./Employee";
+
 export interface Task{
  
     id: any;
@@ -7,7 +9,7 @@ export interface Task{
    startDate : Date ;
    endDate : Date;
    taskPhase : taskPhase;
-   isInDelay: boolean;
+   resource: Employee
 }
    export enum taskPhase{
     A_FAIRE = "A_FAIRE",
