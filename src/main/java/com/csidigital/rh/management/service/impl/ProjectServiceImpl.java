@@ -16,6 +16,7 @@ import com.csidigital.rh.dao.entity.Project;
 import com.csidigital.rh.dao.repository.ProjectRepository;
 import com.csidigital.rh.shared.dto.request.ProjectDtoRequest;
 import com.csidigital.rh.shared.dto.response.ProjectDtoResponse;
+import com.csidigital.rh.shared.dto.response.TaskDtoResponse;
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -189,17 +190,22 @@ public class ProjectServiceImpl implements ProjectService {
             projectRepository.deleteById(id);
 
     }
-    public List<Task> getTasksForProject(Long projectId) {
+    public List<TaskDtoResponse> getTasksForProject(Long projectId) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new IllegalArgumentException("Project not found with ID: " + projectId));
 
         List<Task> tasks = new ArrayList<>();
+        List<TaskDtoResponse> tasksRes = new ArrayList<>();
 
         for (Resource resource : project.getResources()) {
-            tasks.addAll(resource.getTasks());
+            tasks.addAll(resource.getTasks());}
+            for (Task tt : tasks) {
+                TaskDtoResponse taskDtoResponse = modelMapper.map(tt, TaskDtoResponse.class);
+                tasksRes.add(taskDtoResponse);
+
         }
 
-        return tasks;
+        return tasksRes;
     }
 }
 

@@ -25,6 +25,7 @@ public class TaskDtoResponse {
     private LocalDate startDate;
     private LocalDate EndDate;
     private Long estimation;
+    private Long progression ;
     private String reference;
     private TaskType taskType;
     private Priority priority;
@@ -33,4 +34,5 @@ public class TaskDtoResponse {
     private Long resourceId;
     private Long projectId;
     private String ResourceN;
+    private Resource resource ;
 }

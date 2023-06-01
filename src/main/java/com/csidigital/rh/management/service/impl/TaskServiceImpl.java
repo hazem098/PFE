@@ -88,10 +88,28 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDtoResponse updateTask(Long id, TaskDtoRequest taskDtoRequest) {
+
         Task task = taskRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Task with id: " + id + " not found"));
+     Project project = projectRepository.findById(taskDtoRequest.getProjectNum()).orElseThrow();
         modelMapper.map(taskDtoRequest, task);
+        Resource newResource = resourceRepository.findById(taskDtoRequest.getResourceNum())
+                .orElseThrow(() -> new ResourceNotFoundException("Resource with id: " + taskDtoRequest.getResourceNum() + " not found"));
+
+        // Retrieve the existing resource
+        Resource existingResource = task.getResource();
+        Project existingProject = task.getProject();
+        // Update the resource association if it has changed
+        if (existingResource != null && !existingResource.equals(newResource)) {
+            existingResource.getTasks().remove(task); // Remove the task from the existing resource
+        }
+       task.setProject(task.getProject());
+        task.setResource(newResource);
+
+
         Task updatedTask = taskRepository.save(task);
+        resourceRepository.save(newResource);
+        projectRepository.save(project);
         return modelMapper.map(updatedTask, TaskDtoResponse.class);
     }
 
@@ -107,6 +125,19 @@ public class TaskServiceImpl implements TaskService {
     }*/
     @Override
     public void deleteTaskById(Long id) {
+      Task task = taskRepository.findById(id).orElseThrow();
+        Resource resource = task.getResource();
+        if (resource != null) {
+            resource.getTasks().remove(task);
+        }
+
+        // Remove the task from the associated project
+        Project project = task.getProject();
+        if (project != null) {
+            project.getTasks().remove(task);
+        }
+
+
         taskRepository.deleteById(id);
 
     }

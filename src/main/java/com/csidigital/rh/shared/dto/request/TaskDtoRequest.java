@@ -20,7 +20,7 @@ public class TaskDtoRequest {
     private LocalDate startDate;
     private LocalDate EndDate;
     private Long estimation;
-
+    private Long progression ;
     private TaskType taskType;
     private Priority priority;
     private TaskPhase taskPhase;

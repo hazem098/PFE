@@ -28,7 +28,7 @@ public class Task implements Serializable {
     private LocalDate startDate;
     private LocalDate EndDate;
     private Long estimation;
-
+    private Long progression ;
     private TaskType taskType;
     private Priority priority;
     @Enumerated(EnumType.STRING)

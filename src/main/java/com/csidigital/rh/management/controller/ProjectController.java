@@ -9,6 +9,7 @@ import com.csidigital.rh.dao.entity.Task;
 import com.csidigital.rh.management.service.impl.ProjectServiceImpl;
 import com.csidigital.rh.shared.dto.request.ProjectDtoRequest;
 import com.csidigital.rh.shared.dto.response.ProjectDtoResponse;
+import com.csidigital.rh.shared.dto.response.TaskDtoResponse;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -65,7 +66,7 @@ public class ProjectController {
         return ResponseEntity.ok("Resource added to the project successfully.");
     }
     @GetMapping("/{projectId}/tasks")
-    public List<Task> getTasksForProject(@PathVariable Long projectId) {
+    public List<TaskDtoResponse> getTasksForProject(@PathVariable Long projectId) {
         return projectService.getTasksForProject(projectId);
     }
 }
