@@ -22,15 +22,7 @@
           placeholder="Titre">
         </mat-form-field>
       </div>
-    <div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
-        <input
-        matInput
-        name="description"
-        [formControlName]="'description'"
-        placeholder="description">
-      </mat-form-field>
-    </div>
+    
     <div fxFlex="50"  class="pr-16">
       <mat-form-field class="full-width">
         <mat-label>Responsable</mat-label>
@@ -78,9 +70,6 @@
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
       </mat-form-field>
       <mat-datepicker #endDatePicker></mat-datepicker>
-      <mat-error *ngIf="itemForm.get('endDate').errors?.required">
-        La date de fin est obligatoire.
-      </mat-error>
       <mat-error *ngIf="itemForm.get('endDate').errors?.min">
         La date de fin doit être postérieure à la date de début.
       </mat-error>
@@ -95,24 +84,74 @@
           </mat-form-field>
             
           </div-->
-            <div fxFlex="50"  class="pr-16">
+            <!--div fxFlex="50"  class="pr-16">
             <mat-form-field class="full-width">
               <mat-label>Resource</mat-label>
               <mat-select  [formControlName]="'resourceIds'" multiple>
-                <mat-option *ngFor="let resource of Noresponsables" [value]="resource.id">{{resource.lastName}}</mat-option>
+                <mat-option *ngFor="let resource of Noresponsables" [value]="resource.id">  {{ resource.lastName }} {{ resource.title }}</mat-option>
               </mat-select>
             </mat-form-field>
            
-        </div>
-        <div *ngIf="errorMessage" class="error-message" >{{ errorMessage }}</div>
+        </div-->
+
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+<div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        name="description"
+        [formControlName]="'description'"
+        placeholder="commentaire">
+      </mat-form-field>
+    </div>
+   
+    <div class="table-container">
+      <mat-progress-spinner *ngIf="isLoading" color="primary" mode="indeterminate"></mat-progress-spinner>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="toggleSelectionAll($event)"></mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (change)="toggleSelection($event, row)" [checked]="selection.isSelected(row)"></mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- Nom Column -->
+        <ng-container matColumnDef="Nom">
+          <th mat-header-cell *matHeaderCellDef> Nom </th>
+          <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
+        </ng-container>
+
+        <!-- Prénom Column -->
+        <ng-container matColumnDef="Prénom">
+          <th mat-header-cell *matHeaderCellDef> Prénom </th>
+          <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
+        </ng-container>
+
+        <!-- Poste Column -->
+        <ng-container matColumnDef="Poste">
+          <th mat-header-cell *matHeaderCellDef> Poste </th>
+          <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
+        </ng-container>
+
+        <!-- Header and Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+      </table>
+    </div>
 
     <div fxFlex="100" class="mt-16">
-      <button mat-raised-button color="primary" >{{"SAVE" | translate }}</button>
+      <button mat-raised-button color="primary">{{ "SAVE" }}</button>
       <span fxFlex></span>
       <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
     </div>
   </div>
-  </form>
+</form>
+  <!-- Include the necessary Angular Material components -->
+
+
   <!--h1 matDialogTitle>{{data.title}}</h1>
   <form [formGroup]="Form" (ngSubmit)="submit()" >
     <mat-card class="p-0">

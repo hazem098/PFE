@@ -5,6 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { taskPhase } from "app/shared/models/Task";
 import { ResourceService } from "app/views/Component/HumanResource/resource/resource.service";
 import { ProjetService } from "../../../projet.service";
+import { Projet } from "app/shared/models/Projet";
 
 @Component({
     selector: 'app-ngx-table-popup',
@@ -12,7 +13,7 @@ import { ProjetService } from "../../../projet.service";
    
   })
   export class TaskPopupComponent implements OnInit {
-    Noresponsables : any[]
+   
     id:number
    
     dataSource : any
@@ -27,6 +28,7 @@ import { ProjetService } from "../../../projet.service";
     }
     public itemForm: FormGroup;
     buildItemForm(item){
+      
         this.itemForm = this.fb.group({
            
             title : [item.title || '', Validators.required], 
@@ -36,26 +38,24 @@ import { ProjetService } from "../../../projet.service";
           startDate: [item.startDate ||'', Validators.required, ],
           endDate : [item.endDate || '', Validators.required],
             estimation : [item.estimation || Validators.required],
-          resourceNum:[item.resourceNum|| '', Validators.required],
+          
           taskPhase:[item.taskPhase|| '', Validators.required],
           progression:[item.progression||''],
           projectNum:[this.data.projectId]
           
     
-           },)}
+           });
+           
+          }
     ngOnInit() {
         this.buildItemForm(this.data.payload)
-        this.dataSource = this.data.resources
-        this.getNoChefs()
+       
         this.id = this.router.snapshot.params['id'];
     }
+   
     submit() {
         this.dialogRef.close(this.itemForm.value)
       }
-      getNoChefs(){
-        this.resourceService.getItemNoResponsable().subscribe((data: any) => {
-          this.Noresponsables = data;
-         });
-        }
+      
        
   }

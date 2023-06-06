@@ -4,20 +4,26 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {  Validators,  FormGroup, FormBuilder, UntypedFormGroup, UntypedFormControl, FormArray, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Partner,CompanyStatus,WorkField,LegalStatus,Provenance ,Country} from 'app/shared/models/Partner';
 import { ProjetService } from '../../projet.service';
-import { Devise, ProjectStatus, ProjectType } from 'app/shared/models/Projet';
+import { Devise, ProjectStatus, ProjectType, Projet } from 'app/shared/models/Projet';
 import { ResourceService } from '../../../resource/resource.service';
 import { Employee, Title } from 'app/shared/models/Employee';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { PeriodicElement } from 'assets/examples/material/pagination-table/pagination-table.component';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 
 @Component({
   selector: 'app-ngx-table-popup',
   templateUrl: './Projetpopup.component.html',
+  styleUrls:['./ProjetPopup.component.scss']
+  
  
 })
 export class ProjetPopupComponent implements OnInit {
   public itemForm: FormGroup;;
   public Form: FormGroup;
-  
+  isLoading = true;
   ProjectStatus = Object.values(ProjectStatus);
   ProjectType = Object.values(ProjectType);
   devise = Object.values(Devise)
@@ -26,13 +32,18 @@ export class ProjetPopupComponent implements OnInit {
   selectedFile: File;
   formRessource:FormGroup;
   submitted=false;
-  resources : Employee[]
+  resources : Employee[] 
   responsables : Employee[] = []
   Noresponsables : Employee[] = []
- 
+  public dataSource: MatTableDataSource<Employee>;
+  public displayedColumns: any;
+  selection = new SelectionModel<Employee>(true, []);
+  selectedResourceIds: number[] = [];
+
   formWidth = 200; // declare and initialize formWidth property
-  formHeight = 700; // declare and initialize formHeight property
+  formHeight = 1000; // declare and initialize formHeight property
   selectedResources: number[] = [];
+  selectedRowIds: number[] = [];
 
 
   constructor(
@@ -43,15 +54,18 @@ export class ProjetPopupComponent implements OnInit {
     private resourceService : ResourceService
   ) {    
     
-
+    this.dataSource = new MatTableDataSource<Employee>([]);
   }
   isFieldEnabled(): boolean {
     return !this.data.isNew; // Enable the field if isNew is true
   }
   
-
+  getDisplayedColumns() {
+    return ['select', 'Nom' , 'Prénom' , 'Poste' ];
+  }
 
   buildItemForm(item){
+   
     this.itemForm = this.fb.group({
         projectReference : [item.projectReference|| '', Validators.required],
         name : [item.name || '', Validators.required], 
@@ -62,7 +76,7 @@ export class ProjetPopupComponent implements OnInit {
       endDate : [item.endDate || '', Validators.required],
       projectType: [item.projectType || '', Validators.required],
       projectStatus : [item.projectStatus|| 'NOT_STARTED', Validators.required],
-      resourceIds:[item.resourceIds|| '', Validators.required],
+      resourceIds:[this.selectedRowIds|| '', Validators.required],
       responsableNum:[item.responsableId||'',Validators.required],
       
 
@@ -78,8 +92,16 @@ export class ProjetPopupComponent implements OnInit {
 
   }
 
- 
+  getRessources(){
+    this.isLoading = true;
+    this.resourceService.getItems().subscribe((data:any) =>{
+this.dataSource.data=data;
+this.isLoading = false;
+    })
+}
   ngOnInit() {
+    this.getRessources()
+    this.displayedColumns=this.getDisplayedColumns()
     this.Form= new UntypedFormGroup({
       
       name : new UntypedFormControl('', [Validators.required]),
@@ -123,6 +145,7 @@ this.getNoChefs()
         this.errorMessage = 'Please fill in all required fields and ensure the date is valid.';
       }
     }
+   
   }
   endDateValidator(startDate: Date) {
     return (endDateControl) => {
@@ -133,7 +156,7 @@ this.getNoChefs()
       return null;
     };
   }
-  
+ 
    getResources(){
     this.resourceService.getItems().subscribe((data :any )=>{
       this.resources = data
@@ -157,5 +180,28 @@ this.getNoChefs()
         return { 'invalidDate': true };
       }
       return null;
+    }
+    isAllSelected() {
+      const numSelected = this.selection.selected.length;
+      const numRows = this.dataSource.data.length;
+      return numSelected === numRows;
+    }
+  
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+  
+    /** The label for the checkbox on the passed row */
+    toggleSelection(event: MatCheckboxChange, row: Employee) {
+    
+      this.selection.toggle(row);
+      this.updateSelectedRowIds();
+    }
+    
+    toggleSelectionAll(event: MatCheckboxChange) {
+     
+      this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach(row => this.selection.select(row));
+      this.updateSelectedRowIds();
+    }
+    updateSelectedRowIds() {
+      this.selectedRowIds = this.selection.selected.map(row => row.id);
     }
   }

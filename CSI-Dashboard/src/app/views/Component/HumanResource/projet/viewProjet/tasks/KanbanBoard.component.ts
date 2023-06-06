@@ -18,6 +18,10 @@ import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.s
 })
 export class KanbanBoardComponent implements OnInit {
   id :number
+  isSubtaskPanelOpen: boolean = false;
+  selectedTask: any;
+  subtasksDataSource: MatTableDataSource<any>;
+  subtaskDisplayedColumns: string[] = ['SubtaskTitle'];
   projet : any
   private tasks: any[]
   public dataSource: MatTableDataSource<any>;
@@ -38,22 +42,26 @@ export class KanbanBoardComponent implements OnInit {
   ngOnInit() {
     this.id = this.router.snapshot.params['id'];
     this.getItem()
-    this.gettasks()
     this.gettask()
+    this.gettasks()
     this.displayedColumns = this.getDisplayedColumns();
   }
   gettask(){
-    this.crudService.ProjectTask(this.id).subscribe((data:any) =>{
+    this.crudService.getTask().subscribe((data:any) =>{
 this.tasks=data
     })}
     gettasks(){
-      this.crudService.ProjectTask(this.id).subscribe((data:any) =>{
+      this.crudService.getTask().subscribe((data:any) =>{
   this.dataSource=data
       })}
   getItem(){
     this.crudService.getItem(this.id).subscribe((data:any) =>{
 this.projet=data
     })
+}
+toggleSubtaskPanel(task: any) {
+  this.selectedTask = task;
+  this.isSubtaskPanelOpen = !this.isSubtaskPanelOpen;
 }
 getDisplayedColumns() {
   return ['Titre' , 'Description' , 'DateDébut' , 'DateFin','Actions'];
@@ -158,7 +166,7 @@ deleteItem(row) {
       width: '1000px',
 
       disableClose: true,
-      data: { title: title, payload: data , isNew: isNew , resources : resources , projectId : this.id }
+      data: { title: title, payload: data , isNew: isNew , resources : resources , projectId : this.id , projet : this.projet}
     })
     dialogRef.afterClosed()
       .subscribe(res => {

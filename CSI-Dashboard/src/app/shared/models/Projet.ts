@@ -4,8 +4,8 @@ projectReference ?: string ;
 name?: string ;
 description?: number ;
 budget?: string ;
-startDate?: string
-endDate?: string ;
+startDate?: Date
+endDate?: Date ;
 type?: string
 projectStatus?: ProjectStatus
 projectType?: ProjectType
