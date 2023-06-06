@@ -41,5 +41,5 @@ public class Resource extends Employee{
 
     @JsonIgnore
     @OneToMany
-    private List<Task> tasks;
+    private List<SubTask> subTasks;
 }

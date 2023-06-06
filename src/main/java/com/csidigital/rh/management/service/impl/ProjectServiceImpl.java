@@ -190,23 +190,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectRepository.deleteById(id);
 
     }
-    public List<TaskDtoResponse> getTasksForProject(Long projectId) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new IllegalArgumentException("Project not found with ID: " + projectId));
 
-        List<Task> tasks = new ArrayList<>();
-        List<TaskDtoResponse> tasksRes = new ArrayList<>();
-
-        for (Resource resource : project.getResources()) {
-            tasks.addAll(resource.getTasks());}
-            for (Task tt : tasks) {
-                TaskDtoResponse taskDtoResponse = modelMapper.map(tt, TaskDtoResponse.class);
-                tasksRes.add(taskDtoResponse);
-
-        }
-
-        return tasksRes;
-    }
 }
 
 

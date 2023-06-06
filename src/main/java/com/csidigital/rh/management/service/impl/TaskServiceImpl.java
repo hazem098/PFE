@@ -3,11 +3,8 @@ package com.csidigital.rh.management.service.impl;
 
 
 
-import com.csidigital.rh.dao.entity.AssResourceProjet;
 import com.csidigital.rh.dao.entity.Project;
-import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.dao.entity.Task;
-import com.csidigital.rh.dao.repository.AssResourceProjetRepository;
 import com.csidigital.rh.dao.repository.ProjectRepository;
 import com.csidigital.rh.dao.repository.ResourceRepository;
 import com.csidigital.rh.dao.repository.TaskRepository;
@@ -15,8 +12,6 @@ import com.csidigital.rh.management.service.TaskService;
 import com.csidigital.rh.shared.dto.request.TaskDtoRequest;
 import com.csidigital.rh.shared.dto.response.TaskDtoResponse;
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,8 +28,7 @@ public class TaskServiceImpl implements TaskService {
     private ProjectRepository projectRepository;
     @Autowired
     private ResourceRepository resourceRepository;
-    @Autowired
-    private AssResourceProjetRepository assResourceProjetRepository;
+
     @Autowired
     private ModelMapper modelMapper;
     @Override
@@ -46,7 +40,7 @@ public class TaskServiceImpl implements TaskService {
             TaskDtoResponse taskDtoResponse = modelMapper.map(task,TaskDtoResponse.class);
 
             taskList.add(taskDtoResponse);
-            taskDtoResponse.setResourceN(task.getResource().getLastName());
+
         }
 
         return taskList;
@@ -63,25 +57,23 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDtoResponse createTask(TaskDtoRequest taskDtoRequest) {
-        Resource resource = null ;
-        if (resourceRepository.findById(taskDtoRequest.getResourceNum()).orElseThrow() !=null) {
-            resource = resourceRepository.findById(taskDtoRequest.getResourceNum()).orElseThrow();
 
-        }
+
+
         Project project = null ;
         if (projectRepository.findById(taskDtoRequest.getProjectNum()).orElseThrow() !=null) {
             project = projectRepository.findById(taskDtoRequest.getProjectNum()).orElseThrow();
 
         }
         Task task = modelMapper.map(taskDtoRequest, Task.class);
-        resource.getTasks().add(task);
+
         project.getTasks().add(task);
-        task.setResource(resource);
+
         task.setProject(project);
 
 
         Task TaskSaved = taskRepository.save(task);
-        resourceRepository.save(resource);
+
         projectRepository.save(project);
         return modelMapper.map(TaskSaved, TaskDtoResponse.class);
     }
@@ -93,22 +85,22 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(()-> new ResourceNotFoundException("Task with id: " + id + " not found"));
      Project project = projectRepository.findById(taskDtoRequest.getProjectNum()).orElseThrow();
         modelMapper.map(taskDtoRequest, task);
-        Resource newResource = resourceRepository.findById(taskDtoRequest.getResourceNum())
-                .orElseThrow(() -> new ResourceNotFoundException("Resource with id: " + taskDtoRequest.getResourceNum() + " not found"));
+        //Resource newResource = resourceRepository.findById(taskDtoRequest.getResourceNum())
+          //      .orElseThrow(() -> new ResourceNotFoundException("Resource with id: " + taskDtoRequest.getResourceNum() + " not found"));
 
         // Retrieve the existing resource
-        Resource existingResource = task.getResource();
-        Project existingProject = task.getProject();
+        //Resource existingResource = task.getResource();
+        //Project existingProject = task.getProject();
         // Update the resource association if it has changed
-        if (existingResource != null && !existingResource.equals(newResource)) {
-            existingResource.getTasks().remove(task); // Remove the task from the existing resource
-        }
-       task.setProject(task.getProject());
-        task.setResource(newResource);
+        //if (existingResource != null && !existingResource.equals(newResource)) {
+          //  existingResource.getTasks().remove(task); // Remove the task from the existing resource
+        //}
+      // task.setProject(task.getProject());
+        //task.setResource(newResource);
 
 
         Task updatedTask = taskRepository.save(task);
-        resourceRepository.save(newResource);
+        //esourceRepository.save(newResource);
         projectRepository.save(project);
         return modelMapper.map(updatedTask, TaskDtoResponse.class);
     }
@@ -126,10 +118,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void deleteTaskById(Long id) {
       Task task = taskRepository.findById(id).orElseThrow();
-        Resource resource = task.getResource();
-        if (resource != null) {
-            resource.getTasks().remove(task);
-        }
+
 
         // Remove the task from the associated project
         Project project = task.getProject();

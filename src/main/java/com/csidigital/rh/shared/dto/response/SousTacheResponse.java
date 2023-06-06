@@ -1,22 +1,16 @@
-package com.csidigital.rh.shared.dto.request;
+package com.csidigital.rh.shared.dto.response;
 
-
+import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.dao.entity.Task;
 import com.csidigital.rh.shared.enumeration.Priority;
 import com.csidigital.rh.shared.enumeration.TaskPhase;
 import com.csidigital.rh.shared.enumeration.TaskType;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class TaskDtoRequest {
+public class SousTacheResponse {
+   private Long id ;
     private String title;
     private String description;
     private LocalDate startDate;
@@ -26,8 +20,7 @@ public class TaskDtoRequest {
     private TaskType taskType;
     private Priority priority;
     private TaskPhase taskPhase;
+    private Resource resource;
 
-    private Long ProjectNum ;
-
-
+    private Task task ;
 }

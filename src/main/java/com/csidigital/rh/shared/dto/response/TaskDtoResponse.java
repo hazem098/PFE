@@ -2,9 +2,7 @@ package com.csidigital.rh.shared.dto.response;
 
 
 
-import com.csidigital.rh.dao.entity.AssResourceProjet;
-import com.csidigital.rh.dao.entity.Project;
-import com.csidigital.rh.dao.entity.Resource;
+import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.shared.enumeration.Priority;
 import com.csidigital.rh.shared.enumeration.TaskPhase;
 import com.csidigital.rh.shared.enumeration.TaskType;
@@ -14,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -30,9 +29,10 @@ public class TaskDtoResponse {
     private TaskType taskType;
     private Priority priority;
     private TaskPhase taskPhase;
-    private AssResourceProjet assResourceProjet ;
-    private Long resourceId;
-    private Long projectId;
-    private String ResourceN;
-    private Resource resource ;
+
+
+    private Project project;
+
+
+    private List<SubTask> sousTaches ;
 }

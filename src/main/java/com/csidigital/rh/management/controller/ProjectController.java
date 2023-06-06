@@ -65,8 +65,5 @@ public class ProjectController {
         projectService.addResourceToProject(projectId, resourceIds);
         return ResponseEntity.ok("Resource added to the project successfully.");
     }
-    @GetMapping("/{projectId}/tasks")
-    public List<TaskDtoResponse> getTasksForProject(@PathVariable Long projectId) {
-        return projectService.getTasksForProject(projectId);
-    }
+
 }
