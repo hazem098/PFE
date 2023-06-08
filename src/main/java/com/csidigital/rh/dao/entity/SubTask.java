@@ -28,6 +28,9 @@ public class SubTask implements Serializable {
     private Long progression ;
     private TaskType taskType;
     private Priority priority;
+    private Integer remaining ;
+    private LocalDate realEndDate;
+    private LocalDate projectionDate;
     @Enumerated(EnumType.STRING)
     private TaskPhase taskPhase;
     @JsonIgnore

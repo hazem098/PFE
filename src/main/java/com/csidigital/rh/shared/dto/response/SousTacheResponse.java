@@ -21,6 +21,8 @@ public class SousTacheResponse {
     private Priority priority;
     private TaskPhase taskPhase;
     private Resource resource;
-
+    private Integer remaining ;
+    private LocalDate realEndDate;
+    private LocalDate projectionDate;
     private Task task ;
 }

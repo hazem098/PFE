@@ -33,6 +33,7 @@ public class Project implements Serializable {
     private String name;
     private String description;
     private Double budget;
+    private Integer workingHourNumber ;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate startDate;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")

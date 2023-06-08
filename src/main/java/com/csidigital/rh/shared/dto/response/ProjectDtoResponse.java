@@ -26,7 +26,7 @@ public class ProjectDtoResponse {
     private ProjectType projectType;
     private LocalDate startDate;
     private LocalDate endDate;
-
+    private Integer workingHourNumber ;
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
    private  List<Resource> resources ;

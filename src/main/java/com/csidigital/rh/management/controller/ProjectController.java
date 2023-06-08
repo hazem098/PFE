@@ -5,6 +5,7 @@ package com.csidigital.rh.management.controller;
 
 import com.csidigital.rh.dao.entity.Project;
 import com.csidigital.rh.dao.entity.Resource;
+import com.csidigital.rh.dao.entity.SubTask;
 import com.csidigital.rh.dao.entity.Task;
 import com.csidigital.rh.management.service.impl.ProjectServiceImpl;
 import com.csidigital.rh.shared.dto.request.ProjectDtoRequest;
@@ -65,5 +66,12 @@ public class ProjectController {
         projectService.addResourceToProject(projectId, resourceIds);
         return ResponseEntity.ok("Resource added to the project successfully.");
     }
-
+    @GetMapping("/{id}/subTask")
+    public List<SubTask> getProjectTask(@PathVariable Long id){
+        return projectService.getProjectTask(id);
+    }
+    @GetMapping("/{id}/Tasks")
+    public List<Task> getProjectTasks(@PathVariable Long id){
+        return projectService.getProjectTasks(id);
+    }
 }

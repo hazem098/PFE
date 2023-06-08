@@ -3,20 +3,16 @@ package com.csidigital.rh.management.service.impl;
 
 
 
-import com.csidigital.rh.dao.entity.ProjectReferenceSequence;
-import com.csidigital.rh.dao.entity.Resource;
-import com.csidigital.rh.dao.entity.Task;
+import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.dao.repository.ProjectReferenceSequenceRepository;
 import com.csidigital.rh.dao.repository.ResourceRepository;
 import com.csidigital.rh.management.service.ProjectService;
 
 
-
-import com.csidigital.rh.dao.entity.Project;
 import com.csidigital.rh.dao.repository.ProjectRepository;
 import com.csidigital.rh.shared.dto.request.ProjectDtoRequest;
 import com.csidigital.rh.shared.dto.response.ProjectDtoResponse;
-import com.csidigital.rh.shared.dto.response.TaskDtoResponse;
+import com.csidigital.rh.shared.dto.response.SousTacheResponse;
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +60,27 @@ public class ProjectServiceImpl implements ProjectService {
 
     }
 
+    public List<SubTask> getProjectTask(Long id) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Project with id " +id+ " not found"));
+        List<SubTask> sousTacheResponses= new ArrayList<>();
+        List<Task> taskList = project.getTasks();
+        for(Task t : taskList){
+            sousTacheResponses.addAll(t.getSubTaskList());
+        }
+        return sousTacheResponses;
+
+    }
+    public List<Task> getProjectTasks(Long id) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Project with id " +id+ " not found"));
+
+        List<Task> taskList = project.getTasks();
+
+
+        return taskList ;
+
+    }
     @Override
     public List<Resource> getProjectResource(Long id) {
         Project project = projectRepository.findById(id)

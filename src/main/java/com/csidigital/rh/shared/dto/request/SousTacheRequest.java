@@ -19,6 +19,8 @@ public class SousTacheRequest {
     private Priority priority;
     private TaskPhase taskPhase;
     private Long resourceNum ;
-
+    private Integer remaining ;
+    private LocalDate realEndDate;
+    private LocalDate projectionDate;
     private Long taskNum ;
 }

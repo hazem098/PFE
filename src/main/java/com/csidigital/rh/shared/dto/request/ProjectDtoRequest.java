@@ -23,7 +23,7 @@ public class ProjectDtoRequest {
     private String description;
     private Double budget;
     private LocalDate startDate;
-
+    private Integer workingHourNumber ;
     private ProjectType projectType;
     private LocalDate endDate;
 
