@@ -6,6 +6,7 @@ import { taskPhase } from "app/shared/models/Task";
 import { ResourceService } from "app/views/Component/HumanResource/resource/resource.service";
 import { ProjetService } from "../../../projet.service";
 import { Projet } from "app/shared/models/Projet";
+import { Employee } from "app/shared/models/Employee";
 
 @Component({
     selector: 'app-ngx-table-popup',
@@ -15,7 +16,7 @@ import { Projet } from "app/shared/models/Projet";
   export class TaskPopupComponent implements OnInit {
    
     id:number
-   
+    resources : Employee[]
     dataSource : any
     taskPhase = Object.values(taskPhase);
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -24,7 +25,7 @@ import { Projet } from "app/shared/models/Projet";
     public crudService : ProjetService,
     public router : ActivatedRoute,
     private fb: FormBuilder,){
-
+      
     }
     public itemForm: FormGroup;
     buildItemForm(item){
@@ -41,21 +42,23 @@ import { Projet } from "app/shared/models/Projet";
           
           taskPhase:[item.taskPhase|| '', Validators.required],
           progression:[item.progression||''],
-          projectNum:[this.data.projectId]
-          
-    
+          projectNum:[this.data.projectId],
+          status :[item.status],
+          resourceNum : [item.resourceNum],
+          taskNum:[item.taskNum]
            });
            
           }
     ngOnInit() {
         this.buildItemForm(this.data.payload)
-       
+       this.resources = this.data.resources
         this.id = this.router.snapshot.params['id'];
+        this.dataSource = this.data.tasks
     }
    
     submit() {
         this.dialogRef.close(this.itemForm.value)
       }
-      
+    
        
   }

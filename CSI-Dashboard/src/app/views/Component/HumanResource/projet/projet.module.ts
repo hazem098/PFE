@@ -34,7 +34,7 @@ import { ViewProjetComponent } from "./viewProjet/viewProjet.component";
 import { AffectationComponent } from "./viewProjet/affectationResource/affecatation.component";
 import { KanbanBoardComponent } from "./viewProjet/tasks/KanbanBoard.component";
 import { TaskPopupComponent } from "./viewProjet/tasks/taskPopup/taskPopup.component";
-
+import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
@@ -71,6 +71,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatExpansionModule,
     MatCheckboxModule,
     MatTabsModule,
+    MatRadioModule,
     MatProgressSpinnerModule,
     RouterModule.forChild(ProjetRoutes),
   ],

@@ -9,6 +9,7 @@ import { catchError, Observable } from "rxjs";
 export class ProjetService {
   private apiUrl = 'http://localhost:8084/project';
   private apiUrl2 = 'http://localhost:8084/task';
+  private apiUrl3 = 'http://localhost:8084/subTask';
  
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -20,9 +21,23 @@ export class ProjetService {
     const apiUrlWithGET = this.apiUrl2 + '/getAll';
     return this.http.get<any>(apiUrlWithGET).pipe();
   }
-  addTask(task:any): Observable<any> {
+ /* addTask(task:any): Observable<any> {
     const apiUrlWithGET = this.apiUrl2 + '/add';
     return this.http.post<any>(apiUrlWithGET,task).pipe();
+  }*/
+  addSubTask(subTask:any): Observable<any> {
+    const apiUrlWithGET = this.apiUrl3 + '/add';
+    return this.http.post<any>(apiUrlWithGET,subTask).pipe();
+  }
+  addTask(payload: any) {
+    if (payload.status === 'option1') {
+      const apiTask = this.apiUrl2 + '/add';
+     
+      return this.http.post(apiTask , payload);
+    } else if (payload.status === 'option2') {
+      const apiSubTask = this.apiUrl3 + '/add';
+      return this.http.post(apiSubTask , payload);
+    }
   }
   addItem(projet: any): Observable<any> {
     const apiUrlWithAdd = this.apiUrl + '/add'; // Append /add to the apiUrl
@@ -31,6 +46,10 @@ export class ProjetService {
   getItem(id: number): Observable<Projet> {
     const url = `${this.apiUrl+ '/getById'}/${id}`;
     return this.http.get<Projet>(url).pipe();
+  }
+  getTasks(id: number): Observable<any> {
+    const url = `${this.apiUrl}/${id}/Tasks`;
+    return this.http.get<any>(url).pipe();
   }
   updateItem(id: number, projet: Projet): Observable<Projet> {
     const url = `${this.apiUrl +'/updateById'}/${id}`;
@@ -63,7 +82,7 @@ export class ProjetService {
     return this.http.post(url, resourceIds);
   }
   ProjectTask(projectId: number) {
-    const url = `${this.apiUrl}/${projectId}/tasks`;
+    const url = `${this.apiUrl}/${projectId}/subTask`;
     return this.http.get(url).pipe();
   }
   }

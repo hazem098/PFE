@@ -76,9 +76,10 @@ export class ProjetPopupComponent implements OnInit {
       endDate : [item.endDate || '', Validators.required],
       projectType: [item.projectType || '', Validators.required],
       projectStatus : [item.projectStatus|| 'NOT_STARTED', Validators.required],
-      resourceIds:[this.selectedRowIds|| '', Validators.required],
+      resourceIds:[this.selectedRowIds.values|| '', Validators.required],
       responsableNum:[item.responsableId||'',Validators.required],
-      
+      lieuDuProjet:[item.lieuDuProjet],
+      workingHourNumber:[item.workingHourNumber]
 
        },);
        this.itemForm.get('startDate').valueChanges.subscribe((value) => {
@@ -91,7 +92,7 @@ export class ProjetPopupComponent implements OnInit {
       });
 
   }
-
+    
   getRessources(){
     this.isLoading = true;
     this.resourceService.getItems().subscribe((data:any) =>{
@@ -135,6 +136,7 @@ this.getNoChefs()
     const endDateControl = this.itemForm.get('endDate');
   
     if (startDateControl.valid && endDateControl.valid) {
+      console.log(this.selectedRowIds);
       this.dialogRef.close(this.itemForm.value);
     } else {
       if (startDateControl.invalid) {
@@ -194,6 +196,7 @@ this.getNoChefs()
     
       this.selection.toggle(row);
       this.updateSelectedRowIds();
+      this.updateResourceIds()
     }
     
     toggleSelectionAll(event: MatCheckboxChange) {
@@ -203,5 +206,8 @@ this.getNoChefs()
     }
     updateSelectedRowIds() {
       this.selectedRowIds = this.selection.selected.map(row => row.id);
+    }
+    updateResourceIds() {
+      this.itemForm.get('resourceIds').setValue(this.selectedRowIds); // Update the resourceIds form control value
     }
   }

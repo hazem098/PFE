@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
+import { Employee } from 'app/shared/models/Employee';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class KanbanBoardComponent implements OnInit {
   selectedTask: any;
   subtasksDataSource: MatTableDataSource<any>;
   subtaskDisplayedColumns: string[] = ['SubtaskTitle'];
+resources : Employee[]
   projet : any
   private tasks: any[]
   public dataSource: MatTableDataSource<any>;
@@ -31,12 +33,12 @@ export class KanbanBoardComponent implements OnInit {
     private router : ActivatedRoute,
     private crudService: ProjetService,
     private snack: MatSnackBar,
-      private dialog: MatDialog,
-      private confirmService: AppConfirmService,
+    private dialog: MatDialog,
+    private confirmService: AppConfirmService,
     
       private loader : AppLoaderService,
       private elementRef: ElementRef
-   
+    
   ) { this.dataSource = new MatTableDataSource<any>([]); }
 
   ngOnInit() {
@@ -45,13 +47,14 @@ export class KanbanBoardComponent implements OnInit {
     this.gettask()
     this.gettasks()
     this.displayedColumns = this.getDisplayedColumns();
+    this.getRessources();
   }
   gettask(){
-    this.crudService.getTask().subscribe((data:any) =>{
+    this.crudService.getTasks(this.id).subscribe((data:any) =>{
 this.tasks=data
     })}
     gettasks(){
-      this.crudService.getTask().subscribe((data:any) =>{
+      this.crudService.ProjectTask(this.id).subscribe((data:any) =>{
   this.dataSource=data
       })}
   getItem(){
@@ -64,7 +67,7 @@ toggleSubtaskPanel(task: any) {
   this.isSubtaskPanelOpen = !this.isSubtaskPanelOpen;
 }
 getDisplayedColumns() {
-  return ['Titre' , 'Description' , 'DateDébut' , 'DateFin','Actions'];
+  return ['Titre' ,'Description' , 'DateDébut' , 'DateFin','Actions'];
 }
 isEndDateExpired(row: any): boolean {
   const endDate = new Date(row.endDate);
@@ -136,7 +139,11 @@ deleteItem(row) {
     const currentDate = new Date();
     return this.tasks.filter(task => task.taskPhase === status);
   }
-
+  getRessources(){
+    this.crudService.getResources(this.id).subscribe((data:any) =>{
+this.resources=data
+    })
+}
   onDragStart(event: DragEvent, task: any): void {
     event.dataTransfer!.setData('text/plain', task.id.toString());
   }
@@ -166,7 +173,7 @@ deleteItem(row) {
       width: '1000px',
 
       disableClose: true,
-      data: { title: title, payload: data , isNew: isNew , resources : resources , projectId : this.id , projet : this.projet}
+      data: { title: title, payload: data , isNew: isNew , resources : resources , projectId : this.id , projet : this.projet , tasks : this.tasks}
     })
     dialogRef.afterClosed()
       .subscribe(res => {

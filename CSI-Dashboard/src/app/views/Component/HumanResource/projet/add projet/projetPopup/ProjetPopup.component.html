@@ -1,79 +1,274 @@
 <h1 matDialogTitle>{{data.title}}</h1>
 
-  <form [formGroup]="itemForm" (ngSubmit)="submit()" >
-    <div fxLayout="row wrap" fxLayout.lt-sm="column">
-    <div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
-        <mat-label>Type du projet</mat-label>
-        <mat-select  [formControlName]="'projectType'">
-            <mat-option *ngFor="let x of ProjectType" [value]="x">{{ x }}</mat-option>
-          </mat-select>
-      </mat-form-field>
-    </div>
-
+  
+<form [formGroup]="itemForm" (ngSubmit)="submit()" >
    
-    <div fxFlex="50"  class="pr-16">
+    <mat-tab-group>
+      
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">info</mat-icon>
+          <span class="tab-label" style="color: #0077C2;">Informations générales</span>
+        </ng-template>
+        <mat-card-content class="mt-16">
+          <mat-card-title class=""> </mat-card-title>
+            <mat-card-content> 
+        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="50"  class="pr-16">
+          <mat-form-field class="full-width">
+            <mat-label>Type du projet</mat-label>
+            <mat-select  [formControlName]="'projectType'">
+                <mat-option *ngFor="let x of ProjectType" [value]="x">{{ x }}</mat-option>
+              </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50"  class="pr-16">
+          <mat-form-field class="full-width">
+            <input
+            matInput
+            name="projectReference"
+            type="text"
+            
+            placeholder="Reference du commande">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50"  class="pr-16">
+          <mat-form-field class="full-width">
+            <input
+            matInput
+            name="projectReference"
+            type="text"
+            [formControlName]="'name'"
+            placeholder="Titre">
+          </mat-form-field>
+        </div>
+
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+       
+          <mat-label>Date  début</mat-label>
+          <input matInput name="startDate" formControlName="startDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
+          <mat-datepicker-toggle matSuffix [for]="appDatepicker1"></mat-datepicker-toggle>
+        </mat-form-field>
+        <mat-datepicker #appDatepicker1></mat-datepicker>
+      </div>
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <mat-label>Date fin</mat-label>
+          <input matInput name="endDate" formControlName="endDate"  placeholder="Date fin" [matDatepicker]="endDatePicker" />
+          <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        </mat-form-field>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+        <mat-error *ngIf="itemForm.get('endDate').errors?.min">
+          La date de fin doit être postérieure à la date de début.
+        </mat-error>
+      </div>
+      <div fxFlex="50"  class="pr-16">
         <mat-form-field class="full-width">
           <input
           matInput
-          name="projectReference"
           type="text"
-          [formControlName]="'name'"
-          placeholder="Titre">
+          name="budget"
+          [formControlName]="'lieuDuProjet'"
+          placeholder="Lieu du projet">
         </mat-form-field>
       </div>
-    
-    <div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
-        <mat-label>Responsable</mat-label>
-        <mat-select  [formControlName]="'responsableNum'">
-          <mat-option *ngFor="let resource of responsables" [value]="resource.id">{{resource.lastName}}</mat-option>
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          type="number"
+          name="budget"
+          [formControlName]="' workingHourNumber'"
+          placeholder="Nbre d'heures du travail">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          type="number"
+          name="budget"
+          [formControlName]="'budget'"
+          placeholder="budget">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <mat-label>Devise</mat-label>
+          <mat-select>
+          <mat-option *ngFor="let x of devise" [value]="x">{{ x }}</mat-option>
         </mat-select>
-        <mat-error *ngIf="itemForm.get('responsableNum').errors?.required">
-          Le Responsable est obligatoire.
-        </mat-error>
-      </mat-form-field>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          name="description"
+          [formControlName]="'description'"
+          placeholder="commentaire">
+        </mat-form-field>
+      </div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </div>
+      
      
-  </div>
+         </mat-card-content>
+         </mat-card-content>
+      </mat-tab>
+      <mat-tab>
+       
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">people</mat-icon>
+          <span class="tab-label" style="color: #0077C2;">Affectation des resources</span>
+        </ng-template>
+        <mat-card-content class="mt-16">
+          <mat-card-title class=""> </mat-card-title>
+            <mat-card-content> 
+        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+         
+        <div class="table-container" style="width: 1000px;">
+          <mat-progress-spinner *ngIf="isLoading" color="primary" mode="indeterminate"></mat-progress-spinner>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="toggleSelectionAll($event)"></mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (change)="toggleSelection($event, row)" [checked]="selection.isSelected(row)"></mat-checkbox>
+              </td>
+            </ng-container>
     
-    <div fxFlex="50"  class="pr-16">
+            <!-- Nom Column -->
+            <ng-container matColumnDef="Nom">
+              <th mat-header-cell *matHeaderCellDef> Nom </th>
+              <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
+            </ng-container>
+    
+            <!-- Prénom Column -->
+            <ng-container matColumnDef="Prénom">
+              <th mat-header-cell *matHeaderCellDef> Prénom </th>
+              <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
+            </ng-container>
+    
+            <!-- Poste Column -->
+            <ng-container matColumnDef="Poste">
+              <th mat-header-cell *matHeaderCellDef> Poste </th>
+              <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
+            </ng-container>
+    
+            <!-- Header and Row Definitions -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+          </table>
+        </div>
+    
+        <div fxFlex="100" class="mt-16">
+          <button mat-raised-button color="primary">{{ "SAVE" }}</button>
+          <span fxFlex></span>
+          <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+        </div>
+     </div>
+     </mat-card-content>
+     </mat-card-content>
+        </mat-tab>
+        <mat-tab>
+         
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">person</mat-icon>
+            <span class="tab-label" style="color: #0077C2;">Affectation des reponsables</span>
+          </ng-template>
+          <mat-card-content class="mt-16">
+            <mat-card-title class=""> </mat-card-title>
+              <mat-card-content> 
+           <h2>Affectation des responsables a partir de la liste des employées</h2>
+                <div fxLayout="row wrap" fxLayout.lt-sm="column">
+                <div fxFlex="50"  class="pr-16">
+            <mat-form-field class="full-width">
+              <mat-label>Responsable</mat-label>
+              <mat-select  [formControlName]="'responsableNum'">
+                <mat-option *ngFor="let resource of responsables" [value]="resource.id">{{resource.lastName}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="itemForm.get('responsableNum').errors?.required">
+                Le Responsable est obligatoire.
+              </mat-error>
+            </mat-form-field>
+           
+        </div>
+        <div fxFlex="50"  class="pr-16">
+          <mat-form-field class="full-width">
+            <mat-label>Fonction</mat-label>
+            <mat-select>
+              <mat-option ></mat-option>
+            </mat-select>
+           
+          </mat-form-field>
+         
+      </div>
+        </div>
+        <h2>Affectation des responsables externes</h2>
+        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+          <div fxFlex="50"  class="pr-16">
+            
       <mat-form-field class="full-width">
         <input
         matInput
-        type="number"
-        name="budget"
-        [formControlName]="'budget'"
-        placeholder="budget">
+        name="nom"
+       
+        placeholder="Nom">
       </mat-form-field>
-    </div>
-    <div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
-        <mat-label>Devise</mat-label>
-        <mat-select>
-        <mat-option *ngFor="let x of devise" [value]="x">{{ x }}</mat-option>
-      </mat-select>
-      </mat-form-field>
-    </div>
-    <div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
      
-        <mat-label>Date  début</mat-label>
-        <input matInput name="startDate" formControlName="startDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
-        <mat-datepicker-toggle matSuffix [for]="appDatepicker1"></mat-datepicker-toggle>
-      </mat-form-field>
-      <mat-datepicker #appDatepicker1></mat-datepicker>
-    </div>
-    <div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
-        <mat-label>Date fin</mat-label>
-        <input matInput name="endDate" formControlName="endDate"  placeholder="Date fin" [matDatepicker]="endDatePicker" />
-        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-      </mat-form-field>
-      <mat-datepicker #endDatePicker></mat-datepicker>
-      <mat-error *ngIf="itemForm.get('endDate').errors?.min">
-        La date de fin doit être postérieure à la date de début.
-      </mat-error>
-    </div>
+  </div>
+  <div fxFlex="50"  class="pr-16">
+            
+    <mat-form-field class="full-width">
+      <input
+      matInput
+      name="prénom"
+     
+      placeholder="Prénom">
+    </mat-form-field>
+   
+</div>
+<div fxFlex="50"  class="pr-16">
+            
+  <mat-form-field class="full-width">
+    <input
+    matInput
+    name="adresse mail"
+   
+    placeholder="adresse mail">
+  </mat-form-field>
+ 
+</div>
+<div fxFlex="50"  class="pr-16">
+            
+  <mat-form-field class="full-width">
+    <input
+    matInput
+    type="number"
+    name="adresse mail"
+   
+    placeholder="téléphone">
+  </mat-form-field>
+ 
+</div>
+  </div>
+          </mat-card-content>
+          </mat-card-content>
+          </mat-tab>
+      </mat-tab-group>
+    
+   
+    </form>
+   
+  
+ 
+   
+    
+  
           <!--div fxFlex="50"  class="pr-16">
 
             <mat-form-field class="full-width">
@@ -94,62 +289,9 @@
            
         </div-->
 
-        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-<div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
-        <input
-        matInput
-        name="description"
-        [formControlName]="'description'"
-        placeholder="commentaire">
-      </mat-form-field>
-    </div>
-   
-    <div class="table-container">
-      <mat-progress-spinner *ngIf="isLoading" color="primary" mode="indeterminate"></mat-progress-spinner>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox (change)="toggleSelectionAll($event)"></mat-checkbox>
-          </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-checkbox (change)="toggleSelection($event, row)" [checked]="selection.isSelected(row)"></mat-checkbox>
-          </td>
-        </ng-container>
+ 
 
-        <!-- Nom Column -->
-        <ng-container matColumnDef="Nom">
-          <th mat-header-cell *matHeaderCellDef> Nom </th>
-          <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
-        </ng-container>
-
-        <!-- Prénom Column -->
-        <ng-container matColumnDef="Prénom">
-          <th mat-header-cell *matHeaderCellDef> Prénom </th>
-          <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
-        </ng-container>
-
-        <!-- Poste Column -->
-        <ng-container matColumnDef="Poste">
-          <th mat-header-cell *matHeaderCellDef> Poste </th>
-          <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
-        </ng-container>
-
-        <!-- Header and Row Definitions -->
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
-      </table>
-    </div>
-
-    <div fxFlex="100" class="mt-16">
-      <button mat-raised-button color="primary">{{ "SAVE" }}</button>
-      <span fxFlex></span>
-      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
-    </div>
-  </div>
-</form>
-  <!-- Include the necessary Angular Material components -->
+<!-- Include the necessary Angular Material components -->
 
 
   <!--h1 matDialogTitle>{{data.title}}</h1>

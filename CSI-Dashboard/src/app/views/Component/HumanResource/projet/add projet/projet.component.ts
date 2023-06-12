@@ -99,7 +99,7 @@ export class ProjetComponent implements OnInit {
     let title = isNew ? 'Nouveau projet' : 'Modifier projet';
     let dialogRef: MatDialogRef<any> = this.dialog.open(ProjetPopupComponent, {
       width: '800px',
-      height:'600px',
+      height:'500px',
       disableClose: true,
       data: { title: title, payload: data , isNew: isNew }
     })

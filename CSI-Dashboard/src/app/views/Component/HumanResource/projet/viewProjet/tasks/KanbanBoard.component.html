@@ -64,8 +64,9 @@
 <div class="kanban-board">
     <div class="column" *ngFor="let status of statuses" >
       <h3>{{ status }}</h3>
-      <div class="card" *ngFor="let task of getTasksByStatus(status)"  (dragstart)="onDragStart($event, task)" >
-        <h2>{{ task.title }}</h2>
+      <div (click)="task.showDetails = !task.showDetails" class="card" *ngFor="let task of getTasksByStatus(status)"  (dragstart)="onDragStart($event, task)" >
+        <h2 >{{ task.title }}</h2>
+        <div *ngIf="task.showDetails">
         <p><strong>Description:</strong>{{ task.description}}</p>
        
         <p><strong>Date debut:</strong>{{ task.startDate | date:'dd-MM-yyyy'}}</p>
@@ -77,8 +78,10 @@
     </div>
   </div>
   <mat-card-content>
+    </mat-card-content>
+    </div>
     <div class="m-12" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
-
+    
 
       <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)="openPopUp({},true)"> Ajouter tache </button>
     
@@ -97,7 +100,7 @@
               <mat-cell *matCellDef="let row"  [style.color]="row.color">{{row.title}} </mat-cell>
            
             </ng-container>
-    
+            
     
       <ng-container matColumnDef="Description">
         <mat-header-cell *matHeaderCellDef mat-sort-header> description
@@ -147,12 +150,5 @@
     
     </mat-card-content>
     </mat-card>
-    <mat-accordion *ngIf="selectedTask">
-      <mat-expansion-panel *ngFor="let subtask of selectedTask.sousTaches">
-        <mat-expansion-panel-header>
-          {{ subtask.title }}
-        </mat-expansion-panel-header>
-        <p>{{ subtask.description }}</p>
-      </mat-expansion-panel>
-    </mat-accordion>
+    
     </div>
