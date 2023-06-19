@@ -78,9 +78,11 @@ export class ProjetPopupComponent implements OnInit {
       projectStatus : [item.projectStatus|| 'NOT_STARTED', Validators.required],
       resourceIds:[this.selectedRowIds.values|| '', Validators.required],
       responsableNum:[item.responsableId||'',Validators.required],
+      realStartDate:[item.realStartDate||'',Validators.required],
+      realEndDate:[item.realEndDate||'',Validators.required],
       lieuDuProjet:[item.lieuDuProjet],
       workingHourNumber:[item.workingHourNumber]
-
+      
        },);
        this.itemForm.get('startDate').valueChanges.subscribe((value) => {
         // If startDate is set, update the endDate control to disable all dates before the selected startDate
@@ -92,7 +94,7 @@ export class ProjetPopupComponent implements OnInit {
       });
 
   }
-    
+
   getRessources(){
     this.isLoading = true;
     this.resourceService.getItems().subscribe((data:any) =>{
@@ -197,7 +199,7 @@ this.getNoChefs()
       this.selection.toggle(row);
       this.updateSelectedRowIds();
       this.updateResourceIds()
-    }
+        }
     
     toggleSelectionAll(event: MatCheckboxChange) {
      

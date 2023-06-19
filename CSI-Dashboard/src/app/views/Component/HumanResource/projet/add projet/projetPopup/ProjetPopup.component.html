@@ -111,9 +111,52 @@
         </mat-form-field>
       </div>
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  
+    <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
+      <mat-form-field class="full-width">
+        <mat-label>Date réelle de début du projet</mat-label>
+        <input matInput name="realStartDate" formControlName="realStartDate"  placeholder="realStartDate" [matDatepicker]="endDatePicker" />
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      </mat-form-field>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+      <mat-error *ngIf="itemForm.get('realStartDate').errors?.min">
+        La date de fin doit être postérieure à la date de début.
+      </mat-error>
     </div>
-      
-     
+    <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
+      <mat-form-field class="full-width">
+        <mat-label>Date réelle de fin du projet</mat-label>
+        <input matInput name="realEndDate" formControlName="realEndDate"  placeholder="realEndDate" [matDatepicker]="endDatePicker" />
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      </mat-form-field>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+      <mat-error *ngIf="itemForm.get('realEndDate').errors?.min">
+        La date de fin doit être postérieure à la date de début.
+      </mat-error>
+    </div>
+    <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        name="projectStatus"
+        [formControlName]="'projectStatus'"
+        placeholder="Etat du projet">
+      </mat-form-field>
+    </div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  
+  <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
+    <mat-form-field class="full-width">
+      <mat-label>Date de suspension</mat-label>
+      <input matInput name="suspensionDate" formControlName="suspensionDate"  placeholder="realEndDate" [matDatepicker]="endDatePicker" />
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    </mat-form-field>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+    <mat-error *ngIf="itemForm.get('realEndDate').errors?.min">
+      La date de fin doit être postérieure à la date de début.
+    </mat-error>
+  </div>
+</div>
          </mat-card-content>
          </mat-card-content>
       </mat-tab>
@@ -123,16 +166,13 @@
           <mat-icon class="example-tab-icon">people</mat-icon>
           <span class="tab-label" style="color: #0077C2;">Affectation des resources</span>
         </ng-template>
-        <mat-card-content class="mt-16">
-          <mat-card-title class=""> </mat-card-title>
-            <mat-card-content> 
-        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <mat-card  style="border: 5px; width: auto"  >
+          <mat-card-content class="p-0">
          
-        <div class="table-container" style="width: 1000px;">
-          <mat-progress-spinner *ngIf="isLoading" color="primary" mode="indeterminate"></mat-progress-spinner>
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+       
+          <table mat-table [dataSource]="dataSource" style="width:100%">
             <!-- Checkbox Column -->
-            <ng-container matColumnDef="select">
+            <ng-container matColumnDef="select" style="width:30px">
               <th mat-header-cell *matHeaderCellDef>
                 <mat-checkbox (change)="toggleSelectionAll($event)"></mat-checkbox>
               </th>
@@ -142,37 +182,33 @@
             </ng-container>
     
             <!-- Nom Column -->
-            <ng-container matColumnDef="Nom">
+            <ng-container matColumnDef="Nom" style="width:200px">
               <th mat-header-cell *matHeaderCellDef> Nom </th>
               <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
             </ng-container>
     
             <!-- Prénom Column -->
-            <ng-container matColumnDef="Prénom">
+            <ng-container matColumnDef="Prénom"   style="width:200px">
               <th mat-header-cell *matHeaderCellDef> Prénom </th>
               <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
             </ng-container>
-    
+            
             <!-- Poste Column -->
-            <ng-container matColumnDef="Poste">
+            <ng-container matColumnDef="Poste"  style="width:200px">
               <th mat-header-cell *matHeaderCellDef> Poste </th>
               <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
             </ng-container>
-    
+            
             <!-- Header and Row Definitions -->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
           </table>
-        </div>
+        
     
-        <div fxFlex="100" class="mt-16">
-          <button mat-raised-button color="primary">{{ "SAVE" }}</button>
-          <span fxFlex></span>
-          <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
-        </div>
-     </div>
+        
+    
      </mat-card-content>
-     </mat-card-content>
+     </mat-card>
         </mat-tab>
         <mat-tab>
          
@@ -258,6 +294,11 @@
   </div>
           </mat-card-content>
           </mat-card-content>
+          <div fxFlex="100" class="mt-16">
+            <button mat-raised-button color="primary">{{ "SAVE" }}</button>
+            <span fxFlex></span>
+            <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+          </div>
           </mat-tab>
       </mat-tab-group>
     

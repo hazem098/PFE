@@ -56,7 +56,7 @@ export class AppUsersComponent implements OnInit {
       'registered': '2015-12-12'
     },
     {
-      'name': 'Watson Joyce',
+      'name': 'Hazem BOUMNIJEL',
       'membership': 'Paid Member',
       'phone': '+1 (982) 500-3137',
       'photo': 'assets/images/face-7.jpg',

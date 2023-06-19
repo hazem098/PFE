@@ -183,14 +183,14 @@ export class DefaultDashboardComponent implements OnInit {
 
   projects = [{
     name: 'User Story',
-    user: 'Watson Joyce',
+    user: 'Hazem BOUMNIJEL',
     progress: 100,
     leader: 'Snow Benton'
   }, {
     name: 'Design Data Model',
     user: 'Morris Adams',
     progress: 30,
-    leader: 'Watson Joyce'
+    leader: 'Hazem BOUMNIJEL'
   }, {
     name: 'Develop CR Algorithm',
     user: 'Jhone Doe',

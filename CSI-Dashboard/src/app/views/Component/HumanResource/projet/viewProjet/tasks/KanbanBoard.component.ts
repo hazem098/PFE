@@ -192,6 +192,7 @@ this.resources=data
               this.gettasks()
               this.gettask()
             });
+            
         } else {
           this.loader.open('modification en cours');
           this.crudService.updateTask(data.id,res)

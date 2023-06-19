@@ -4,7 +4,7 @@
     <div fxLayout="row wrap" fxLayout.lt-sm="column">
       <div fxFlex="50" class="pr-16">
           
-          <mat-radio-group [formControlName]="'status'">
+          <mat-radio-group [formControlName]="'status'" >
             <mat-radio-button value="option1">Tache</mat-radio-button>
             <mat-radio-button value="option2">Sous tache</mat-radio-button>
           </mat-radio-group>
@@ -38,15 +38,11 @@
         </mat-form-field>
       </div>
  
-    
-    
-    
-    
     <div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
+        <mat-form-field class="full-width">
      
         <mat-label>Date  début</mat-label>
-        <input matInput name="startDate" formControlName="startDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
+        <input matInput name="startDate" formControlName="startDate" [min]="projectStartDate" [max]="projectEndDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
         <mat-datepicker-toggle matSuffix [for]="appDatepicker1"></mat-datepicker-toggle>
       
       </mat-form-field>
@@ -55,7 +51,7 @@
     <div fxFlex="50"  class="pr-16">
       <mat-form-field class="full-width">
         <mat-label>Date fin</mat-label>
-        <input matInput name="endDate" formControlName="endDate"  placeholder="Date fin" [matDatepicker]="endDatePicker" />
+        <input matInput name="endDate" formControlName="endDate"   [min]="projectStartDate" [max]="projectEndDate" placeholder="Date fin" [matDatepicker]="endDatePicker" />
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
       </mat-form-field>
       <mat-datepicker #endDatePicker></mat-datepicker>
@@ -83,6 +79,17 @@
               placeholder="Progression">
             </mat-form-field>
           </div>
+          <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50" class="pr-16">
+      
+            <mat-form-field class="full-width">
+              <input
+              matInput
+              type="number"
+              name="reamining"
+              [formControlName]="'remaining'"
+              placeholder="reste a faire">
+            </mat-form-field>
+        </div>
           <div fxFlex="50"  class="pr-16">
             <mat-form-field class="full-width">
               <input

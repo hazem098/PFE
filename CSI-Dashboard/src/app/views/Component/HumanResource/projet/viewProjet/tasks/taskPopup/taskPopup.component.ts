@@ -14,7 +14,8 @@ import { Employee } from "app/shared/models/Employee";
    
   })
   export class TaskPopupComponent implements OnInit {
-   
+    projectStartDate: Date;
+    projectEndDate: Date;
     id:number
     resources : Employee[]
     dataSource : any
@@ -25,7 +26,8 @@ import { Employee } from "app/shared/models/Employee";
     public crudService : ProjetService,
     public router : ActivatedRoute,
     private fb: FormBuilder,){
-      
+      this.projectStartDate = this.data.projet.startDate;
+      this.projectEndDate = this.data.projet.endDate
     }
     public itemForm: FormGroup;
     buildItemForm(item){
@@ -39,7 +41,7 @@ import { Employee } from "app/shared/models/Employee";
           startDate: [item.startDate ||'', Validators.required, ],
           endDate : [item.endDate || '', Validators.required],
             estimation : [item.estimation || Validators.required],
-          
+            reamaining : [item.remaining],
           taskPhase:[item.taskPhase|| '', Validators.required],
           progression:[item.progression||''],
           projectNum:[this.data.projectId],
@@ -47,11 +49,11 @@ import { Employee } from "app/shared/models/Employee";
           resourceNum : [item.resourceNum],
           taskNum:[item.taskNum]
            });
-           
+          
           }
     ngOnInit() {
         this.buildItemForm(this.data.payload)
-       this.resources = this.data.resources
+        this.resources = this.data.resources
         this.id = this.router.snapshot.params['id'];
         this.dataSource = this.data.tasks
     }
@@ -60,5 +62,25 @@ import { Employee } from "app/shared/models/Employee";
         this.dialogRef.close(this.itemForm.value)
       }
     
-       
+      onSubtaskChange() {
+        const selectedSubtask = this.itemForm.get('taskNum').value;
+        if (selectedSubtask) {
+          const subtask = this.dataSource.find(task => task.id === selectedSubtask);
+          if (subtask) {
+            this.itemForm.get('startDate').setValue(subtask.startDate);
+            this.itemForm.get('endDate').setValue(subtask.endDate);
+            this.itemForm.get('endDate').enable();
+          }
+        } else {
+          this.itemForm.get('endDate').setValue(null);
+          this.itemForm.get('endDate').disable();
+        }
+      }
+      
+      
+      
+      
+      
+      
+      
   }
