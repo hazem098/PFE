@@ -64,6 +64,7 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Project with id " +id+ " not found"));
         List<SubTask> sousTacheResponses= new ArrayList<>();
+        List<SousTacheResponse> subTaskList = new ArrayList<>();
         List<Task> taskList = project.getTasks();
         for(Task t : taskList){
             sousTacheResponses.addAll(t.getSubTaskList());
@@ -202,8 +203,23 @@ public class ProjectServiceImpl implements ProjectService {
     public void deleteProjectById(Long id) {
         Project project = projectRepository.findById(id).orElse(null);
 
-
-
+        List<Resource> resources = project.getResources();
+        for(Resource r : resources) {
+            r.getProject().remove(project);
+            resourceRepository.save(r);
+        }
+        List<Task> tasks = project.getTasks();
+        for (Task task : tasks) {
+            List<SubTask> subTasks = task.getSubTaskList();
+            for (SubTask subTask : subTasks) {
+                Resource resource = subTask.getResource();
+                if (resource != null) {
+                    resource.getSubTasks().remove(subTask);
+                    subTask.setResource(null);
+                    resourceRepository.save(resource);
+                }
+            }
+        }
             projectRepository.deleteById(id);
 
     }

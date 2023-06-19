@@ -74,7 +74,11 @@ public class SubTaskImp {
             taskRepository.save(tache);
         return modelMapper.map(TaskSaved, SousTacheResponse.class);
     }
-
+public void deleteSubTask(Long id){
+        SubTask subTask = subtaskRepository.findById(id).orElseThrow();
+        Resource resource = subTask.getResource();
+        resource.getSubTasks().remove(subTask);
+}
 
 
 }

@@ -34,6 +34,9 @@ public class Project implements Serializable {
     private String description;
     private Double budget;
     private Integer workingHourNumber ;
+    private LocalDate realStartDate ;
+    private LocalDate realEndDate ;
+    private String projectCategory ;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate startDate;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
@@ -52,7 +55,7 @@ public class Project implements Serializable {
     @OneToOne(mappedBy = "prj")
     private Resource responsable;
     @JsonIgnore
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Task> tasks;
 }
 

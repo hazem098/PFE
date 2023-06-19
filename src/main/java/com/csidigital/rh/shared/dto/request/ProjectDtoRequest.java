@@ -24,6 +24,9 @@ public class ProjectDtoRequest {
     private Double budget;
     private LocalDate startDate;
     private Integer workingHourNumber ;
+    private LocalDate realStartDate ;
+    private LocalDate realEndDate ;
+    private String projectCategory ;
     private ProjectType projectType;
     private LocalDate endDate;
 

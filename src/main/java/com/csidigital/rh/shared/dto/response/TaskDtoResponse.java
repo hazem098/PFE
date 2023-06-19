@@ -25,12 +25,14 @@ public class TaskDtoResponse {
     private LocalDate EndDate;
     private Long estimation;
     private Long progression ;
+    private Long TimeSpent ;
+    private LocalDate creationDate ;
     private String reference;
     private TaskType taskType;
     private Priority priority;
     private TaskPhase taskPhase;
-
-
+    private LocalDate realEndDate ;
+    private LocalDate projectionDate;
     private Project project;
 
 

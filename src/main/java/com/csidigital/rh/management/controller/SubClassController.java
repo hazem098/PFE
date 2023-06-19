@@ -30,4 +30,9 @@ public class SubClassController {
     public SousTacheResponse createTask(@Valid @RequestBody SousTacheRequest taskDtoRequest) {
         return subTaskService.createTask(taskDtoRequest);
     }
+    @DeleteMapping("/delete")
+
+    public void deleteTask(@PathVariable Long id) {
+         subTaskService.deleteSubTask(id);
+    }
 }
