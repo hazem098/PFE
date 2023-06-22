@@ -25,6 +25,7 @@ export class KanbanBoardComponent implements OnInit {
   subtaskDisplayedColumns: string[] = ['SubtaskTitle'];
 resources : Employee[]
   projet : any
+  phases:any[]
   private tasks: any[]
   public dataSource: MatTableDataSource<any>;
     public displayedColumns: any;
@@ -48,6 +49,7 @@ resources : Employee[]
     this.gettasks()
     this.displayedColumns = this.getDisplayedColumns();
     this.getRessources();
+    this.getPhases();
   }
   gettask(){
     this.crudService.getTasks(this.id).subscribe((data:any) =>{
@@ -57,6 +59,11 @@ this.tasks=data
       this.crudService.ProjectTask(this.id).subscribe((data:any) =>{
   this.dataSource=data
       })}
+      getPhases(){
+        this.crudService.ProjectPhase(this.id).subscribe((data:any)=>{
+          this.phases=data
+        })
+      }
   getItem(){
     this.crudService.getItem(this.id).subscribe((data:any) =>{
 this.projet=data
@@ -67,11 +74,12 @@ toggleSubtaskPanel(task: any) {
   this.isSubtaskPanelOpen = !this.isSubtaskPanelOpen;
 }
 getDisplayedColumns() {
-  return ['Titre' ,'Description' , 'DateDébut' , 'DateFin','Actions'];
+  return ['Titre' ,'Description' ,'Resource' ,'Tache' , 'DateDébut' , 'DateFin','Actions'];
 }
 isEndDateExpired(row: any): boolean {
   const endDate = new Date(row.endDate);
-  return endDate < this.currentDate;
+  const taskPhase = row.taskPhase;
+  return endDate < this.currentDate && taskPhase === "A_FAIRE";
 }
 deleteItem(row) {
   this.confirmService.confirm({message: `étes vous sure de supprission ?`})
@@ -127,7 +135,7 @@ deleteItem(row) {
     }
   ];*/
 
- statuses: string[] = ['A_FAIRE', 'EN_COURS','TEST','TERMINE'];
+/* statuses: string[] = ['A_FAIRE', 'EN_COURS','TEST','TERMINE'];*/
   // TypeScript code
 
 
@@ -135,25 +143,25 @@ deleteItem(row) {
 
 
 
-  getTasksByStatus(status: string): Task[] {
+  /*getTasksByStatus(status: string): Task[] {
     const currentDate = new Date();
     return this.tasks.filter(task => task.taskPhase === status);
-  }
+  }*/
   getRessources(){
     this.crudService.getResources(this.id).subscribe((data:any) =>{
 this.resources=data
     })
 }
-  onDragStart(event: DragEvent, task: any): void {
+  /*onDragStart(event: DragEvent, task: any): void {
     event.dataTransfer!.setData('text/plain', task.id.toString());
-  }
+  }*/
 
-  onDrop(event: CdkDragDrop<Task[], any>, status: string): void {
+  /*onDrop(event: CdkDragDrop<Task[], any>, status: string): void {
     const taskId = +event.item.data;
     const taskIndex = this.tasks.findIndex(task => task.id === taskId);
     this.tasks[taskIndex].status = status;
     moveItemInArray(this.tasks, taskIndex, event.currentIndex);
-  }
+  }*/
   /*getStatusClass(status: string): string {
     switch (status) {
       case 'A_FAIRE':
@@ -173,7 +181,7 @@ this.resources=data
       width: '1000px',
 
       disableClose: true,
-      data: { title: title, payload: data , isNew: isNew , resources : resources , projectId : this.id , projet : this.projet , tasks : this.tasks}
+      data: { title: title, payload: data , isNew: isNew , resources : this.resources , phases :this.phases , projectId : this.id , projet : this.projet , tasks : this.tasks}
     })
     dialogRef.afterClosed()
       .subscribe(res => {
@@ -190,7 +198,7 @@ this.resources=data
               this.loader.close();
               this.snack.open('tache ajouté avec succès!', 'OK', { duration: 2000 });
               this.gettasks()
-              this.gettask()
+             /* this.gettask()*/
             });
             
         } else {

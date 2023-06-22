@@ -7,9 +7,11 @@ import { catchError, Observable } from "rxjs";
 
 @Injectable()
 export class ProjetService {
-  private apiUrl = 'http://localhost:8084/project';
+  private apiUrl =  'http://localhost:8084/project';
   private apiUrl2 = 'http://localhost:8084/task';
   private apiUrl3 = 'http://localhost:8084/subTask';
+  private apiUrl4 = 'http://localhost:8084/phase';
+  
  
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -43,12 +45,16 @@ export class ProjetService {
     const apiUrlWithAdd = this.apiUrl + '/add'; // Append /add to the apiUrl
     return this.http.post<any>(apiUrlWithAdd, projet).pipe();
   }
+  addPhase(phase: any): Observable<any> {
+    const apiUrlWithAdd = this.apiUrl4 + '/add'; // Append /add to the apiUrl
+    return this.http.post<any>(apiUrlWithAdd, phase).pipe();
+  }
   getItem(id: number): Observable<Projet> {
     const url = `${this.apiUrl+ '/getById'}/${id}`;
     return this.http.get<Projet>(url).pipe();
   }
   getTasks(id: number): Observable<any> {
-    const url = `${this.apiUrl}/${id}/Tasks`;
+    const url = `${this.apiUrl}/${id}/tache`;
     return this.http.get<any>(url).pipe();
   }
   updateItem(id: number, projet: Projet): Observable<Projet> {
@@ -82,7 +88,11 @@ export class ProjetService {
     return this.http.post(url, resourceIds);
   }
   ProjectTask(projectId: number) {
-    const url = `${this.apiUrl}/${projectId}/subTask`;
+    const url = `${this.apiUrl}/${projectId}/tasks`;
     return this.http.get(url).pipe();
+  }
+  ProjectPhase(id: number):Observable<any[]>{
+    const url = `${this.apiUrl}/${id}/phases`;
+    return this.http.get<any>(url).pipe();
   }
   }

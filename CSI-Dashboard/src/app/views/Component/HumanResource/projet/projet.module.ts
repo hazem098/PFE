@@ -37,6 +37,7 @@ import { TaskPopupComponent } from "./viewProjet/tasks/taskPopup/taskPopup.compo
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { PhaseComponent } from "./add projet/projetPopup/phase.component";
 
 
 
@@ -75,7 +76,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatProgressSpinnerModule,
     RouterModule.forChild(ProjetRoutes),
   ],
-  declarations: [ ProjetComponent , ProjetPopupComponent, ViewProjetComponent, AffectationComponent, KanbanBoardComponent, TaskPopupComponent],
+  declarations: [ ProjetComponent , ProjetPopupComponent, ViewProjetComponent, AffectationComponent, KanbanBoardComponent, TaskPopupComponent, PhaseComponent],
   providers: [ ProjetService,DatePipe]
 })
 export class ProjetModule { }

@@ -22,16 +22,7 @@
               </mat-select>
           </mat-form-field>
         </div>
-        <div fxFlex="50"  class="pr-16">
-          <mat-form-field class="full-width">
-            <input
-            matInput
-            name="projectReference"
-            type="text"
-            
-            placeholder="Reference du commande">
-          </mat-form-field>
-        </div>
+       
         <div fxFlex="50"  class="pr-16">
           <mat-form-field class="full-width">
             <input
@@ -67,6 +58,16 @@
         <mat-form-field class="full-width">
           <input
           matInput
+          name="projectReference"
+          type="text"
+          
+          placeholder="Reference du commande">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
           type="text"
           name="budget"
           [formControlName]="'lieuDuProjet'"
@@ -80,7 +81,7 @@
           type="number"
           name="budget"
           [formControlName]="' workingHourNumber'"
-          placeholder="Nbre d'heures du travail">
+          placeholder="Nbre d'heures du travail par jours">
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
@@ -160,91 +161,19 @@
          </mat-card-content>
          </mat-card-content>
       </mat-tab>
-      <mat-tab>
-       
-        <ng-template mat-tab-label>
-          <mat-icon class="example-tab-icon">people</mat-icon>
-          <span class="tab-label" style="color: #0077C2;">Affectation des resources</span>
-        </ng-template>
-        <mat-card  style="border: 5px; width: auto"  >
-          <mat-card-content class="p-0">
-         
-       
-          <table mat-table [dataSource]="dataSource" style="width:100%">
-            <!-- Checkbox Column -->
-            <ng-container matColumnDef="select" style="width:30px">
-              <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="toggleSelectionAll($event)"></mat-checkbox>
-              </th>
-              <td mat-cell *matCellDef="let row">
-                <mat-checkbox (change)="toggleSelection($event, row)" [checked]="selection.isSelected(row)"></mat-checkbox>
-              </td>
-            </ng-container>
-    
-            <!-- Nom Column -->
-            <ng-container matColumnDef="Nom" style="width:200px">
-              <th mat-header-cell *matHeaderCellDef> Nom </th>
-              <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
-            </ng-container>
-    
-            <!-- Prénom Column -->
-            <ng-container matColumnDef="Prénom"   style="width:200px">
-              <th mat-header-cell *matHeaderCellDef> Prénom </th>
-              <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
-            </ng-container>
-            
-            <!-- Poste Column -->
-            <ng-container matColumnDef="Poste"  style="width:200px">
-              <th mat-header-cell *matHeaderCellDef> Poste </th>
-              <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
-            </ng-container>
-            
-            <!-- Header and Row Definitions -->
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
-          </table>
-        
-    
-        
-    
-     </mat-card-content>
-     </mat-card>
-        </mat-tab>
+     
         <mat-tab>
          
           <ng-template mat-tab-label>
             <mat-icon class="example-tab-icon">person</mat-icon>
-            <span class="tab-label" style="color: #0077C2;">Affectation des reponsables</span>
+            <span class="tab-label" style="color: #0077C2;">Responsables client </span>
           </ng-template>
           <mat-card-content class="mt-16">
             <mat-card-title class=""> </mat-card-title>
               <mat-card-content> 
-           <h2>Affectation des responsables a partir de la liste des employées</h2>
-                <div fxLayout="row wrap" fxLayout.lt-sm="column">
-                <div fxFlex="50"  class="pr-16">
-            <mat-form-field class="full-width">
-              <mat-label>Responsable</mat-label>
-              <mat-select  [formControlName]="'responsableNum'">
-                <mat-option *ngFor="let resource of responsables" [value]="resource.id">{{resource.lastName}}</mat-option>
-              </mat-select>
-              <mat-error *ngIf="itemForm.get('responsableNum').errors?.required">
-                Le Responsable est obligatoire.
-              </mat-error>
-            </mat-form-field>
-           
-        </div>
-        <div fxFlex="50"  class="pr-16">
-          <mat-form-field class="full-width">
-            <mat-label>Fonction</mat-label>
-            <mat-select>
-              <mat-option ></mat-option>
-            </mat-select>
-           
-          </mat-form-field>
-         
-      </div>
-        </div>
-        <h2>Affectation des responsables externes</h2>
+          
+        
+       
         <div fxLayout="row wrap" fxLayout.lt-sm="column">
           <div fxFlex="50"  class="pr-16">
             
@@ -291,6 +220,26 @@
   </mat-form-field>
  
 </div>
+      
+<div fxFlex="50"  class="pr-16">
+  <mat-form-field class="full-width">
+    <mat-label>Fonction</mat-label>
+    <mat-select>
+      <mat-option ></mat-option>
+    </mat-select>
+   
+  </mat-form-field>
+ 
+</div>
+<div fxFlex="50"  class="pr-16">
+  <mat-form-field class="full-width">
+    <input
+    matInput
+    name="description"
+    [formControlName]="'description'"
+    placeholder="commentaire">
+  </mat-form-field>
+</div>
   </div>
           </mat-card-content>
           </mat-card-content>
@@ -300,6 +249,56 @@
             <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
           </div>
           </mat-tab>
+          <mat-tab>
+       
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">people</mat-icon>
+              <span class="tab-label" style="color: #0077C2;">Affectation des resources</span>
+            </ng-template>
+            <mat-card  style="border: 5px; width: auto"  >
+              <mat-card-content class="p-0">
+             
+           
+              <table mat-table [dataSource]="dataSource" style="width:100%">
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select" style="width:30px">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="toggleSelectionAll($event)"></mat-checkbox>
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (change)="toggleSelection($event, row)" [checked]="selection.isSelected(row)"></mat-checkbox>
+                  </td>
+                </ng-container>
+        
+                <!-- Nom Column -->
+                <ng-container matColumnDef="Nom" style="width:200px">
+                  <th mat-header-cell *matHeaderCellDef> Nom </th>
+                  <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
+                </ng-container>
+        
+                <!-- Prénom Column -->
+                <ng-container matColumnDef="Prénom"   style="width:200px">
+                  <th mat-header-cell *matHeaderCellDef> Prénom </th>
+                  <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
+                </ng-container>
+                
+                <!-- Poste Column -->
+                <ng-container matColumnDef="Poste"  style="width:200px">
+                  <th mat-header-cell *matHeaderCellDef> Poste </th>
+                  <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
+                </ng-container>
+                
+                <!-- Header and Row Definitions -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+              </table>
+            
+        
+            
+        
+         </mat-card-content>
+         </mat-card>
+            </mat-tab>
       </mat-tab-group>
     
    

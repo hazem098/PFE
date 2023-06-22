@@ -49,7 +49,7 @@
   </mat-card-content>
 </mat-card>
 
-          <mat-card class="kanbanCard">
+          <!--mat-card class="kanbanCard">
             <mat-card-content>
               <div dir="rtl" fxLayoutGap="20px">
               <button class="add-task-button"
@@ -79,7 +79,7 @@
   </div>
   <mat-card-content>
     </mat-card-content>
-    </div>
+    </div-->
     <div class="m-12" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
     
 
@@ -103,14 +103,28 @@
             
     
       <ng-container matColumnDef="Description">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> description
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Status
           <div style="padding-left: 20px;">
            
            </div> </mat-header-cell>
-        <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.description}} </mat-cell>
+        <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.taskPhase}} </mat-cell>
       </ng-container>
     
-    
+      <ng-container matColumnDef="Tache">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tache
+          <div style="padding-left: 20px;">
+           
+           </div> </mat-header-cell>
+        <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.task.title}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="Resource">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Resource
+          <div style="padding-left: 20px;">
+           
+           </div> </mat-header-cell>
+        <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.resource.lastName}} </mat-cell>
+      </ng-container>
+      
       <ng-container matColumnDef="DateDébut">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Date debut
             <div style="padding-left: 20px;">

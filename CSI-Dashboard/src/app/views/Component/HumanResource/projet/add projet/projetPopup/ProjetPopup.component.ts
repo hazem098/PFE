@@ -92,7 +92,7 @@ export class ProjetPopupComponent implements OnInit {
           this.itemForm.get('endDate').updateValueAndValidity();
         }
       });
-
+ 
   }
 
   getRessources(){

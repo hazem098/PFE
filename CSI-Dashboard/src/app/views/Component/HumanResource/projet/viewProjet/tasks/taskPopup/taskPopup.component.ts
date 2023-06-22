@@ -18,6 +18,7 @@ import { Employee } from "app/shared/models/Employee";
     projectEndDate: Date;
     id:number
     resources : Employee[]
+    phases : any[]
     dataSource : any
     taskPhase = Object.values(taskPhase);
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -47,6 +48,7 @@ import { Employee } from "app/shared/models/Employee";
           projectNum:[this.data.projectId],
           status :[item.status],
           resourceNum : [item.resourceNum],
+          phaseNum : [item.phaseNum],
           taskNum:[item.taskNum]
            });
           
@@ -54,6 +56,7 @@ import { Employee } from "app/shared/models/Employee";
     ngOnInit() {
         this.buildItemForm(this.data.payload)
         this.resources = this.data.resources
+        this.phases=this.data.phases
         this.id = this.router.snapshot.params['id'];
         this.dataSource = this.data.tasks
     }

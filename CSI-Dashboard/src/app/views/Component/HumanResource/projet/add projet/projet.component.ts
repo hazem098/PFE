@@ -16,6 +16,7 @@ import { ProjetService } from '../projet.service';
 import { ProjetPopupComponent } from './projetPopup/ProjetPopup.component';
 import { ResourceService } from '../../resource/resource.service';
 import { DatePipe } from '@angular/common';
+import { PhaseComponent } from './projetPopup/phase.component';
 
 
 @Component({
@@ -129,6 +130,33 @@ export class ProjetComponent implements OnInit {
                 this.getItems();
               })
         }
+      })
+  }
+  openPopUp2(projectId: number , isNew?) {
+    let title = isNew ? 'Nouvelle Phase' : 'Ajouter phase';
+    let dialogRef: MatDialogRef<any> = this.dialog.open(PhaseComponent, {
+      width: '500px',
+      height:'300px',
+      disableClose: true,
+      data: { title: title, payload: projectId , isNew: isNew }
+    })
+    dialogRef.afterClosed()
+      .subscribe(res => {
+        if(!res) {
+          // If user press cancel
+          return;
+        
+         }
+     
+          this.loader.open('Ajout en cours');
+          this.crudService.addPhase(res)
+            .subscribe((data :any)=> {
+              this.dataSource = data;
+              this.loader.close();
+              this.snack.open('Phase ajoutée avec succès!', 'OK', { duration: 2000 });
+              this.getItems();
+            })
+      
       })
   }
 

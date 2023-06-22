@@ -9,6 +9,15 @@
             <mat-radio-button value="option2">Sous tache</mat-radio-button>
           </mat-radio-group>
       </div>
+      <div *ngIf="itemForm.get('status').value === 'option1'" fxFlex="50" class="pr-16">
+      
+        <mat-form-field class="full-width">
+          <mat-label>Phase</mat-label>
+          <mat-select [formControlName]="'phaseNum'" >
+            <mat-option *ngFor="let res of phases" [value]="res.id">{{res.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
       <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50" class="pr-16">
       
           <mat-form-field class="full-width">

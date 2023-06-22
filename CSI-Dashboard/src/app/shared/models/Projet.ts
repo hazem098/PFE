@@ -20,7 +20,9 @@ export enum ProjectStatus{
 }
 export enum ProjectType{
     INTERN="INTERN" ,
-    EXTERN="EXTERN"
+    EXTERN_FORFAIT="EXTERN FORFAIT",
+    EXTERN_T_AND_M="EXTERN T&M"
+
 }
 export enum Devise{
     DINAR="DT" ,

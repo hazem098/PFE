@@ -67,6 +67,13 @@
          <button mat-icon-button mat-sm-button color="primary" class="mr-16 "  (click)="openPopUp(row)">
            <mat-icon>edit</mat-icon>
          </button>
+         <button  mat-icon-button
+         color="primary"
+
+         (click)="openPopUp2(row.id)"
+       >
+         <mat-icon>note_add</mat-icon>
+       </button>
          <button
          mat-icon-button
          routerLink="/projets/{{ row.id }}"

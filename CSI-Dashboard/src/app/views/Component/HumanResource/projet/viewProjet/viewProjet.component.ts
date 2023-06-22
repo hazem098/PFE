@@ -80,7 +80,7 @@ import { DatePipe } from "@angular/common";
         [Title.FRONT_END_DEVELOPER]: 'Développeur frontEnd '
        
       }
-    openPopUp(data: any, isNew?) {
+      async  openPopUp(data: any, isNew?) {
         let title = isNew ? 'Nouveau projet' : 'Modifier projet';
         let dialogRef: MatDialogRef<any> = this.dialog.open(AffectationComponent, {
           width: '400px',
@@ -88,7 +88,7 @@ import { DatePipe } from "@angular/common";
           data: { title: title, payload: data, isNew: isNew }
         });
       
-        dialogRef.afterClosed().subscribe(res => {
+      await  dialogRef.afterClosed().subscribe(res => {
           if (!res) {
             // If user presses cancel
             return;
@@ -97,11 +97,10 @@ import { DatePipe } from "@angular/common";
          // if (isNew) {
             const resourceId = res.resourceId;
             
-            this.crudService.addResourceToProject(this.id, resourceId).subscribe((data: any) => {
-              this.dataSource = data;
-              this.loader.close();
+            this.crudService.addResourceToProject(this.id, resourceId).subscribe(async (data: any) => {
+             this.loader.close();
               this.snack.open('resource affecté avec succès!', 'OK', { duration: 2000 });
-              this.getRessources()
+            await  this.getRessources()
             });
           }
         //}
