@@ -33,7 +33,7 @@ public class TaskDtoResponse {
     private TaskPhase taskPhase;
     private LocalDate realEndDate ;
     private LocalDate projectionDate;
-    private Project project;
+    private Phase phase;
 
 
     private List<SubTask> sousTaches ;

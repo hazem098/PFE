@@ -43,8 +43,8 @@ public class Task implements Serializable {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @JoinColumn(name = "phase_id")
+    private Phase phase;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private List<SubTask> SubTaskList ;

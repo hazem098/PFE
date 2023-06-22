@@ -30,7 +30,7 @@ public class TaskDtoRequest {
     private TaskPhase taskPhase;
     private LocalDate realEndDate ;
     private LocalDate projectionDate;
-    private Long ProjectNum ;
+    private Long PhaseNum;
 
 
 }

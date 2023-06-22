@@ -55,7 +55,9 @@ public class Project implements Serializable {
     @OneToOne(mappedBy = "prj")
     private Resource responsable;
     @JsonIgnore
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<Task> tasks;
+    @OneToMany
+    private List<Phase> phases;
+
+
 }
 

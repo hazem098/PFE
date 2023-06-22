@@ -3,8 +3,10 @@ package com.csidigital.rh.management.service.impl;
 
 
 
+import com.csidigital.rh.dao.entity.Phase;
 import com.csidigital.rh.dao.entity.Project;
 import com.csidigital.rh.dao.entity.Task;
+import com.csidigital.rh.dao.repository.PhaseRepository;
 import com.csidigital.rh.dao.repository.ProjectRepository;
 import com.csidigital.rh.dao.repository.ResourceRepository;
 import com.csidigital.rh.dao.repository.TaskRepository;
@@ -28,6 +30,8 @@ public class TaskServiceImpl implements TaskService {
     private ProjectRepository projectRepository;
     @Autowired
     private ResourceRepository resourceRepository;
+    @Autowired
+    private PhaseRepository phaseRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -60,21 +64,21 @@ public class TaskServiceImpl implements TaskService {
 
 
 
-        Project project = null ;
-        if (projectRepository.findById(taskDtoRequest.getProjectNum()).orElseThrow() !=null) {
-            project = projectRepository.findById(taskDtoRequest.getProjectNum()).orElseThrow();
+        Phase phase = null ;
+        if (phaseRepository.findById(taskDtoRequest.getPhaseNum()).orElseThrow() !=null) {
+            phase = phaseRepository.findById(taskDtoRequest.getPhaseNum()).orElseThrow();
 
         }
         Task task = modelMapper.map(taskDtoRequest, Task.class);
 
-        project.getTasks().add(task);
+        phase.getTasks().add(task);
 
-        task.setProject(project);
+        task.setPhase(phase);
 
 
         Task TaskSaved = taskRepository.save(task);
 
-        projectRepository.save(project);
+        phaseRepository.save(phase);
         return modelMapper.map(TaskSaved, TaskDtoResponse.class);
     }
 
@@ -83,7 +87,7 @@ public class TaskServiceImpl implements TaskService {
 
         Task task = taskRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Task with id: " + id + " not found"));
-     Project project = projectRepository.findById(taskDtoRequest.getProjectNum()).orElseThrow();
+     Project project = projectRepository.findById(taskDtoRequest.getPhaseNum()).orElseThrow();
         modelMapper.map(taskDtoRequest, task);
         //Resource newResource = resourceRepository.findById(taskDtoRequest.getResourceNum())
           //      .orElseThrow(() -> new ResourceNotFoundException("Resource with id: " + taskDtoRequest.getResourceNum() + " not found"));
@@ -121,9 +125,9 @@ public class TaskServiceImpl implements TaskService {
 
 
         // Remove the task from the associated project
-        Project project = task.getProject();
-        if (project != null) {
-            project.getTasks().remove(task);
+        Phase phase = task.getPhase();
+        if (phase != null) {
+            phase.getTasks().remove(task);
         }
 
 

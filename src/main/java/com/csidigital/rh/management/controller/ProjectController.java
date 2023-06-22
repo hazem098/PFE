@@ -3,13 +3,11 @@ package com.csidigital.rh.management.controller;
 
 
 
-import com.csidigital.rh.dao.entity.Project;
-import com.csidigital.rh.dao.entity.Resource;
-import com.csidigital.rh.dao.entity.SubTask;
-import com.csidigital.rh.dao.entity.Task;
+import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.management.service.impl.ProjectServiceImpl;
 import com.csidigital.rh.shared.dto.request.ProjectDtoRequest;
 import com.csidigital.rh.shared.dto.response.ProjectDtoResponse;
+import com.csidigital.rh.shared.dto.response.SousTacheResponse;
 import com.csidigital.rh.shared.dto.response.TaskDtoResponse;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -66,12 +64,16 @@ public class ProjectController {
         projectService.addResourceToProject(projectId, resourceIds);
         return ResponseEntity.ok("Resource added to the project successfully.");
     }
-    @GetMapping("/{id}/subTask")
-    public List<SubTask> getProjectTask(@PathVariable Long id){
-        return projectService.getProjectTask(id);
+    @GetMapping("/{id}/tasks")
+    public List<SousTacheResponse> getProjectTask(@PathVariable Long id){
+       return  projectService.getTasksById(id);
     }
-    @GetMapping("/{id}/Tasks")
-    public List<Task> getProjectTasks(@PathVariable Long id){
-        return projectService.getProjectTasks(id);
+    @GetMapping("/{id}/phases")
+    public List<Phase> getProjectPhases(@PathVariable Long id){
+        return projectService.getProjectPhase(id);
+    }
+    @GetMapping("{id}/tache")
+    public List<Task> getProjectTache(@PathVariable Long id){
+        return projectService.getProjectTask(id);
     }
 }

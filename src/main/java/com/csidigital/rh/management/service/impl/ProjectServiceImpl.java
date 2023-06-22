@@ -4,6 +4,7 @@ package com.csidigital.rh.management.service.impl;
 
 
 import com.csidigital.rh.dao.entity.*;
+import com.csidigital.rh.dao.repository.PhaseRepository;
 import com.csidigital.rh.dao.repository.ProjectReferenceSequenceRepository;
 import com.csidigital.rh.dao.repository.ResourceRepository;
 import com.csidigital.rh.management.service.ProjectService;
@@ -30,6 +31,8 @@ public class ProjectServiceImpl implements ProjectService {
     private  ProjectRepository projectRepository;
     @Autowired
     private ResourceRepository resourceRepository ;
+    @Autowired
+    private PhaseRepository phaseRepository ;
     @Autowired
     private ProjectReferenceSequenceRepository sequenceRepository;
 
@@ -59,29 +62,42 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDtoResponse;
 
     }
-
-    public List<SubTask> getProjectTask(Long id) {
+    public List<SousTacheResponse> getTasksById(Long id) {
         Project project = projectRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Project with id " +id+ " not found"));
-        List<SubTask> sousTacheResponses= new ArrayList<>();
-        List<SousTacheResponse> subTaskList = new ArrayList<>();
-        List<Task> taskList = project.getTasks();
-        for(Task t : taskList){
-            sousTacheResponses.addAll(t.getSubTaskList());
+        List<Phase> phases = project.getPhases();
+        List<Task> tasks = new ArrayList<>();
+        List<SubTask> subTasks = new ArrayList<>();
+        List<SousTacheResponse> sousTacheResponses = new ArrayList<>();
+        for (Phase phase : phases) {
+            List<Task> phaseTasks = phase.getTasks();
+            tasks.addAll(phaseTasks);
+        }
+        for(Task t : tasks){
+            subTasks.addAll(t.getSubTaskList());
+        }
+        for (SubTask s : subTasks) {
+            SousTacheResponse sousTacheResponse = modelMapper.map(s , SousTacheResponse.class);
+            sousTacheResponses.add(sousTacheResponse);
         }
         return sousTacheResponses;
-
     }
-    public List<Task> getProjectTasks(Long id) {
-        Project project = projectRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Project with id " +id+ " not found"));
 
-        List<Task> taskList = project.getTasks();
-
-
-        return taskList ;
-
+    public List<Phase> getProjectPhase(Long id){
+        Project project = projectRepository.findById(id).orElseThrow();
+        return project.getPhases();
     }
+    public List<Task> getProjectTask(Long id){
+        Project project = projectRepository.findById(id).orElseThrow();
+        List<Phase> phaseList = project.getPhases();
+
+        List<Task> tasks = new ArrayList<>();
+        for (Phase p : phaseList){
+            tasks.addAll(p.getTasks());
+        }
+    return tasks;
+    }
+
     @Override
     public List<Resource> getProjectResource(Long id) {
         Project project = projectRepository.findById(id)
@@ -208,18 +224,7 @@ public class ProjectServiceImpl implements ProjectService {
             r.getProject().remove(project);
             resourceRepository.save(r);
         }
-        List<Task> tasks = project.getTasks();
-        for (Task task : tasks) {
-            List<SubTask> subTasks = task.getSubTaskList();
-            for (SubTask subTask : subTasks) {
-                Resource resource = subTask.getResource();
-                if (resource != null) {
-                    resource.getSubTasks().remove(subTask);
-                    subTask.setResource(null);
-                    resourceRepository.save(resource);
-                }
-            }
-        }
+
             projectRepository.deleteById(id);
 
     }
