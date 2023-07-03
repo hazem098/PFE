@@ -38,6 +38,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { PhaseComponent } from "./add projet/projetPopup/phase.component";
+import { TaskViewComponent } from "./viewProjet/tasks/taskPopup/taskView.component";
+import { ModifTaskComponent } from "./add projet/modifTaskPopup/modifTask.component";
 
 
 
@@ -76,7 +78,7 @@ import { PhaseComponent } from "./add projet/projetPopup/phase.component";
     MatProgressSpinnerModule,
     RouterModule.forChild(ProjetRoutes),
   ],
-  declarations: [ ProjetComponent , ProjetPopupComponent, ViewProjetComponent, AffectationComponent, KanbanBoardComponent, TaskPopupComponent, PhaseComponent],
+  declarations: [ ProjetComponent , ProjetPopupComponent, ViewProjetComponent, AffectationComponent, KanbanBoardComponent, TaskPopupComponent, PhaseComponent, TaskViewComponent, ModifTaskComponent],
   providers: [ ProjetService,DatePipe]
 })
 export class ProjetModule { }

@@ -4,16 +4,16 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ActivatedRoute } from "@angular/router";
 import { taskPhase } from "app/shared/models/Task";
 import { ResourceService } from "app/views/Component/HumanResource/resource/resource.service";
-import { ProjetService } from "../../../projet.service";
+import { ProjetService } from "../../projet.service";
 import { Projet } from "app/shared/models/Projet";
 import { Employee } from "app/shared/models/Employee";
 
 @Component({
     selector: 'app-ngx-table-popup',
-    templateUrl: './taskPopup.component.html',
+    templateUrl: './modifTask.component.html',
    
   })
-  export class TaskPopupComponent implements OnInit {
+  export class ModifTaskComponent implements OnInit {
     projectStartDate: Date;
     projectEndDate: Date;
     id:number
@@ -22,7 +22,7 @@ import { Employee } from "app/shared/models/Employee";
     dataSource : any
     taskPhase = Object.values(taskPhase);
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<TaskPopupComponent>,
+    public dialogRef: MatDialogRef<ModifTaskComponent>,
     public resourceService : ResourceService,
     public crudService : ProjetService,
     public router : ActivatedRoute,
@@ -42,14 +42,13 @@ import { Employee } from "app/shared/models/Employee";
           startDate: [item.startDate ||'', Validators.required, ],
           endDate : [item.endDate || '', Validators.required],
             estimation : [item.estimation || Validators.required],
-            reamaining : [item.remaining],
+            remaining : [item.remaining],
           taskPhase:[item.taskPhase|| '', Validators.required],
           progression:[item.progression||''],
           projectNum:[this.data.projectId],
           status :[item.status],
-          resourceNum : [item.resourceNum],
-          phaseNum : [item.phaseNum],
-          taskNum:[item.taskNum],
+          resourceNum : [this.data.payload.resource.id],
+          taskNum:[this.data.payload.task.id],
           reference:[item.reference]
            });
           

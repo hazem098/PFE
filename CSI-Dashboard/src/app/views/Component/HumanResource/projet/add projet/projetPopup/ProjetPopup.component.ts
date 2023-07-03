@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {  Validators,  FormGroup, FormBuilder, UntypedFormGroup, UntypedFormControl, FormArray, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Partner,CompanyStatus,WorkField,LegalStatus,Provenance ,Country} from 'app/shared/models/Partner';
 import { ProjetService } from '../../projet.service';
-import { Devise, ProjectStatus, ProjectType, Projet } from 'app/shared/models/Projet';
+import { Devise, Fnction, ProjectStatus, ProjectType, Projet } from 'app/shared/models/Projet';
 import { ResourceService } from '../../../resource/resource.service';
 import { Employee, Title } from 'app/shared/models/Employee';
 import { MatTableDataSource } from '@angular/material/table';
@@ -26,6 +26,7 @@ export class ProjetPopupComponent implements OnInit {
   isLoading = true;
   ProjectStatus = Object.values(ProjectStatus);
   ProjectType = Object.values(ProjectType);
+  fonction=Object.values(Fnction)
   devise = Object.values(Devise)
   ressourceId:number;
   states: string[];
@@ -81,7 +82,8 @@ export class ProjetPopupComponent implements OnInit {
       realStartDate:[item.realStartDate||'',Validators.required],
       realEndDate:[item.realEndDate||'',Validators.required],
       lieuDuProjet:[item.lieuDuProjet],
-      workingHourNumber:[item.workingHourNumber]
+      workingHourNumber:[item.workingHourNumber],
+      
       
        },);
        this.itemForm.get('startDate').valueChanges.subscribe((value) => {

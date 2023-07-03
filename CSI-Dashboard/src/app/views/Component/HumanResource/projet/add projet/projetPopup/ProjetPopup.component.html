@@ -61,7 +61,7 @@
           name="projectReference"
           type="text"
           
-          placeholder="Reference du commande">
+          placeholder="Reference de la commande">
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
@@ -225,7 +225,7 @@
   <mat-form-field class="full-width">
     <mat-label>Fonction</mat-label>
     <mat-select>
-      <mat-option ></mat-option>
+      <mat-option  *ngFor="let x of fonction" [value]="x" >{{x}}</mat-option>
     </mat-select>
    
   </mat-form-field>
@@ -243,11 +243,7 @@
   </div>
           </mat-card-content>
           </mat-card-content>
-          <div fxFlex="100" class="mt-16">
-            <button mat-raised-button color="primary">{{ "SAVE" }}</button>
-            <span fxFlex></span>
-            <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
-          </div>
+         
           </mat-tab>
           <mat-tab>
        
@@ -297,7 +293,13 @@
             
         
          </mat-card-content>
+         
          </mat-card>
+         <div fxFlex="100" class="mt-16">
+          <button mat-raised-button color="primary">{{ "SAVE" }}</button>
+          <span fxFlex></span>
+          <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+        </div>
             </mat-tab>
       </mat-tab-group>
     
@@ -309,151 +311,4 @@
    
     
   
-          <!--div fxFlex="50"  class="pr-16">
-
-            <mat-form-field class="full-width">
-              <mat-label>Status du projet</mat-label>
-              <mat-select  [formControlName]="'projectStatus'" [disabled]="!isFieldEnabled()">
-                <mat-option *ngFor="let x of ProjectStatus" [value]="x">{{ x }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-            
-          </div-->
-            <!--div fxFlex="50"  class="pr-16">
-            <mat-form-field class="full-width">
-              <mat-label>Resource</mat-label>
-              <mat-select  [formControlName]="'resourceIds'" multiple>
-                <mat-option *ngFor="let resource of Noresponsables" [value]="resource.id">  {{ resource.lastName }} {{ resource.title }}</mat-option>
-              </mat-select>
-            </mat-form-field>
-           
-        </div-->
-
- 
-
-<!-- Include the necessary Angular Material components -->
-
-
-  <!--h1 matDialogTitle>{{data.title}}</h1>
-  <form [formGroup]="Form" (ngSubmit)="submit()" >
-    <mat-card class="p-0">
-  
-      <mat-tab-group mat-stretch-tabs>
          
-         
-
-<mat-tab>
-           
-  <ng-template mat-tab-label>
-    <mat-icon style="color: #0077C2;">share</mat-icon>
-    <span class="tab-label" style="color: #0077C2;">Informations générales</span>
-  </ng-template>
-  <mat-card-content class="mt-16">
-    <div fxLayout="row wrap" fxLayout.lt-sm="column">
-   
-    <div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
-        <mat-label>Type du projet</mat-label>
-        <mat-select  [formControlName]="'projectType'">
-            <mat-option *ngFor="let x of ProjectType" [value]="x">{{ x }}</mat-option>
-          </mat-select>
-      </mat-form-field>
-      </div>
-
-      <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
-          <input
-          matInput
-          name="projectReference"
-          type="text"
-          [formControlName]="'name'"
-          placeholder="Titre">
-        </mat-form-field>
-        </div>
-
-        <div fxFlex="50"  class="pr-16">
-          <mat-form-field class="full-width">
-            <input
-            matInput
-            name="description"
-            [formControlName]="'description'"
-            placeholder="description">
-          </mat-form-field>
-          </div>
-          <div fxFlex="50"  class="pr-16">
-            <mat-form-field class="full-width">
-              <input
-              matInput
-              name="budget"
-              [formControlName]="'budget'"
-              placeholder="budget">
-            </mat-form-field>
-          </div>
-          <div fxFlex="50"  class="pr-16">
-            <mat-form-field class="full-width">
-              <input
-              matInput
-              type="date"
-              name="startDate"
-              [formControlName]="'startDate'"
-              placeholder="Date début">
-            </mat-form-field>
-          </div>
-      
-         
-      
-                <div fxFlex="50"  class="pr-16">
-                  <mat-form-field class="full-width">
-                    <input
-                    matInput
-                    name="endDate"
-                    type="date"
-                    [formControlName]="'endDate'"
-                    placeholder="Date fin">
-                  </mat-form-field>
-                </div>
-      
-                <div fxFlex="50"  class="pr-16">
-      
-                  <mat-form-field class="full-width">
-                    <mat-label>projectStatus</mat-label>
-                    <mat-select  [formControlName]="'projectStatus'">
-                      <mat-option *ngFor="let x of ProjectStatus" [value]="x">{{ x }}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-              </div>
-     </div>
-        </mat-card-content>
-     
-      </mat-tab>
-      <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon style="color: #0077C2;">accessibility</mat-icon>
-        <span class="tab-label" style="color: #0077C2;">Ressources</span>
-      </ng-template>
-        
-      <mat-card-content class="mt-16">
-        <div fxLayout="row wrap" fxLayout.lt-sm="column">
-          <div fxFlex="50"  class="pr-16">
-      
-            <mat-form-field class="full-width">
-              <mat-label>Resource</mat-label>
-              <mat-select  [formControlName]="'resourceIds'" multiple>
-                <mat-option *ngFor="let resource of resources" [value]="resource.id">{{resource.lastName}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-        </div>    
-          </div>
-
-</mat-card-content>
-<div fxFlex="100" class="mt-16">
-  <button mat-raised-button color="primary" >{{"Enregistrer" | translate }}</button>
-  <span fxFlex></span>
-  <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Annuler</button>
-</div>
-</mat-tab>
-
-  
-  </mat-tab-group>
-  
-</mat-card-->

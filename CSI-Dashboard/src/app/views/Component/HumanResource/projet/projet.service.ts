@@ -63,6 +63,10 @@ export class ProjetService {
       
     
   }
+  updateSubTask(id : number , task:any): Observable<any> {
+    const url = `${this.apiUrl3+'/update'}/${id}`
+    return this.http.put<any>(url, task).pipe()
+  }
   updateTask(id: number, projet: any): Observable<any> {
     const url = `${this.apiUrl2 +'/updateById'}/${id}`;
     return this.http.put<any>(url, projet).pipe()

@@ -1,8 +1,6 @@
 <mat-card class="p-0">
     <mat-card-title class="">
-       <div class="card-title-text"><mat-icon>
-        info_outline </mat-icon>informations générales </div>
-      <mat-divider></mat-divider>
+      
     </mat-card-title>
     <mat-card-content>
       <div fxLayout="row wrap">
@@ -35,7 +33,7 @@
             </mat-card-content>
             </mat-card>
             
-            <div class="m-12" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
+            <div class="m-12">
 
 
                 <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)="openPopUp({},true)"> Affecter ressource </button>
@@ -43,7 +41,7 @@
                 
                
               
-              <mat-card  style="border: 5px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
+              <mat-card  style="border: 5px; "  >
                 <mat-card-content class="p-0">
                   <mat-table [dataSource]="dataSource" matSort  >
                     <ng-container matColumnDef="Reference">

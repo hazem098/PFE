@@ -29,3 +29,12 @@ export enum Devise{
     EURO="EUR",
     DOLLAR="DLR"
 }
+export enum Fnction{
+    SPONSOR="Sponsor du projet maitrise d'ouvrage",
+    CHEF_OUVRAGE="Chef du projet maitrise d'ouvrage",
+    DIRECTEUR="Directeur",
+    CHEF_OEUVRE="Chef du projet maitrise d'oeuvre",
+    RESPONSABLE_PRESTATAIRE="Responsable prestataire",
+    CHEF_PRESTATAIRE="chef du projet chez le prestataire"
+
+}

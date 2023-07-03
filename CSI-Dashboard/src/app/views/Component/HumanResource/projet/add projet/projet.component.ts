@@ -126,7 +126,7 @@ export class ProjetComponent implements OnInit {
               .subscribe((data:any) => {
                 this.dataSource = data ;
                 this.loader.close();
-                this.snack.open('Offre modifiée avec succées !', 'OK', { duration: 2000 });
+                this.snack.open('Projet modifié avec succées !', 'OK', { duration: 2000 });
                 this.getItems();
               })
         }
@@ -170,7 +170,7 @@ deleteItem(row) {
             .subscribe((data:any)=> {
               this.dataSource = data;
               this.loader.close();
-              this.snack.open('projet supprimée!', 'OK', { duration: 2000 });
+              this.snack.open('projet supprimé!', 'OK', { duration: 2000 });
               this.getItems();
             })
         }

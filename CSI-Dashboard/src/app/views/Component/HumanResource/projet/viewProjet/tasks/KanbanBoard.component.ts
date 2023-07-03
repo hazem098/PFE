@@ -10,6 +10,8 @@ import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.serv
 import { MatTableDataSource } from '@angular/material/table';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
 import { Employee } from 'app/shared/models/Employee';
+import { TaskViewComponent } from './taskPopup/taskView.component';
+import { ModifTaskComponent } from '../../add projet/modifTaskPopup/modifTask.component';
 
 
 @Component({
@@ -81,6 +83,7 @@ isEndDateExpired(row: any): boolean {
   const taskPhase = row.taskPhase;
   return endDate < this.currentDate && taskPhase === "A_FAIRE";
 }
+
 deleteItem(row) {
   this.confirmService.confirm({message: `étes vous sure de supprission ?`})
     .subscribe(res => {
@@ -97,43 +100,7 @@ deleteItem(row) {
     })
 }
 
- /* tasks: any[] = [
-    {
-      
-      title: 'Tache 1',
-      description: 'Crud',
-      status: 'A faire',
-      assignee: 'John Doe'
-    },
-    {
-      
-      title: 'Tache 2',
-      description: 'travailler sur tache 2',
-      status: 'En cours',
-      assignee: 'Jane Smith'
-    },
-    {
-     
-      title: 'Tache 3',
-      description: 'completer tache 3',
-      status: 'Terminé',
-      assignee: 'John Doe'
-    },
-    {
-     
-      title: 'Tache 4',
-      description: 'Finir tache 4',
-      status: 'A faire',
-      assignee: 'John Doe'
-    },
-    {
-      
-      title: 'Tache 5',
-      description: 'test',
-      status: 'Test',
-      assignee: 'Hazem'
-    }
-  ];*/
+
 
 /* statuses: string[] = ['A_FAIRE', 'EN_COURS','TEST','TERMINE'];*/
   // TypeScript code
@@ -214,10 +181,67 @@ this.resources=data
       });
     });
   }
+  openPopUpModif(data:  any , isNew?) {
+    let title = isNew ? 'Nouvelle tache' : 'Modifier projet';
+    this.crudService.getResources(this.id).subscribe((resources: any) => {
+    let dialogRef: MatDialogRef<any> = this.dialog.open(ModifTaskComponent, {
+      width: '1000px',
+
+      disableClose: true,
+      data: { title: title, payload: data , isNew: isNew , resources : this.resources , phases :this.phases , projectId : this.id , projet : this.projet , tasks : this.tasks}
+    })
+    dialogRef.afterClosed()
+      .subscribe(res => {
+        if(!res) {
+          // If user press cancel
+          return;
+        
+         }
+        if (isNew) {
+          this.loader.open('Ajout en cours');
+          this.crudService.addTask(res)
+            .subscribe((data :any)=> {
+              this.dataSource = data;
+              this.loader.close();
+              this.snack.open('tache ajouté avec succès!', 'OK', { duration: 2000 });
+              this.gettasks()
+             /* this.gettask()*/
+            });
+            
+        } else {
+          this.loader.open('modification en cours');
+          this.crudService.updateSubTask(data.id,res)
+            .subscribe((data:any) => {
+              this.dataSource = data ;
+              this.loader.close();
+              this.snack.open('Tache modifiée avec succées !', 'OK', { duration: 2000 });
+              this.gettasks();
+            })
+      }
+      });
+    });
+  }
   isTaskInDelay(task: any) : boolean {
     const currentDate = new Date();
     return task.endDate < currentDate 
   
     }
-   
+    openPopUpView(row: any): void {
+      const dialogRef = this.dialog.open(TaskViewComponent, {
+        width: '720px',
+        data:  { task : row},
+      });
+    
+      dialogRef.afterOpened().subscribe(() => {
+        console.log('Dialog opened successfully.');
+      });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('Dialog closed with result:', result);
+        // Code executed after the dialog is closed
+      }, error => {
+        console.error('An error occurred while opening the dialog:', error);
+        // Handle the error appropriately (e.g., display an error message)
+      });
+    }
 }

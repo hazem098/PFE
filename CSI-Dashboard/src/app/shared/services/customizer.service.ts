@@ -66,6 +66,10 @@ export class CustomizerService {
     {
       class: "slate",
       active: false
+    },
+    {
+      class: "silver",
+      active: false
     }
   ];
   selectedSidebarColor;
@@ -83,7 +87,7 @@ export class CustomizerService {
   }
 
   getSidebarColors() {
-    let sidebarColors = ['black', 'slate', 'white', 'grey', 'brown', 'purple', 'dark-blue',];
+    let sidebarColors = ['black', 'slate', 'white', 'grey', 'brown', 'purple', 'dark-blue','silver'];
     return this.colors.filter(color => {
       return sidebarColors.includes(color.class);
     })
