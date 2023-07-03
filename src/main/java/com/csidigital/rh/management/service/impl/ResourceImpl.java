@@ -44,7 +44,7 @@ public class ResourceImpl implements ResourceService {
         }
         Resource resource = modelMapper.map(request, Resource.class);
         resource.setProject(projet);
-        resource.setPrj(responsable);
+
         Resource resourceSaved = resourceRepository.save(resource);
         return modelMapper.map(resourceSaved, ResourceResponse.class);
     }

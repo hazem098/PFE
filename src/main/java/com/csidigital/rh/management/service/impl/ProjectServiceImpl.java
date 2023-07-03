@@ -124,14 +124,14 @@ public class ProjectServiceImpl implements ProjectService {
             res.getProject().add(project);
             //resourceRepository.save(res);
         }
-     Resource responsable = resourceRepository.findById(projectDtoRequest.getResponsableNum()).orElseThrow();
+
 
         project.setResources(existingResources);
-        project.setResponsable(responsable);
+
         project = projectRepository.save(project);
 
-        responsable.getProject().add(project);
-       resourceRepository.save(responsable);
+
+
         resourceRepository.saveAll(existingResources);
 
 
@@ -170,13 +170,7 @@ public class ProjectServiceImpl implements ProjectService {
                     .orElseThrow(() -> new ResourceNotFoundException("Resource with id: " + resourceId + " not found"));
             existingResources.add(resource);
         }
-    if (resourceRepository.findById(projectDtoRequest.getResponsableNum())!=null) {
-        responsable = resourceRepository.findById(projectDtoRequest.getResponsableNum())
-                .orElseThrow(() -> new ResourceNotFoundException("Resource with id: " + projectDtoRequest.getResponsableNum() + " not found"));
-        if (responsable.getId() == null) {
-            responsable = resourceRepository.save(responsable);
-        }
-    }
+
         // Save new resources if necessary
         for (Resource resource : existingResources) {
             if (resource.getId() == null) {
@@ -190,7 +184,7 @@ public class ProjectServiceImpl implements ProjectService {
         responsable.getProject().add(project);
         resourceRepository.save(responsable);
         project.setResources(existingResources);
-        project.setResponsable(responsable);
+
 
         Project updatedProject = projectRepository.save(project);
         return modelMapper.map(updatedProject, ProjectDtoResponse.class);

@@ -34,5 +34,5 @@ public class ProjectDtoResponse {
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
    private  List<Resource> resources ;
-   private Resource responsable ;
+
 }

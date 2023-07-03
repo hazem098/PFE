@@ -35,9 +35,6 @@ public class Resource extends Employee{
     @JsonIgnore
     @ManyToMany
     private List<Project> project;
-   @JsonIgnore
-    @OneToOne
-   private Project prj;
 
     @JsonIgnore
     @OneToMany

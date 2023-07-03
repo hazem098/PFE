@@ -5,11 +5,9 @@ package com.csidigital.rh.management.service.impl;
 
 import com.csidigital.rh.dao.entity.Phase;
 import com.csidigital.rh.dao.entity.Project;
+import com.csidigital.rh.dao.entity.ProjectReferenceSequence;
 import com.csidigital.rh.dao.entity.Task;
-import com.csidigital.rh.dao.repository.PhaseRepository;
-import com.csidigital.rh.dao.repository.ProjectRepository;
-import com.csidigital.rh.dao.repository.ResourceRepository;
-import com.csidigital.rh.dao.repository.TaskRepository;
+import com.csidigital.rh.dao.repository.*;
 import com.csidigital.rh.management.service.TaskService;
 import com.csidigital.rh.shared.dto.request.TaskDtoRequest;
 import com.csidigital.rh.shared.dto.response.TaskDtoResponse;
@@ -32,6 +30,8 @@ public class TaskServiceImpl implements TaskService {
     private ResourceRepository resourceRepository;
     @Autowired
     private PhaseRepository phaseRepository;
+    @Autowired
+    private ProjectReferenceSequenceRepository sequenceRepository;
 
     @Autowired
     private ModelMapper modelMapper;

@@ -33,6 +33,8 @@ public class SubTask implements Serializable {
     private LocalDate projectionDate;
     @Enumerated(EnumType.STRING)
     private TaskPhase taskPhase;
+    @Column(unique = true)
+    private String subTaskReference;
     @JsonIgnore
     @ManyToOne
     private Resource resource;

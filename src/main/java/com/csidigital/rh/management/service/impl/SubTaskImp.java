@@ -1,5 +1,6 @@
 package com.csidigital.rh.management.service.impl;
 
+import com.csidigital.rh.dao.entity.ProjectReferenceSequence;
 import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.dao.entity.SubTask;
 import com.csidigital.rh.dao.entity.Task;
@@ -25,6 +26,8 @@ public class SubTaskImp {
     private ProjectRepository projectRepository;
     @Autowired
     private ResourceRepository resourceRepository;
+    @Autowired
+    private ProjectReferenceSequenceRepository sequenceRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -53,6 +56,7 @@ public class SubTaskImp {
     }
 
     public SousTacheResponse createTask(SousTacheRequest sousTacheRequest) {
+
         Resource resource = null ;
         Task tache = null ;
         if( resourceRepository.findById(sousTacheRequest.getResourceNum()) !=null){
@@ -72,6 +76,28 @@ public class SubTaskImp {
 
             resourceRepository.save(resource);
             taskRepository.save(tache);
+        return modelMapper.map(TaskSaved, SousTacheResponse.class);
+    }
+    public SousTacheResponse updateTask(SousTacheRequest sousTacheRequest , Long id) {
+        SubTask subTask = subtaskRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Task with id: " + id + " not found"));
+        Resource resource = null ;
+        Task tache = null ;
+        if( resourceRepository.findById(sousTacheRequest.getResourceNum()) !=null){
+            resource = resourceRepository.findById(sousTacheRequest.getResourceNum()).orElseThrow();
+        }
+        if( resourceRepository.findById(sousTacheRequest.getTaskNum()) !=null){
+            tache = taskRepository.findById(sousTacheRequest.getTaskNum()).orElseThrow(() -> new NoSuchElementException("Task with the given ID does not exist"));}
+        modelMapper.map(sousTacheRequest, subTask);
+        subTask.setResource(resource);
+
+        subTask.setTask(tache);
+
+
+        SubTask TaskSaved = subtaskRepository.save(subTask);
+
+        resourceRepository.save(resource);
+        taskRepository.save(tache);
         return modelMapper.map(TaskSaved, SousTacheResponse.class);
     }
 public void deleteSubTask(Long id){

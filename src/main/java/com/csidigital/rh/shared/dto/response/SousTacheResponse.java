@@ -24,6 +24,6 @@ public class SousTacheResponse {
     private Integer remaining ;
     private LocalDate realEndDate;
     private LocalDate projectionDate;
-
+ private String subTaskReference;
     private Task task ;
 }

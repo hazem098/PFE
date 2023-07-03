@@ -34,6 +34,7 @@ public class TaskDtoResponse {
     private LocalDate realEndDate ;
     private LocalDate projectionDate;
     private Phase phase;
+    private String taskReference;
 
 
     private List<SubTask> sousTaches ;

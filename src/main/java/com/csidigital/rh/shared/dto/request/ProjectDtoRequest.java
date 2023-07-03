@@ -33,5 +33,5 @@ public class ProjectDtoRequest {
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
     private List<Long> resourceIds;
-    private  Long responsableNum;
+
 }

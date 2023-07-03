@@ -39,7 +39,8 @@ public class Task implements Serializable {
     private Priority priority;
     @Enumerated(EnumType.STRING)
     private TaskPhase taskPhase;
-
+    @Column(unique = true)
+    private String taskReference;
 
     @JsonIgnore
     @ManyToOne

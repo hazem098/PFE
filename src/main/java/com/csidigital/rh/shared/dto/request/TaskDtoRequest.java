@@ -31,6 +31,6 @@ public class TaskDtoRequest {
     private LocalDate realEndDate ;
     private LocalDate projectionDate;
     private Long PhaseNum;
-
+    private String reference;
 
 }

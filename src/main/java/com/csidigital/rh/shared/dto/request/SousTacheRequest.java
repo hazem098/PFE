@@ -22,5 +22,6 @@ public class SousTacheRequest {
     private Integer remaining ;
     private LocalDate realEndDate;
     private LocalDate projectionDate;
-    private Long taskNum ;
+    private Long taskNum;
+    private String reference;
 }
