@@ -45,10 +45,13 @@ export class ProjetService {
     const apiUrlWithAdd = this.apiUrl + '/add'; // Append /add to the apiUrl
     return this.http.post<any>(apiUrlWithAdd, projet).pipe();
   }
-  addPhase(phase: any): Observable<any> {
-    const apiUrlWithAdd = this.apiUrl4 + '/add'; // Append /add to the apiUrl
-    return this.http.post<any>(apiUrlWithAdd, phase).pipe();
+  addPhase(phases: any[], id: number): Observable<any> {
+    const apiUrlWithAdd = `${this.apiUrl4}/addphases`;
+    const payload = phases; // Only pass the array of phases as the payload
+    
+    return this.http.post<any[]>(apiUrlWithAdd, payload, { params: { projectId: id.toString() } }).pipe();
   }
+  
   getItem(id: number): Observable<Projet> {
     const url = `${this.apiUrl+ '/getById'}/${id}`;
     return this.http.get<Projet>(url).pipe();

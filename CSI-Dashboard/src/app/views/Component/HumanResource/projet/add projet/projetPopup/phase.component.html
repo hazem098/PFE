@@ -1,52 +1,60 @@
-<h1 matDialogTitle>{{data.title}}</h1>
+<h1 matDialogTitle>{{ data.title }}</h1>
 
-    <form [formGroup]="itemForm" (ngSubmit)="submit()">
-    <div fxLayout="row wrap" fxLayout.lt-sm="column">
-      <div fxFlex="50"  class="pr-16">
-            <mat-form-field class="full-width">
-                <input
-                  matInput
-                  [formControlName]="'name'"
-                  name="name"
-                  placeholder="nom du phase"
-                  type="text">
-            </mat-form-field>
+<form [formGroup]="itemForm" (ngSubmit)="submit()">
+  <div formArrayName="formItems">
+    <div *ngFor="let formItem of formItems.controls; let i = index" [formGroupName]="i">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="50" class="pr-16">
+          <mat-form-field class="full-width">
+            <input matInput [formControlName]="'name'" name="name" placeholder="Nom du phase" type="text">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-16">
+          <mat-form-field class="full-width">
+            <mat-label>Date début</mat-label>
+            <input matInput name="startDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
+            <mat-datepicker-toggle matSuffix [for]="appDatepicker1"></mat-datepicker-toggle>
+          </mat-form-field>
+          <mat-datepicker #appDatepicker1></mat-datepicker>
+        </div>
+        <div fxFlex="50" class="pr-16">
+          <mat-form-field class="full-width">
+            <mat-label>Date fin</mat-label>
+            <input matInput name="endDate" placeholder="Date fin" [matDatepicker]="appDatepicker2" />
+            <mat-datepicker-toggle matSuffix [for]="appDatepicker2"></mat-datepicker-toggle>
+          </mat-form-field>
+          <mat-datepicker #appDatepicker2></mat-datepicker>
+        </div>
+        <div fxFlex="50" class="pr-16">
+          <mat-form-field class="full-width">
+            <input matInput name="description" placeholder="Commentaire">
+          </mat-form-field>
+        </div>
       </div>
-                <div fxFlex="50"  class="pr-16">
-                  <mat-form-field class="full-width">
-       
-                    <mat-label>Date  début</mat-label>
-                    <input matInput name="startDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
-                    <mat-datepicker-toggle matSuffix [for]="appDatepicker1"></mat-datepicker-toggle>
-                  </mat-form-field>
-                  <mat-datepicker #appDatepicker1></mat-datepicker>
-                      </div>
-                      <div fxFlex="50"  class="pr-16">
-                        <mat-form-field class="full-width">
-             
-                          <mat-label>Date  fin</mat-label>
-                          <input matInput name="startDate" placeholder="Date Fin" [matDatepicker]="appDatepicker2" />
-                          <mat-datepicker-toggle matSuffix [for]="appDatepicker2"></mat-datepicker-toggle>
-                        </mat-form-field>
-                        <mat-datepicker #appDatepicker2></mat-datepicker>
-                            </div>
-                            <div fxFlex="50"  class="pr-16">
-                              <mat-form-field class="full-width">
-                                <input
-                                matInput
-                                name="description"
-                               
-                                placeholder="commentaire">
-                              </mat-form-field>
-                            </div>
-                </div>
-                <div fxLayout="row wrap" fxLayout.lt-sm="column">
-                    <div fxFlex="50"  class="pr-16">
-                    <button mat-raised-button color="primary">{{ "SAVE" }}</button>
-                    <span fxFlex></span>
-                    <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
-                  </div>
-                
-              </div>
-           
-            </form>
+      <div class="button-container">
+
+        <div>
+          <button class="left-button" mat-icon-button (click)="removeFormItem(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <div>
+          <button type="button"  class="right-button" mat-icon-button (click)="addFormItem()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+      </div>
+
+     
+    </div>
+  </div>
+  <div fxLayout="row wrap" fxLayout.lt-sm="column">
+    <div fxFlex="50" class="pr-16">
+      <button type="submit"  mat-raised-button color="primary" (click)="submit()">Enregistrer</button>
+      <span fxFlex></span>
+      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+    </div>
+  </div>
+</form>

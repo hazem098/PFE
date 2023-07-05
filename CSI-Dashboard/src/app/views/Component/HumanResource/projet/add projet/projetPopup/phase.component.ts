@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
@@ -11,6 +11,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
   })
   export class PhaseComponent implements OnInit {
     public itemForm: FormGroup;
+    public formItems: FormArray;
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialogRef: MatDialogRef<PhaseComponent>,
@@ -21,19 +22,39 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
         
       }
     ngOnInit(): void {
-        this.buildItemForm(this.data.payload)
+      
+        this.buildItemForm()
     }
-    buildItemForm(item){
-   
-        this.itemForm = this.fb.group({
-            name : [item.name || '', Validators.required], 
-            projectNum: this.data.payload
-             });
-        }
+    buildItemForm() {
+      this.itemForm = this.fb.group({
+        formItems: this.fb.array([this.createFormItem()]), // Add initial form item
+      });
+  
+      this.formItems = this.itemForm.get('formItems') as FormArray;
+    }
+  
+    createFormItem(): FormGroup {
+     
+      return this.fb.group({
+        name: [null, Validators.required], 
+        
+      });
+    }
+  
+    addFormItem(): void {
+      const formItem = this.createFormItem();
+      this.formItems.push(formItem);
+    }
+  
+    removeFormItem(index: number): void {
+      this.formItems.removeAt(index);
+    }
+  
     submit() {
-   
-          this.dialogRef.close(this.itemForm.value);
+      const formItemsValue = this.itemForm.get('formItems').value;
+      this.dialogRef.close(formItemsValue);
             console.log(this.data.payload)
+            console.log(this.itemForm.value)
         }
    
   }

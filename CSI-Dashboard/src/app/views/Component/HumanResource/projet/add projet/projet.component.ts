@@ -149,7 +149,7 @@ export class ProjetComponent implements OnInit {
          }
      
           this.loader.open('Ajout en cours');
-          this.crudService.addPhase(res)
+          this.crudService.addPhase(res,projectId)
             .subscribe((data :any)=> {
               this.dataSource = data;
               this.loader.close();
