@@ -14,6 +14,6 @@ public class PhaseRequest {
 
     private String name ;
 
-    private Long projectNum;
+
 
 }

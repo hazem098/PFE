@@ -35,8 +35,13 @@ public class PhaseController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Phase> createPhase(@Valid @RequestBody PhaseRequest phaseRequest) {
-        return new ResponseEntity<>(phaseService.createPhase(phaseRequest), HttpStatus.OK);
+    public ResponseEntity<Phase> createPhase(@Valid @RequestBody PhaseRequest phaseRequest,  @RequestParam Long projectId) {
+        return new ResponseEntity<>(phaseService.createPhase(phaseRequest , projectId), HttpStatus.OK);
+    }
+    @PostMapping("/addphases")
+    public ResponseEntity<List<Phase>> createPhases(@Valid @RequestBody List<PhaseRequest> phaseRequests, @RequestParam Long projectId) {
+        List<Phase> phases = phaseService.createPhases(phaseRequests, projectId);
+        return new ResponseEntity<>(phases, HttpStatus.OK);
     }
 
 }

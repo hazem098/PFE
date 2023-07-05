@@ -41,15 +41,11 @@ public class PhaseService {
 
         return phaseResponse;
     }
-    public Phase createPhase(PhaseRequest request) {
+    public Phase createPhase(PhaseRequest request , Long projectId) {
 
 
 
-        Project project= null ;
-        if (projectRepository.findById(request.getProjectNum()).orElseThrow()!=null) {
-            project = projectRepository.findById(request.getProjectNum()).orElseThrow();
-
-        }
+       Project project = projectRepository.findById(projectId).orElse(null);
         Phase phase = modelMapper.map(request, Phase.class);
 
         project.getPhases().add(phase);
@@ -61,6 +57,25 @@ public class PhaseService {
 
 
         return phaseSaved;
+    }
+    public List<Phase> createPhases(List<PhaseRequest> requests, Long projectId) {
+        List<Phase> phases = new ArrayList<>();
+
+        Project project = projectRepository.findById(projectId).orElse(null);
+        if (project == null) {
+            // Handle the case where the project with the given projectId doesn't exist
+            return phases;
+        }
+
+        for (PhaseRequest request : requests) {
+            Phase phase = modelMapper.map(request, Phase.class);
+            phase.setProject(project);
+
+            Phase phaseSaved = phaseRepository.save(phase);
+            phases.add(phaseSaved);
+        }
+
+        return phases;
     }
 
 }
