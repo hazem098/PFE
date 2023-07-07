@@ -45,7 +45,8 @@ export class ProjetPopupComponent implements OnInit {
   formHeight = 1000; // declare and initialize formHeight property
   selectedResources: number[] = [];
   selectedRowIds: number[] = [];
-
+  form: FormGroup;
+  responsableClients: FormArray;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -94,7 +95,10 @@ export class ProjetPopupComponent implements OnInit {
           this.itemForm.get('endDate').updateValueAndValidity();
         }
       });
- 
+ this.form=this.fb.group({
+  responsableClients:this.fb.array([this.createResponsableClient()])
+ });
+ this.responsableClients = this.form.get('responsableClients') as FormArray;
   }
 
   getRessources(){
@@ -107,17 +111,7 @@ this.isLoading = false;
   ngOnInit() {
     this.getRessources()
     this.displayedColumns=this.getDisplayedColumns()
-    this.Form= new UntypedFormGroup({
-      
-      name : new UntypedFormControl('', [Validators.required]),
-      description: new UntypedFormControl('', []),
-      budget :  new UntypedFormControl('', []),
-      endDate: new UntypedFormControl('', []),
-      startDate: new UntypedFormControl('', []),
-      projectType: new UntypedFormControl('',[]),
-      projectStatus: new UntypedFormControl('',[]),
-      resourceIds:  new UntypedFormControl('' , [])
-    })
+    
     this.getResources()
     this.buildItemForm(this.data.payload)
 this.getChefs()
@@ -126,16 +120,38 @@ this.getNoChefs()
     this.formRessource = this.fb.group({
       value : new FormArray([])
      });
+   
+  
      (this.formRessource.get('value') as FormArray).push(this.fb.group({
       firstName: new UntypedFormControl('', []),
     }));
   }
-
+  createResponsableClient(): FormGroup {
+    return this.fb.group({
+      nom: ['', Validators.required],
+      prénom:['',Validators.required],
+      description:['',Validators.required],
+      adressMail:['',Validators.required],
+      phoneNumber: ['',Validators.required]
+    })}
+      addFormItem(): void {
+        const formItem = this.createResponsableClient();
+        this.responsableClients.push(formItem);
+      }
+      removeFormItem(index: number): void {
+        if (index === 0 && this.responsableClients.length === 1) {
+          return; // Skip removal
+        }
+        this.responsableClients.removeAt(index);
+      }
   /*submit() {
     this.dialogRef.close(this.itemForm.value)
   }*/
   errorMessage : String 
   submit() {
+    if (this.responsableClients.controls.some((control, index) => control.pristine && index !== 0)) {
+      return;
+    }
     const startDateControl = this.itemForm.get('startDate');
     const endDateControl = this.itemForm.get('endDate');
   
@@ -144,9 +160,9 @@ this.getNoChefs()
       this.dialogRef.close(this.itemForm.value);
     } else {
       if (startDateControl.invalid) {
-        this.errorMessage = 'Please select a valid start date.';
+        this.errorMessage = 'selectionner une date valide.';
       } else if (endDateControl.invalid) {
-        this.errorMessage = 'Please select a valid end date.';
+        this.errorMessage = 'selectionner une date valide.';
       } else {
         this.errorMessage = 'Please fill in all required fields and ensure the date is valid.';
       }

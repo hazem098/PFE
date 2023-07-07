@@ -90,6 +90,16 @@
           matInput
           type="number"
           name="budget"
+          
+          placeholder="Nbre total des heures du travail">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          type="number"
+          name="budget"
           [formControlName]="'budget'"
           placeholder="budget">
         </mat-form-field>
@@ -170,18 +180,18 @@
           </ng-template>
           <mat-card-content class="mt-16">
             <mat-card-title class=""> </mat-card-title>
-              <mat-card-content> 
-          
-        
-       
-        <div fxLayout="row wrap" fxLayout.lt-sm="column">
-          <div fxFlex="50"  class="pr-16">
+             
+            
+          <div formArrayName="responsableClients">
+         <div *ngFor="let responsableClient of responsableClients.controls; let i = index" [formGroupName]="i">
+            <div fxLayout="row wrap" fxLayout.lt-sm="column"  >
+            <div fxFlex="50"  class="pr-16">
             
       <mat-form-field class="full-width">
         <input
         matInput
         name="nom"
-       
+       formControlName="nom"
         placeholder="Nom">
       </mat-form-field>
      
@@ -192,7 +202,7 @@
       <input
       matInput
       name="prénom"
-     
+      [formControlName]="'prénom'"
       placeholder="Prénom">
     </mat-form-field>
    
@@ -203,7 +213,7 @@
     <input
     matInput
     name="adresse mail"
-   
+   [formControlName]="'adressMail'"
     placeholder="adresse mail">
   </mat-form-field>
  
@@ -214,8 +224,8 @@
     <input
     matInput
     type="number"
-    name="adresse mail"
-   
+    name="phone"
+   [formControlName]="'phoneNumber'"
     placeholder="téléphone">
   </mat-form-field>
  
@@ -240,8 +250,19 @@
     placeholder="commentaire">
   </mat-form-field>
 </div>
+<div fxFlex="50" class="mt-16">
+  <button type="button" mat-icon-button (click)="addFormItem()"> 
+     <mat-icon>add</mat-icon></button>
+</div>
+<div fxFlex="50" >
+  <button class="left-button" mat-icon-button (click)="removeFormItem(i)">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>
   </div>
-          </mat-card-content>
+        </div>
+      </div>
+         
           </mat-card-content>
          
           </mat-tab>

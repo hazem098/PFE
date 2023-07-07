@@ -45,12 +45,23 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
       const formItem = this.createFormItem();
       this.formItems.push(formItem);
     }
-  
+    
     removeFormItem(index: number): void {
+      if (index === 0 && this.formItems.length === 1) {
+    return; // Skip removal
+  }
       this.formItems.removeAt(index);
     }
-  
+    
     submit() {
+      if (this.itemForm.invalid) {
+        return;
+      }
+    
+      // Check if a form item is being deleted
+      if (this.formItems.controls.some((control, index) => control.pristine && index !== 0)) {
+        return;
+      }
       const formItemsValue = this.itemForm.get('formItems').value;
       this.dialogRef.close(formItemsValue);
             console.log(this.data.payload)

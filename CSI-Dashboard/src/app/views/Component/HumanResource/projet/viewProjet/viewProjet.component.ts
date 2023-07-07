@@ -83,7 +83,8 @@ import { DatePipe } from "@angular/common";
       async  openPopUp(data: any, isNew?) {
         let title = isNew ? 'Nouveau projet' : 'Modifier projet';
         let dialogRef: MatDialogRef<any> = this.dialog.open(AffectationComponent, {
-          width: '400px',
+          width: '500px',
+          height:'100px',
           disableClose: true,
           data: { title: title, payload: data, isNew: isNew }
         });
