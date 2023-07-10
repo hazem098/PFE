@@ -5,12 +5,12 @@
     <div *ngFor="let formItem of formItems.controls; let i = index" [formGroupName]="i">
       <div fxLayout="row wrap" fxLayout.lt-sm="column">
         <div fxFlex="50" class="pr-16">
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="outline" [style.width.cm]=10>
             <input matInput [formControlName]="'name'" name="name" placeholder="Nom du phase" type="text">
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-16">
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="outline" [style.width.cm]=10>
             <mat-label>Date début</mat-label>
             <input matInput name="startDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
             <mat-datepicker-toggle matSuffix [for]="appDatepicker1"></mat-datepicker-toggle>
@@ -18,7 +18,7 @@
           <mat-datepicker #appDatepicker1></mat-datepicker>
         </div>
         <div fxFlex="50" class="pr-16">
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="outline" [style.width.cm]=10>
             <mat-label>Date fin</mat-label>
             <input matInput name="endDate" placeholder="Date fin" [matDatepicker]="appDatepicker2" />
             <mat-datepicker-toggle matSuffix [for]="appDatepicker2"></mat-datepicker-toggle>
@@ -26,7 +26,7 @@
           <mat-datepicker #appDatepicker2></mat-datepicker>
         </div>
         <div fxFlex="50" class="pr-16">
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="outline" [style.width.cm]=10>
             <input matInput name="description" placeholder="Commentaire">
           </mat-form-field>
         </div>

@@ -11,7 +11,7 @@
       </div>
       <div *ngIf="itemForm.get('status').value === 'option1'" fxFlex="50" class="pr-16">
       
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <mat-label>Phase</mat-label>
           <mat-select [formControlName]="'phaseNum'" >
             <mat-option *ngFor="let res of phases" [value]="res.id">{{res.name}}</mat-option>
@@ -20,7 +20,7 @@
     </div>
       <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50" class="pr-16">
       
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="outline" [style.width.cm]=10>
             <mat-label>Tache</mat-label>
             <mat-select [formControlName]="'taskNum'" >
               <mat-option *ngFor="let task of dataSource" [value]="task.id">{{task.title}}</mat-option>
@@ -29,7 +29,7 @@
       </div>
       <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50" class="pr-16">
       
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <mat-label>Resources</mat-label>
           <mat-select [formControlName]="'resourceNum'">
             <mat-option *ngFor="let res of resources" [value]="res.id">{{res.lastName}}</mat-option>
@@ -37,7 +37,7 @@
         </mat-form-field>
     </div>
     <div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
+      <mat-form-field appearance="outline" [style.width.cm]=10>
         <input
         matInput
         name="title"
@@ -47,7 +47,7 @@
       </mat-form-field>
     </div>
     <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <input
           matInput
           name="title"
@@ -58,7 +58,7 @@
       </div>
  
     <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
      
         <mat-label>Date  début</mat-label>
         <input matInput name="startDate" formControlName="startDate" [min]="projectStartDate" [max]="projectEndDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
@@ -68,7 +68,7 @@
       <mat-datepicker #appDatepicker1></mat-datepicker>
     </div>
     <div fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
+      <mat-form-field appearance="outline" [style.width.cm]=10>
         <mat-label>Date fin</mat-label>
         <input matInput name="endDate" formControlName="endDate"   [min]="projectStartDate" [max]="projectEndDate" placeholder="Date fin" [matDatepicker]="endDatePicker" />
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
@@ -81,7 +81,7 @@
     </div>
          
         <div fxFlex="50"  class="pr-16">
-            <mat-form-field class="full-width">
+            <mat-form-field appearance="outline" [style.width.cm]=10>
               <mat-label>status du tache</mat-label>
               <mat-select  [formControlName]="'taskPhase'">
                   <mat-option *ngFor="let x of taskPhase" [value]="x">{{ x }}</mat-option>
@@ -89,7 +89,17 @@
             </mat-form-field>
           </div>
           <div fxFlex="50"  class="pr-16">
-            <mat-form-field class="full-width">
+            <mat-form-field appearance="outline" [style.width.cm]=10>
+              <input
+              matInput
+              name="temps passé"
+              type="number"
+              
+              placeholder="temps passé">
+            </mat-form-field>
+          </div>
+          <div fxFlex="50"  class="pr-16">
+            <mat-form-field appearance="outline" [style.width.cm]=10>
               <input
               matInput
               name="progression"
@@ -100,7 +110,7 @@
           </div>
           <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50" class="pr-16">
       
-            <mat-form-field class="full-width">
+            <mat-form-field appearance="outline" [style.width.cm]=10>
               <input
               matInput
               type="number"
@@ -110,7 +120,7 @@
             </mat-form-field>
         </div>
           <div fxFlex="50"  class="pr-16">
-            <mat-form-field class="full-width">
+            <mat-form-field appearance="outline" [style.width.cm]=10>
               <input
               matInput
               name="description"

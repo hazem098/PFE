@@ -99,8 +99,8 @@ export class ProjetComponent implements OnInit {
   openPopUp(data:  any , isNew?) {
     let title = isNew ? 'Nouveau projet' : 'Modifier projet';
     let dialogRef: MatDialogRef<any> = this.dialog.open(ProjetPopupComponent, {
-      width: '800px',
-      height:'600px',
+      width: '920px',
+      height:'650px',
       disableClose: true,
       data: { title: title, payload: data , isNew: isNew }
     })
@@ -135,8 +135,8 @@ export class ProjetComponent implements OnInit {
   openPopUp2(projectId: number , isNew?) {
     let title = isNew ? 'Nouvelle Phase' : 'Ajouter phase';
     let dialogRef: MatDialogRef<any> = this.dialog.open(PhaseComponent, {
-      width: '500px',
-      height:'300px',
+      width: '900px',
+      height:'400px',
       disableClose: true,
       data: { title: title, payload: projectId , isNew: isNew }
     })

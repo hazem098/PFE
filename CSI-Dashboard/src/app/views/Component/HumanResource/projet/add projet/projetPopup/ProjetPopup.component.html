@@ -15,7 +15,7 @@
             <mat-card-content> 
         <div fxLayout="row wrap" fxLayout.lt-sm="column">
         <div fxFlex="50"  class="pr-16">
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="outline" [style.width.cm]=10>
             <mat-label>Type du projet</mat-label>
             <mat-select  [formControlName]="'projectType'">
                 <mat-option *ngFor="let x of ProjectType" [value]="x">{{ x }}</mat-option>
@@ -24,7 +24,7 @@
         </div>
        
         <div fxFlex="50"  class="pr-16">
-          <mat-form-field class="full-width">
+          <mat-form-field appearance="outline" [style.width.cm]=10>
             <input
             matInput
             name="projectReference"
@@ -35,7 +35,7 @@
         </div>
 
       <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
        
           <mat-label>Date  début</mat-label>
           <input matInput name="startDate" formControlName="startDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
@@ -44,7 +44,7 @@
         <mat-datepicker #appDatepicker1></mat-datepicker>
       </div>
       <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <mat-label>Date fin</mat-label>
           <input matInput name="endDate" formControlName="endDate"  placeholder="Date fin" [matDatepicker]="endDatePicker" />
           <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
@@ -55,7 +55,7 @@
         </mat-error>
       </div>
       <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <input
           matInput
           name="projectReference"
@@ -65,7 +65,7 @@
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <input
           matInput
           type="text"
@@ -75,7 +75,7 @@
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <input
           matInput
           type="number"
@@ -85,7 +85,7 @@
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <input
           matInput
           type="number"
@@ -95,7 +95,7 @@
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <input
           matInput
           type="number"
@@ -105,7 +105,7 @@
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <mat-label>Devise</mat-label>
           <mat-select>
           <mat-option *ngFor="let x of devise" [value]="x">{{ x }}</mat-option>
@@ -113,7 +113,7 @@
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
+        <mat-form-field appearance="outline" [style.width.cm]=10>
           <input
           matInput
           name="description"
@@ -124,7 +124,7 @@
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   
     <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
-      <mat-form-field class="full-width">
+      <mat-form-field appearance="outline" [style.width.cm]=10>
         <mat-label>Date réelle de début du projet</mat-label>
         <input matInput name="realStartDate" formControlName="realStartDate"  placeholder="realStartDate" [matDatepicker]="endDatePicker" />
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
@@ -135,7 +135,7 @@
       </mat-error>
     </div>
     <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
-      <mat-form-field class="full-width">
+      <mat-form-field appearance="outline" [style.width.cm]=10>
         <mat-label>Date réelle de fin du projet</mat-label>
         <input matInput name="realEndDate" formControlName="realEndDate"  placeholder="realEndDate" [matDatepicker]="endDatePicker" />
         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
@@ -146,7 +146,7 @@
       </mat-error>
     </div>
     <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
-      <mat-form-field class="full-width">
+      <mat-form-field appearance="outline" [style.width.cm]=10>
         <input
         matInput
         name="projectStatus"
@@ -157,7 +157,7 @@
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   
   <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
-    <mat-form-field class="full-width">
+    <mat-form-field appearance="outline" [style.width.cm]=10>
       <mat-label>Date de suspension</mat-label>
       <input matInput name="suspensionDate" formControlName="suspensionDate"  placeholder="realEndDate" [matDatepicker]="endDatePicker" />
       <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
@@ -182,12 +182,12 @@
             <mat-card-title class=""> </mat-card-title>
              
             
-          <div formArrayName="responsableClients">
-         <div *ngFor="let responsableClient of responsableClients.controls; let i = index" [formGroupName]="i">
-            <div fxLayout="row wrap" fxLayout.lt-sm="column"  >
+          <div formArrayName="responsables">
+         <div *ngFor="let responsableClient of itemForm.get('responsables')?.controls; let i = index" [formGroupName]="i">
+            <div fxLayout="row wrap" >
             <div fxFlex="50"  class="pr-16">
             
-      <mat-form-field class="full-width">
+      <mat-form-field appearance="outline" [style.width.cm]=10>
         <input
         matInput
         name="nom"
@@ -198,41 +198,30 @@
   </div>
   <div fxFlex="50"  class="pr-16">
             
-    <mat-form-field class="full-width">
+    <mat-form-field appearance="outline" [style.width.cm]=10>
       <input
       matInput
       name="prénom"
-      [formControlName]="'prénom'"
+      formControlName="prénom"
       placeholder="Prénom">
     </mat-form-field>
    
 </div>
 <div fxFlex="50"  class="pr-16">
             
-  <mat-form-field class="full-width">
+  <mat-form-field appearance="outline" [style.width.cm]=10>
     <input
     matInput
-    name="adresse mail"
-   [formControlName]="'adressMail'"
-    placeholder="adresse mail">
+    name="prénom"
+    formControlName="phoneNumber"
+    placeholder="numéro du telephone">
   </mat-form-field>
  
 </div>
-<div fxFlex="50"  class="pr-16">
-            
-  <mat-form-field class="full-width">
-    <input
-    matInput
-    type="number"
-    name="phone"
-   [formControlName]="'phoneNumber'"
-    placeholder="téléphone">
-  </mat-form-field>
- 
-</div>
+
       
 <div fxFlex="50"  class="pr-16">
-  <mat-form-field class="full-width">
+  <mat-form-field appearance="outline" [style.width.cm]=10>
     <mat-label>Fonction</mat-label>
     <mat-select>
       <mat-option  *ngFor="let x of fonction" [value]="x" >{{x}}</mat-option>
@@ -241,23 +230,21 @@
   </mat-form-field>
  
 </div>
-<div fxFlex="50"  class="pr-16">
-  <mat-form-field class="full-width">
-    <input
-    matInput
-    name="description"
-    [formControlName]="'description'"
-    placeholder="commentaire">
-  </mat-form-field>
-</div>
-<div fxFlex="50" class="mt-16">
-  <button type="button" mat-icon-button (click)="addFormItem()"> 
-     <mat-icon>add</mat-icon></button>
-</div>
-<div fxFlex="50" >
-  <button class="left-button" mat-icon-button (click)="removeFormItem(i)">
-    <mat-icon>delete</mat-icon>
-  </button>
+
+<div class="button-container">
+
+  <div>
+    <button class="left-button" mat-icon-button (click)="removeHolidayFormGroup(i)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <div>
+    <button class="right-button" type="button" mat-icon-button (click)="addHolidayFormGroup(i)">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
 </div>
   </div>
         </div>
@@ -286,7 +273,7 @@
                     <mat-checkbox (change)="toggleSelection($event, row)" [checked]="selection.isSelected(row)"></mat-checkbox>
                   </td>
                 </ng-container>
-        
+                
                 <!-- Nom Column -->
                 <ng-container matColumnDef="Nom" style="width:200px">
                   <th mat-header-cell *matHeaderCellDef> Nom </th>
@@ -317,7 +304,7 @@
          
          </mat-card>
          <div fxFlex="100" class="mt-16">
-          <button mat-raised-button color="primary">{{ "SAVE" }}</button>
+          <button type="submit" mat-raised-button color="primary">{{ "SAVE" }}</button>
           <span fxFlex></span>
           <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
         </div>
