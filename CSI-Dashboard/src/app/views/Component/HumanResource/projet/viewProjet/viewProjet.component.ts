@@ -38,8 +38,8 @@ import { DatePipe } from "@angular/common";
     public dataSource: MatTableDataSource<Employee>;
     public displayedColumns: any;
     public getItemSub: Subscription;
-    
-  
+    public Responsables : any[];
+    public dataSource2 : MatTableDataSource<any>
   
     constructor(
       private router : ActivatedRoute,
@@ -48,15 +48,21 @@ import { DatePipe } from "@angular/common";
       private loader : AppLoaderService,
       private crudService: ProjetService,
       private resourceService: ResourceService,
-      private datePipe: DatePipe
+      private datePipe: DatePipe,
      
-    ) {this.dataSource = new MatTableDataSource<Employee>([]); }
+    ) {this.dataSource = new MatTableDataSource<Employee>([]); 
+      this.dataSource2= new MatTableDataSource<any>([])
+
+    }
   
     ngOnInit() {
+     
         this.id = this.router.snapshot.params['id'];
       this.getItem()
+     
       this.displayedColumns = this.getDisplayedColumns();
-      this.getRessources()
+      this.getRessources();
+      this.getResp();
     }
     getDisplayedColumns() {
         return ['Reference','Titre' , 'Date début' ];
@@ -71,6 +77,11 @@ import { DatePipe } from "@angular/common";
     this.dataSource=data
         })
     }
+    getResp(){
+      this.crudService.getResp(this.id).subscribe((data:any) =>{
+  this.dataSource2=data
+      })
+  }
     TitleMap = {
         [Title.CRM]:'CRM',
         [Title.PROJECT_MANAGER]:'Chef du projet',

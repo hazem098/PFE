@@ -76,6 +76,7 @@ import { ModifTaskComponent } from "./add projet/modifTaskPopup/modifTask.compon
     MatTabsModule,
     MatRadioModule,
     MatProgressSpinnerModule,
+    
     RouterModule.forChild(ProjetRoutes),
   ],
   declarations: [ ProjetComponent , ProjetPopupComponent, ViewProjetComponent, AffectationComponent, KanbanBoardComponent, TaskPopupComponent, PhaseComponent, TaskViewComponent, ModifTaskComponent],

@@ -9,6 +9,7 @@ endDate?: Date ;
 type?: string
 projectStatus?: ProjectStatus
 projectType?: ProjectType
+responsables?:any[]
 }
 
 export enum ProjectStatus{

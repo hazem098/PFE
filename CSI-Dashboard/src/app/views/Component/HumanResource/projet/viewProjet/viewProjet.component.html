@@ -32,15 +32,74 @@
             </div>
             </mat-card-content>
             </mat-card>
-            
-            <div class="m-12">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon Orders
+                  color="primary">person</mat-icon>
+                  <h6 class="text-18 mb-4"> <strong> liste des responsables </strong></h6>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="m-12">
 
 
                 <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)="openPopUp({},true)"> Affecter ressource </button>
+          <mat-card  style="border: 5px; "  >
+            <mat-card-content class="p-0">
+              <mat-table [dataSource]="dataSource2" matSort  >
+                <ng-container matColumnDef="Reference">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nom
+                      <div style="padding-left: 20px;">
+                        
+                       </div>
+                     </mat-header-cell>
+                    <mat-cell *matCellDef="let row"  [style.color]="row.color">{{row.lastName}} </mat-cell>
+                  </ng-container>
+            <ng-container matColumnDef="Titre">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Prenom
+                <div style="padding-left: 20px;">
+                 
+                 </div> </mat-header-cell>
+              <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.firstName}} </mat-cell>
+            </ng-container>
+          
+            
+          
+            <ng-container matColumnDef="Date début">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Fonction
+                  <div style="padding-left: 20px;">
+                    
+                   </div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color">{{row.function}}</mat-cell>
+              </ng-container>
+               
+            
+             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+           </mat-table>
+           <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+          
+          </mat-card-content>
+          </mat-card>
+        </div>
+              </mat-expansion-panel>
+           
               
                 
-               
-              
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <mat-icon Orders
+                      color="primary"> person</mat-icon>
+                      <h6 class="text-18 mb-4"> <strong> liste des ressource </strong></h6>
+                    </mat-panel-title>
+
+                  </mat-expansion-panel-header>
+                  <div class="m-12">
+
+
+                    <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)="openPopUp({},true)"> Affecter ressource </button>
               <mat-card  style="border: 5px; "  >
                 <mat-card-content class="p-0">
                   <mat-table [dataSource]="dataSource" matSort  >
@@ -79,5 +138,8 @@
               
               </mat-card-content>
               </mat-card>
-              </div>
+            </div>
+              </mat-expansion-panel>
+            
+              
          

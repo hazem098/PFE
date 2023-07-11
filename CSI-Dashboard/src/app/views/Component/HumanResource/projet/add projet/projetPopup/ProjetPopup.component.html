@@ -13,7 +13,7 @@
         <mat-card-content class="mt-16">
           <mat-card-title class=""> </mat-card-title>
             <mat-card-content> 
-        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxLayout="row wrap">
         <div fxFlex="50"  class="pr-16">
           <mat-form-field appearance="outline" [style.width.cm]=10>
             <mat-label>Type du projet</mat-label>
@@ -101,13 +101,15 @@
           type="number"
           name="budget"
           [formControlName]="'budget'"
-          placeholder="budget">
+          placeholder="budget"
+          
+          >
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
           <mat-label>Devise</mat-label>
-          <mat-select>
+          <mat-select [formControlName]="'devise'" >
           <mat-option *ngFor="let x of devise" [value]="x">{{ x }}</mat-option>
         </mat-select>
         </mat-form-field>
@@ -191,7 +193,7 @@
         <input
         matInput
         name="nom"
-       formControlName="nom"
+       formControlName="firstName"
         placeholder="Nom">
       </mat-form-field>
      
@@ -202,7 +204,7 @@
       <input
       matInput
       name="prénom"
-      formControlName="prénom"
+      formControlName="lastName"
       placeholder="Prénom">
     </mat-form-field>
    
@@ -212,9 +214,20 @@
   <mat-form-field appearance="outline" [style.width.cm]=10>
     <input
     matInput
-    name="prénom"
+    name="phone"
     formControlName="phoneNumber"
     placeholder="numéro du telephone">
+  </mat-form-field>
+ 
+</div>
+<div fxFlex="50"  class="pr-16">
+            
+  <mat-form-field appearance="outline" [style.width.cm]=10>
+    <input
+    matInput
+    name="addressMail"
+    formControlName="addressMail"
+    placeholder="mail">
   </mat-form-field>
  
 </div>
@@ -223,29 +236,37 @@
 <div fxFlex="50"  class="pr-16">
   <mat-form-field appearance="outline" [style.width.cm]=10>
     <mat-label>Fonction</mat-label>
-    <mat-select>
-      <mat-option  *ngFor="let x of fonction" [value]="x" >{{x}}</mat-option>
+    <mat-select formControlName="function">
+      <mat-option  *ngFor="let x of fonction" [value]="x">{{x}}</mat-option>
     </mat-select>
-   
+     </mat-form-field>
+ </div>
+ <div fxFlex="50"  class="pr-16">
+            
+  <mat-form-field appearance="outline" [style.width.cm]=10>
+    <input
+    matInput
+    name="commentaire"
+    
+    placeholder="commentaire">
   </mat-form-field>
  
 </div>
 
-<div class="button-container">
-
-  <div>
-    <button class="left-button" mat-icon-button (click)="removeHolidayFormGroup(i)">
+<!--div class="button-container"-->
+ <div fxFlex="50" class="pr-16">
+    <button class="left-button"  mat-icon-button (click)="removeHolidayFormGroup(i)">
       <mat-icon>delete</mat-icon>
     </button>
   </div>
 
-  <div>
-    <button class="right-button" type="button" mat-icon-button (click)="addHolidayFormGroup(i)">
+  <div fxFlex="50" class="pr-16">
+    <button class="right-button"  mat-icon-button (click)="addHolidayFormGroup(i)">
       <mat-icon>add</mat-icon>
     </button>
   </div>
 
-</div>
+<!--/div-->
   </div>
         </div>
       </div>
@@ -291,7 +312,10 @@
                   <th mat-header-cell *matHeaderCellDef> Poste </th>
                   <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
                 </ng-container>
-                
+                <ng-container matColumnDef="Disponibilité"  style="width:200px">
+                  <th mat-header-cell *matHeaderCellDef> Disponibilité </th>
+                  <td mat-cell *matCellDef="let element"> disponible </td>
+                </ng-container>
                 <!-- Header and Row Definitions -->
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>

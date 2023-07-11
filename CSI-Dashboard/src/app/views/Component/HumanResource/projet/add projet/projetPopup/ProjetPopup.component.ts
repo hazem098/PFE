@@ -67,7 +67,7 @@ export class ProjetPopupComponent implements OnInit {
   }
   
   getDisplayedColumns() {
-    return ['select', 'Nom' , 'Prénom' , 'Poste' ];
+    return ['select', 'Nom' , 'Prénom' , 'Poste' , 'Disponibilité' ];
   }
 
   buildItemForm(item){
@@ -88,6 +88,7 @@ export class ProjetPopupComponent implements OnInit {
       realEndDate:[item.realEndDate||'',Validators.required],
       lieuDuProjet:[item.lieuDuProjet|| ''],
       workingHourNumber:[item.workingHourNumber||''],
+      devise:[item.devise||''],
       responsables : this.fb.array([])  
       
        },);
@@ -98,17 +99,21 @@ if (item.responsables && item.responsables.length > 0) {
       item.responsables.forEach((responsable) => {
         responsableFormArray.push(this.fb.group({
           id: [responsable.id || ''],
-          name: [responsable.name || '', Validators.required],
-          phoneNumber:[responsable.phoneNumber],
-          lastName: [responsable.lastName || ''],
+          firstName: [responsable.firstName || '', Validators.required],
+          lastName:[responsable.lastName||''],
+          addressMail: [responsable.addressMail || ''],
+          phoneNumber:[responsable.phoneNumber||''],
+         
           function : [responsable.function||'']
         }));
       });
     } else {
       responsableFormArray.push(this.fb.group({
         id: [''],
-        nom: ['', Validators.required],
-        prénom: [''],
+        firstName: ['', Validators.required],
+        lastName: [''],
+        addressMail:[''],
+        phoneNumber:[''],
         function:[''],
 
       }));
@@ -143,7 +148,8 @@ if (item.responsables && item.responsables.length > 0) {
         this.displayedColumns=this.getDisplayedColumns()
         
         this.getResources()
-        
+        this.itemForm.get('budget').disable();
+        this.itemForm.get('devise').disable();
     //this.getChefs()
     this.getNoChefs()
     
@@ -280,8 +286,9 @@ addHolidayFormGroup(): void {
         
         const holidayarticleFormGroup = this.responsableFb.group({
           id: [''],
-          nom: ['', Validators.required],
-          prénom: ['', Validators.required],
+          firstName: ['', Validators.required],
+          lastName: ['', Validators.required],
+          addressMail:[''],
           phoneNumber:[''],
           function:['']
          

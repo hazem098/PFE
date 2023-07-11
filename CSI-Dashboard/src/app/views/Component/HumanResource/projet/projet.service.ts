@@ -90,6 +90,10 @@ export class ProjetService {
     const url = `${this.apiUrl+ '/getResources'}/${id}`;
     return this.http.get<any>(url).pipe();
   }
+  getResp(id: number): Observable<any[]> {
+    const url = `${this.apiUrl+ '/getResp'}/${id}`;
+    return this.http.get<any>(url).pipe();
+  }
   addResourceToProject(projectId: number, resourceIds: number[]) {
     const url = `${this.apiUrl}/${projectId}/resources`;
     return this.http.post(url, resourceIds);

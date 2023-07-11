@@ -43,7 +43,7 @@ import { Employee } from "app/shared/models/Employee";
           endDate : [item.endDate || '', Validators.required],
             estimation : [item.estimation || Validators.required],
             reamaining : [item.remaining],
-          taskPhase:[item.taskPhase|| '', Validators.required],
+          taskPhase:['A_FAIRE'],
           progression:[item.progression||''],
           projectNum:[this.data.projectId],
           status :[item.status],
