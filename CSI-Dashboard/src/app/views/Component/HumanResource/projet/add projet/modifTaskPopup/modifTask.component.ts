@@ -41,6 +41,8 @@ import { Employee } from "app/shared/models/Employee";
          
           startDate: [item.startDate ||'', Validators.required, ],
           endDate : [item.endDate || '', Validators.required],
+          realStartDate:[item.realStartDate||''],
+          realEndDate:[item.realEndDate],
             estimation : [item.estimation || Validators.required],
             remaining : [item.remaining],
           taskPhase:[item.taskPhase|| '', Validators.required],
@@ -49,7 +51,7 @@ import { Employee } from "app/shared/models/Employee";
           status :[item.status],
           resourceNum : [this.data.payload.resource.id],
           taskNum:[this.data.payload.task.id],
-          reference:[item.reference]
+          subTaskReference:[item.subTaskReference]
            });
           
           }

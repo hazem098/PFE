@@ -86,12 +86,12 @@
       <mat-card-content class="p-0">
         <mat-table [dataSource]="dataSource" matSort  >
           <ng-container matColumnDef="Titre">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Titre
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Reference
                 <div style="padding-left: 20px;">
                   
                  </div>
                </mat-header-cell>
-              <mat-cell *matCellDef="let row"  [style.color]="row.color">{{row.title}} </mat-cell>
+              <mat-cell *matCellDef="let row"  [style.color]="row.color">{{row.subTaskReference}} </mat-cell>
            
             </ng-container>
             

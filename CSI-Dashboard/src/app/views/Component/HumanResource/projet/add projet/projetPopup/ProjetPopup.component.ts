@@ -86,9 +86,10 @@ export class ProjetPopupComponent implements OnInit {
       responsableNum:[item.responsableNum|| '',Validators.required],
       realStartDate:[item.realStartDate||'',Validators.required],
       realEndDate:[item.realEndDate||'',Validators.required],
-      lieuDuProjet:[item.lieuDuProjet|| ''],
+      lieu:[item.lieu|| ''],
       workingHourNumber:[item.workingHourNumber||''],
       devise:[item.devise||''],
+      commande : [item.commande||''],
       responsables : this.fb.array([])  
       
        },);
@@ -284,7 +285,7 @@ createRepeatForm(): FormGroup {
 addHolidayFormGroup(): void {
         const holidaysFormArray = this.itemForm.get('responsables') as FormArray;
         
-        const holidayarticleFormGroup = this.responsableFb.group({
+        const holidayarticleFormGroup = this._formBuilder.group({
           id: [''],
           firstName: ['', Validators.required],
           lastName: ['', Validators.required],

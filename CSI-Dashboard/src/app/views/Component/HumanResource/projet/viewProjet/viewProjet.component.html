@@ -12,6 +12,7 @@
                 <div class="main-title"> <strong>Reference:</strong>{{ projet.projectReference }}</div>
                 <div class="subtitle mb-8"><strong>Titre:</strong> {{ projet.name }}</div>
                 <div class="subtitle mb-8"><strong>Description: </strong>  {{ projet.description }}</div>
+               
                 </div>
                 </mat-card-content>
                 </mat-card>
@@ -21,10 +22,12 @@
                     <mat-card-content>
               
                     <div class="profile-title text-center mb-16">
-                      <div class="main-title"> <strong>Budget:</strong>{{ projet.budget }}</div>
+                      <div class="main-title"> <strong>Lieu:</strong>{{ projet.lieu }}</div>
                       <div class="subtitle mb-8"><strong>Date du début:</strong> {{ projet.startDate  | date:'dd-MM-yyyy' }}</div>
                       <div class="subtitle mb-8"><strong>Date du fin: </strong>  {{ projet.endDate | date:'dd-MM-yyyy' }}</div>
-                      </div>
+                      <div class="subtitle mb-8"><strong>Date réelle de debut: </strong> </div>
+                      <div class="subtitle mb-8"><strong>Date réelle de fin: </strong> </div> 
+                    </div>
                       </mat-card-content>
                       </mat-card>
             </div>

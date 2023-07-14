@@ -20,9 +20,11 @@
             <mat-card-content class="pt-0">
              <mat-list>
               <mat-list-item><strong>Titre &nbsp;: &nbsp;</strong>{{task.title}}</mat-list-item>
-              <mat-list-item><strong>Date de début &nbsp;:&nbsp; </strong> {{task.startDate| date:'dd-MM-yyyy'}}</mat-list-item>
-              <mat-list-item><strong>Date de fin &nbsp;:&nbsp; </strong>{{task.endDate| date:'dd-MM-yyyy'}}</mat-list-item>
+              <mat-list-item><strong>Reference &nbsp;:&nbsp; </strong> {{task.subTaskReference}}</mat-list-item>
               <mat-list-item><strong>Affectée a &nbsp;:&nbsp; </strong> {{task.resource.lastName}}</mat-list-item>
+              
+              <mat-list-item><strong>Date réelle de début &nbsp;:&nbsp; </strong> {{task.realStartDate| date:'dd-MM-yyyy'}}</mat-list-item>
+              <mat-list-item><strong>Date réelle de fin &nbsp;:&nbsp; </strong>{{task.realEndDate| date:'dd-MM-yyyy'}}</mat-list-item>
             </mat-list>
           </mat-card-content>
         </mat-card>

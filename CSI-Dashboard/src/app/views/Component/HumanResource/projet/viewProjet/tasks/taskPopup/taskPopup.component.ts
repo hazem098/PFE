@@ -42,7 +42,7 @@ import { Employee } from "app/shared/models/Employee";
           startDate: [item.startDate ||'', Validators.required, ],
           endDate : [item.endDate || '', Validators.required],
             estimation : [item.estimation || Validators.required],
-            reamaining : [item.remaining],
+            remaining : [item.remaining],
           taskPhase:['A_FAIRE'],
           progression:[item.progression||''],
           projectNum:[this.data.projectId],
@@ -50,7 +50,8 @@ import { Employee } from "app/shared/models/Employee";
           resourceNum : [item.resourceNum],
           phaseNum : [item.phaseNum],
           taskNum:[item.taskNum],
-          reference:[item.reference]
+          reference:[item.reference],
+          subTaskReference:[item.subTaskReference]
            });
           
           }

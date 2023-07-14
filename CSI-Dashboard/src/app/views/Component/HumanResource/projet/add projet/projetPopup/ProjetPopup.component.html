@@ -1,10 +1,17 @@
-<h1 matDialogTitle>{{data.title}}</h1>
+<mat-toolbar matDialogTitle class="mat-primary m-0">
+  <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+    <span class="title dialog-title">{{data.title}}</span>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
 
   
 <form [formGroup]="itemForm" (ngSubmit)="submit()" >
-   
+ 
     <mat-tab-group>
-      
+    
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon class="example-tab-icon">info</mat-icon>
@@ -25,6 +32,7 @@
        
         <div fxFlex="50"  class="pr-16">
           <mat-form-field appearance="outline" [style.width.cm]=10>
+            <mat-label>Titre</mat-label>
             <input
             matInput
             name="projectReference"
@@ -56,46 +64,51 @@
       </div>
       <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
+          <mat-label>Reference de la commande</mat-label>
           <input
           matInput
-          name="projectReference"
+          name="commande"
           type="text"
-          
+          [formControlName]="'commande'"
           placeholder="Reference de la commande">
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
+          <mat-label>Lieu</mat-label>
           <input
           matInput
           type="text"
-          name="budget"
-          [formControlName]="'lieuDuProjet'"
+          name="lieu"
+          [formControlName]="'lieu'"
           placeholder="Lieu du projet">
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
+          <mat-label>Nbre d'heures du travail par jours</mat-label>
           <input
           matInput
           type="number"
           name="budget"
-          [formControlName]="' workingHourNumber'"
+          [formControlName]="'workingHourNumber'"
           placeholder="Nbre d'heures du travail par jours">
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
+          <mat-label>Nbre total des heures du travail </mat-label>
           <input
           matInput
           type="number"
-          name="budget"
+          name="nbr"
           
           placeholder="Nbre total des heures du travail">
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
+          <mat-label>budget</mat-label>
           <input
           matInput
           type="number"
@@ -106,16 +119,10 @@
           >
         </mat-form-field>
       </div>
+     
       <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
-          <mat-label>Devise</mat-label>
-          <mat-select [formControlName]="'devise'" >
-          <mat-option *ngFor="let x of devise" [value]="x">{{ x }}</mat-option>
-        </mat-select>
-        </mat-form-field>
-      </div>
-      <div fxFlex="50"  class="pr-16">
-        <mat-form-field appearance="outline" [style.width.cm]=10>
+          <mat-label>commentaire</mat-label>
           <input
           matInput
           name="description"
@@ -149,6 +156,7 @@
     </div>
     <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
       <mat-form-field appearance="outline" [style.width.cm]=10>
+        <mat-label>Etat du projet</mat-label>
         <input
         matInput
         name="projectStatus"
@@ -190,6 +198,7 @@
             <div fxFlex="50"  class="pr-16">
             
       <mat-form-field appearance="outline" [style.width.cm]=10>
+        <mat-label>Nom</mat-label>
         <input
         matInput
         name="nom"
@@ -201,6 +210,7 @@
   <div fxFlex="50"  class="pr-16">
             
     <mat-form-field appearance="outline" [style.width.cm]=10>
+      <mat-label>prénom</mat-label>
       <input
       matInput
       name="prénom"
@@ -212,6 +222,7 @@
 <div fxFlex="50"  class="pr-16">
             
   <mat-form-field appearance="outline" [style.width.cm]=10>
+    <mat-label>numéro du telephone</mat-label>
     <input
     matInput
     name="phone"
@@ -223,6 +234,7 @@
 <div fxFlex="50"  class="pr-16">
             
   <mat-form-field appearance="outline" [style.width.cm]=10>
+    <mat-label>numéro du telephone </mat-label>
     <input
     matInput
     name="addressMail"
@@ -244,6 +256,7 @@
  <div fxFlex="50"  class="pr-16">
             
   <mat-form-field appearance="outline" [style.width.cm]=10>
+    <mat-label>commentaire</mat-label>
     <input
     matInput
     name="commentaire"
@@ -261,7 +274,7 @@
   </div>
 
   <div fxFlex="50" class="pr-16">
-    <button class="right-button"  mat-icon-button (click)="addHolidayFormGroup(i)">
+    <button class="right-button" type="button" mat-icon-button (click)="addHolidayFormGroup(i)">
       <mat-icon>add</mat-icon>
     </button>
   </div>

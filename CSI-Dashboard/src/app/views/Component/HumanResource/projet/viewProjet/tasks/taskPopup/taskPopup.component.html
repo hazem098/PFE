@@ -36,8 +36,9 @@
           </mat-select>
         </mat-form-field>
     </div>
-    <div fxFlex="50"  class="pr-16">
+    <div *ngIf="itemForm.get('status').value === 'option1'" fxFlex="50"  class="pr-16">
       <mat-form-field appearance="outline" [style.width.cm]=10>
+        <mat-label>Reference</mat-label>
         <input
         matInput
         name="title"
@@ -46,8 +47,20 @@
         placeholder="Reference">
       </mat-form-field>
     </div>
+    <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50"  class="pr-16">
+      <mat-form-field appearance="outline" [style.width.cm]=10>
+        <mat-label>Reference</mat-label>
+        <input
+        matInput
+        name="title"
+        type="text"
+        [formControlName]="'subTaskReference'"
+        placeholder="Reference">
+      </mat-form-field>
+    </div>
     <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
+          <mat-label>Titre</mat-label>
           <input
           matInput
           name="title"
@@ -90,6 +103,7 @@
           </div-->
           <div fxFlex="50"  class="pr-16">
             <mat-form-field appearance="outline" [style.width.cm]=10>
+              <mat-label>temps passé</mat-label>
               <input
               matInput
               name="temps passé"
@@ -100,6 +114,7 @@
           </div>
           <div fxFlex="50"  class="pr-16">
             <mat-form-field appearance="outline" [style.width.cm]=10>
+              <mat-label>progression</mat-label>
               <input
               matInput
               name="progression"
@@ -108,19 +123,23 @@
               placeholder="Progression">
             </mat-form-field>
           </div>
-          <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50" class="pr-16">
+        
+        <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50" class="pr-16">
       
-            <mat-form-field appearance="outline" [style.width.cm]=10>
-              <input
-              matInput
-              type="number"
-              name="reamining"
-              [formControlName]="'remaining'"
-              placeholder="reste a faire">
-            </mat-form-field>
-        </div>
+          <mat-form-field appearance="outline" [style.width.cm]=10>
+            <mat-label>estimation</mat-label>
+            <input
+            matInput
+            type="number"
+            name="estimation"
+            [formControlName]="'estimation'"
+            placeholder="estimation">
+          </mat-form-field>
+      </div>
+      
           <div fxFlex="50"  class="pr-16">
             <mat-form-field appearance="outline" [style.width.cm]=10>
+              <mat-label>commentaire</mat-label>
               <input
               matInput
               name="description"

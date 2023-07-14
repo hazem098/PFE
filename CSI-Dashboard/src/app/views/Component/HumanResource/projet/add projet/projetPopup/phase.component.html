@@ -1,4 +1,11 @@
-<h1 matDialogTitle>{{ data.title }}</h1>
+<mat-toolbar matDialogTitle class="mat-primary m-0">
+  <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+    <span class="title dialog-title">{{data.title}}</span>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
 
 <form [formGroup]="itemForm" (ngSubmit)="submit()">
   <div formArrayName="formItems">
