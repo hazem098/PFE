@@ -2,6 +2,7 @@ package com.csidigital.rh.shared.dto.request;
 
 
 import com.csidigital.rh.dao.entity.Resource;
+import com.csidigital.rh.dao.entity.ResponsableExtern;
 import com.csidigital.rh.shared.enumeration.ProjectStatus;
 import com.csidigital.rh.shared.enumeration.ProjectType;
 import jakarta.persistence.EnumType;
@@ -29,9 +30,9 @@ public class ProjectDtoRequest {
     private String projectCategory ;
     private ProjectType projectType;
     private LocalDate endDate;
-
+    private String lieu;
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
     private List<Long> resourceIds;
-
+    private List<ResponsableExtern> responsables;
 }

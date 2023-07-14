@@ -4,13 +4,10 @@ package com.csidigital.rh.management.service.impl;
 
 
 import com.csidigital.rh.dao.entity.*;
-import com.csidigital.rh.dao.repository.PhaseRepository;
-import com.csidigital.rh.dao.repository.ProjectReferenceSequenceRepository;
-import com.csidigital.rh.dao.repository.ResourceRepository;
+import com.csidigital.rh.dao.repository.*;
 import com.csidigital.rh.management.service.ProjectService;
 
 
-import com.csidigital.rh.dao.repository.ProjectRepository;
 import com.csidigital.rh.shared.dto.request.ProjectDtoRequest;
 import com.csidigital.rh.shared.dto.response.ProjectDtoResponse;
 import com.csidigital.rh.shared.dto.response.SousTacheResponse;
@@ -33,6 +30,8 @@ public class ProjectServiceImpl implements ProjectService {
     private ResourceRepository resourceRepository ;
     @Autowired
     private PhaseRepository phaseRepository ;
+    @Autowired
+    private ResponsableExternRepository responsableExternRepository ;
     @Autowired
     private ProjectReferenceSequenceRepository sequenceRepository;
 
@@ -106,9 +105,16 @@ public class ProjectServiceImpl implements ProjectService {
         return project.getResources();
 
     }
+    public List<ResponsableExtern> getProjectResp(Long id) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Project with id " +id+ " not found"));
+
+        return project.getResponsables();
+
+    }
     @Override
     public ProjectDtoResponse createProject(ProjectDtoRequest projectDtoRequest) {
-
+        List<ResponsableExtern> responsableExterns = projectDtoRequest.getResponsables();
         ProjectReferenceSequence sequence = sequenceRepository.findById(1L)
                 .orElse(null) ;
         if (sequence == null) {
@@ -124,6 +130,21 @@ public class ProjectServiceImpl implements ProjectService {
             res.getProject().add(project);
             //resourceRepository.save(res);
         }
+
+
+            if (responsableExterns != null) {
+                for (ResponsableExtern responsableExtern : responsableExterns) {
+                    responsableExtern.setProject(project);
+
+                    responsableExternRepository.save(responsableExtern);
+                }
+            }
+
+
+
+
+
+
 
 
         project.setResources(existingResources);
@@ -214,11 +235,18 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findById(id).orElse(null);
 
         List<Resource> resources = project.getResources();
+        List<Phase> phases = project.getPhases();
+        project.setPhases(null);
         for(Resource r : resources) {
             r.getProject().remove(project);
+            r.setSubTasks(null);
+
             resourceRepository.save(r);
         }
-
+        for(Phase p : phases){
+            p.setProject(null);
+            phaseRepository.save(p);
+        }
             projectRepository.deleteById(id);
 
     }

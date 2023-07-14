@@ -1,9 +1,7 @@
 package com.csidigital.rh.dao.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -17,4 +15,9 @@ public class ResponsableExtern {
     private String addressMail ;
     private String phoneNumber ;
     private String function ;
+
+    @JsonIgnore
+    @ManyToOne
+    private Project project ;
+
 }

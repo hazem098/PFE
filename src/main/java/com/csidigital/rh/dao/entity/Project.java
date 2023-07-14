@@ -37,6 +37,7 @@ public class Project implements Serializable {
     private LocalDate realStartDate ;
     private LocalDate realEndDate ;
     private String projectCategory ;
+    private String lieu ;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate startDate;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
@@ -53,9 +54,11 @@ public class Project implements Serializable {
     List<Resource> resources ;
 
     @JsonIgnore
-    @OneToMany
+    @OneToMany(mappedBy = "project")
     private List<Phase> phases;
-
+    @JsonIgnore
+    @OneToMany
+    private List<ResponsableExtern> responsables;
 
 }
 

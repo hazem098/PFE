@@ -47,7 +47,7 @@ public class Task implements Serializable {
     @JoinColumn(name = "phase_id")
     private Phase phase;
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "task" , cascade = CascadeType.ALL)
     private List<SubTask> SubTaskList ;
 
 }

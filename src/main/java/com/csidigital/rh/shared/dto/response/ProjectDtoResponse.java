@@ -1,7 +1,9 @@
 package com.csidigital.rh.shared.dto.response;
 
 
+import com.csidigital.rh.dao.entity.Phase;
 import com.csidigital.rh.dao.entity.Resource;
+import com.csidigital.rh.dao.entity.ResponsableExtern;
 import com.csidigital.rh.shared.enumeration.ProjectStatus;
 import com.csidigital.rh.shared.enumeration.ProjectType;
 import jakarta.persistence.EnumType;
@@ -34,5 +36,7 @@ public class ProjectDtoResponse {
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
    private  List<Resource> resources ;
+    private List<Phase> phases;
+   private List<ResponsableExtern> responsables;
 
 }

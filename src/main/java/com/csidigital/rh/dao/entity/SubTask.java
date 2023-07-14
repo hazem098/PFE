@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +30,9 @@ public class SubTask implements Serializable {
     private TaskType taskType;
     private Priority priority;
     private Integer remaining ;
+    private LocalDate realStartDate;
     private LocalDate realEndDate;
+    private Date creationDate ;
     private LocalDate projectionDate;
     @Enumerated(EnumType.STRING)
     private TaskPhase taskPhase;

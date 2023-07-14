@@ -8,6 +8,8 @@ import com.csidigital.rh.shared.enumeration.TaskType;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
+
 @Data
 public class SousTacheResponse {
    private Long id ;
@@ -22,7 +24,9 @@ public class SousTacheResponse {
     private TaskPhase taskPhase;
     private Resource resource;
     private Integer remaining ;
+ private LocalDate realStartDate;
     private LocalDate realEndDate;
+    private Date creationDate ;
     private LocalDate projectionDate;
  private String subTaskReference;
     private Task task ;

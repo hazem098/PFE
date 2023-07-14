@@ -56,7 +56,10 @@ public class ProjectController {
     public List<Resource> getProjectResource(@PathVariable Long id) {
         return projectService.getProjectResource(id);
     }
-
+    @GetMapping("/getResp/{id}")
+    public List<ResponsableExtern> getProjectResp(@PathVariable Long id) {
+        return projectService.getProjectResp(id);
+    }
 
 
     @PostMapping("/{projectId}/resources")
