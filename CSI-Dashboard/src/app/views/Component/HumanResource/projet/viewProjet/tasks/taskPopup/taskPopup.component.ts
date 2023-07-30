@@ -44,7 +44,7 @@ import { Employee } from "app/shared/models/Employee";
             estimation : [item.estimation || Validators.required],
             remaining : [item.remaining],
           taskPhase:['A_FAIRE'],
-          progression:[item.progression||''],
+         
           projectNum:[this.data.projectId],
           status :[item.status],
           resourceNum : [item.resourceNum],

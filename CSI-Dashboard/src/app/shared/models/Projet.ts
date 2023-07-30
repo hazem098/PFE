@@ -20,9 +20,9 @@ export enum ProjectStatus{
     
 }
 export enum ProjectType{
-    INTERN="INTERN" ,
-    EXTERN_FORFAIT="EXTERN FORFAIT",
-    EXTERN_T_AND_M="EXTERN T&M"
+    INTERN="INTERNE" ,
+    EXTERN_FORFAIT="EXTERNE FORFAIT",
+    EXTERN_T_AND_M="EXTERNE T&M"
 
 }
 export enum Devise{
@@ -31,11 +31,14 @@ export enum Devise{
     DOLLAR="DLR"
 }
 export enum Fnction{
+   
     SPONSOR="Sponsor du projet maitrise d'ouvrage",
-    CHEF_OUVRAGE="Chef du projet maitrise d'ouvrage",
     DIRECTEUR="Directeur",
     CHEF_OEUVRE="Chef du projet maitrise d'oeuvre",
-    RESPONSABLE_PRESTATAIRE="Responsable prestataire",
-    CHEF_PRESTATAIRE="chef du projet chez le prestataire"
+    CHEF_OUVRAGE="Chef du projet maitrise d'ouvrage",
+    CHEF_PRESTATAIRE="chef du projet chez le prestataire",
+    RESPONSABLE_PRESTATAIRE="Responsable prestataire"
+   
+   
 
 }

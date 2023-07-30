@@ -37,7 +37,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
      
       return this.fb.group({
         name: [null, Validators.required], 
-        
+        livrable:[null , Validators.required]
       });
     }
   

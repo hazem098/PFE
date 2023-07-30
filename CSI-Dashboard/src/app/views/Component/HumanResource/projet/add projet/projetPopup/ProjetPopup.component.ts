@@ -186,7 +186,9 @@ createRepeatForm(): FormGroup {
         return this.repeatForm.get('repeatArray') as FormArray;
       }
       removeHolidayFormGroup(index: number): void {
-        
+        if (index === 0 && this.repeatFormGroup.length === 1) {
+          return; // Skip removal
+        }
         const holidaysFormArray = this.itemForm.get('responsables') as FormArray;
        
         holidaysFormArray.removeAt(index);

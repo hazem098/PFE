@@ -46,18 +46,16 @@
         <mat-form-field appearance="outline" [style.width.cm]=10>
        
           <mat-label>Date  début</mat-label>
-          <input matInput name="startDate" formControlName="startDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
-          <mat-datepicker-toggle matSuffix [for]="appDatepicker1"></mat-datepicker-toggle>
+          <input matInput name="startDate" formControlName="startDate" placeholder="Date début"  type="date" />
+         
         </mat-form-field>
-        <mat-datepicker #appDatepicker1></mat-datepicker>
+       
       </div>
       <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
           <mat-label>Date fin</mat-label>
-          <input matInput name="endDate" formControlName="endDate"  placeholder="Date fin" [matDatepicker]="endDatePicker" />
-          <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+          <input matInput name="endDate" formControlName="endDate"  placeholder="Date fin"  type="date" />
         </mat-form-field>
-        <mat-datepicker #endDatePicker></mat-datepicker>
         <mat-error *ngIf="itemForm.get('endDate').errors?.min">
           La date de fin doit être postérieure à la date de début.
         </mat-error>
@@ -97,13 +95,13 @@
       </div>
       <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
-          <mat-label>Nbre total des heures du travail </mat-label>
+          <mat-label>Nbre total des jours du travail </mat-label>
           <input
           matInput
           type="number"
           name="nbr"
           
-          placeholder="Nbre total des heures du travail">
+          placeholder="Nbre total des jours du travail">
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
@@ -132,13 +130,14 @@
       </div>
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   
+
+      
     <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
       <mat-form-field appearance="outline" [style.width.cm]=10>
         <mat-label>Date réelle de début du projet</mat-label>
-        <input matInput name="realStartDate" formControlName="realStartDate"  placeholder="realStartDate" [matDatepicker]="endDatePicker" />
-        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <input matInput name="realStartDate" formControlName="realStartDate"  placeholder="realStartDate" type="date" />
+       
       </mat-form-field>
-      <mat-datepicker #endDatePicker></mat-datepicker>
       <mat-error *ngIf="itemForm.get('realStartDate').errors?.min">
         La date de fin doit être postérieure à la date de début.
       </mat-error>
@@ -146,10 +145,10 @@
     <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
       <mat-form-field appearance="outline" [style.width.cm]=10>
         <mat-label>Date réelle de fin du projet</mat-label>
-        <input matInput name="realEndDate" formControlName="realEndDate"  placeholder="realEndDate" [matDatepicker]="endDatePicker" />
-        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <input matInput name="realEndDate" formControlName="realEndDate"  placeholder="realEndDate"  type="date" />
+       
       </mat-form-field>
-      <mat-datepicker #endDatePicker></mat-datepicker>
+   
       <mat-error *ngIf="itemForm.get('realEndDate').errors?.min">
         La date de fin doit être postérieure à la date de début.
       </mat-error>
@@ -169,10 +168,10 @@
   <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
     <mat-form-field appearance="outline" [style.width.cm]=10>
       <mat-label>Date de suspension</mat-label>
-      <input matInput name="suspensionDate" formControlName="suspensionDate"  placeholder="realEndDate" [matDatepicker]="endDatePicker" />
-      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <input matInput name="suspensionDate" formControlName="suspensionDate"  placeholder="realEndDate"  type="date" />
+      
     </mat-form-field>
-    <mat-datepicker #endDatePicker></mat-datepicker>
+    
     <mat-error *ngIf="itemForm.get('realEndDate').errors?.min">
       La date de fin doit être postérieure à la date de début.
     </mat-error>
@@ -234,12 +233,12 @@
 <div fxFlex="50"  class="pr-16">
             
   <mat-form-field appearance="outline" [style.width.cm]=10>
-    <mat-label>numéro du telephone </mat-label>
+    <mat-label>e-Mail </mat-label>
     <input
     matInput
     name="addressMail"
     formControlName="addressMail"
-    placeholder="mail">
+    placeholder="e-mail">
   </mat-form-field>
  
 </div>

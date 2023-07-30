@@ -101,28 +101,7 @@
                 </mat-select>
             </mat-form-field>
           </div-->
-          <div fxFlex="50"  class="pr-16">
-            <mat-form-field appearance="outline" [style.width.cm]=10>
-              <mat-label>temps passé</mat-label>
-              <input
-              matInput
-              name="temps passé"
-              type="number"
-              
-              placeholder="temps passé">
-            </mat-form-field>
-          </div>
-          <div fxFlex="50"  class="pr-16">
-            <mat-form-field appearance="outline" [style.width.cm]=10>
-              <mat-label>progression</mat-label>
-              <input
-              matInput
-              name="progression"
-              type="number"
-              [formControlName]="'progression'"
-              placeholder="Progression">
-            </mat-form-field>
-          </div>
+        
         
         <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50" class="pr-16">
       

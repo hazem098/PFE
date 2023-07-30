@@ -13,51 +13,31 @@
       <mat-table [dataSource]="dataSource" matSort  >
         <ng-container matColumnDef="Reference">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Reference
-              <div style="padding-left: 20px;">
-                <mat-form-field style="width:1.5cm;" >
-                 <input matInput (input)="applyFilterReference($event)" placeholder="Filtrer">
-               </mat-form-field>
-               </div> </mat-header-cell>
+             </mat-header-cell>
             <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.projectReference}} </mat-cell>
           </ng-container>
     <ng-container matColumnDef="Titre">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Titre
-        <div style="padding-left: 20px;">
-          <mat-form-field style="width:1.5cm;" >
-           <input matInput (input)="applyFilterReference($event)" placeholder="Filtrer">
-         </mat-form-field>
-         </div> </mat-header-cell>
+        </mat-header-cell>
       <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.name}} </mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="Type">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Type
-        <div style="padding-left: 20px;">
-          <mat-form-field style="width:1.5cm;" >
-           <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
-         </mat-form-field>
-         </div>
+        
       </mat-header-cell>
       <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.projectType}} </mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="Date début">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Date début
-          <div style="padding-left: 20px;">
-            <mat-form-field style="width:1.5cm;" >
-             <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
-           </mat-form-field>
-           </div>
+      
         </mat-header-cell>
         <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.startDate | date:'dd-MM-yyyy'}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="Date fin">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Date fin
-          <div style="padding-left: 20px;">
-            <mat-form-field style="width:1.5cm;" >
-             <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
-           </mat-form-field>
-           </div>
+       
         </mat-header-cell>
         <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.endDate | date:'dd-MM-yyyy'}} </mat-cell>
       </ng-container>
