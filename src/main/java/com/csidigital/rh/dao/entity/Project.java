@@ -1,5 +1,4 @@
 package com.csidigital.rh.dao.entity;
-
 import com.csidigital.rh.shared.enumeration.ProjectStatus;
 import com.csidigital.rh.shared.enumeration.ProjectType;
 import com.fasterxml.jackson.annotation.JsonFormat;
