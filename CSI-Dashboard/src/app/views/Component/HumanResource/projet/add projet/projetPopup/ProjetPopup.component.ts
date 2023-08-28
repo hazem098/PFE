@@ -298,4 +298,11 @@ addHolidayFormGroup(): void {
         });
         holidaysFormArray.push(holidayarticleFormGroup);
       }
+
+      typeMap={
+        [ProjectType.INTERN] :'Interne',
+        [ProjectType.EXTERN_FORFAIT] : 'Forfait_Externe',
+        [ProjectType.EXTERN_T_AND_M] : 'T_et_M_Externe'
+      
+       }
   }

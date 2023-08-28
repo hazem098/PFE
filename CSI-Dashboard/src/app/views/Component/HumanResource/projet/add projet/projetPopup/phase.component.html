@@ -14,33 +14,45 @@
         <div fxFlex="50" class="pr-16">
           <mat-form-field appearance="outline" [style.width.cm]=10>
             <input matInput [formControlName]="'name'" name="name" placeholder="Nom du phase" type="text">
+         <!--   <mat-error *ngIf="itemForm.controls['name'].invalid && itemForm.controls['name'].touched">
+              Le champ nom est requis.
+            </mat-error> -->
           </mat-form-field>
         </div>
         <div fxFlex="50" class="pr-16">
           <mat-form-field appearance="outline" [style.width.cm]=10>
             <mat-label>Date début</mat-label>
-            <input matInput name="startDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
-            <mat-datepicker-toggle matSuffix [for]="appDatepicker1"></mat-datepicker-toggle>
+            <input matInput name="startDate" placeholder="Date début"  [formControlName]="'startDate'"  type="date" />
+            <!--  <mat-error *ngIf="itemForm.controls['startDate'].invalid && itemForm.controls['startDate'].touched">
+              Le champ date de début est requis.
+            </mat-error> -->
           </mat-form-field>
-          <mat-datepicker #appDatepicker1></mat-datepicker>
+       
         </div>
         <div fxFlex="50" class="pr-16">
           <mat-form-field appearance="outline" [style.width.cm]=10>
             <mat-label>Date fin</mat-label>
-            <input matInput name="endDate" placeholder="Date fin" [matDatepicker]="appDatepicker2" />
-            <mat-datepicker-toggle matSuffix [for]="appDatepicker2"></mat-datepicker-toggle>
+            <input matInput name="endDate" placeholder="Date fin"  [formControlName]="'endDate'"  type="date" />
+            <!--   <mat-error *ngIf="itemForm.controls['endDate'].invalid && itemForm.controls['endDate'].touched">
+              Le champ date de fin est requis.
+            </mat-error>    -->
           </mat-form-field>
-          <mat-datepicker #appDatepicker2></mat-datepicker>
         </div>
         <div fxFlex="50" class="pr-16">
           <mat-form-field appearance="outline" [style.width.cm]=10>
-            <input matInput name="description" placeholder="Livrable" [formControlName]="'livrable'">
+            <input matInput name="livrable" placeholder="Livrable" [formControlName]="'livrable'">
+          <!-- <mat-error *ngIf="itemForm.controls['livrable'].invalid && itemForm.controls['livrable'].touched">
+              Le champ livrable est requis.
+            </mat-error> -->
           </mat-form-field>
         </div>
       
-        <div fxFlex="50" class="pr-16">
-          <mat-form-field appearance="outline" [style.width.cm]=10>
-            <input matInput name="description" placeholder="Commentaire">
+        <div fxFlex="50">
+          <mat-form-field appearance="outline" [style.width.cm]=19>
+            <textarea matInput  name="description" placeholder="Commentaire" [formControlName]="'description'"></textarea>
+           <!-- <mat-error *ngIf="itemForm.controls['description'].invalid && itemForm.controls['description'].touched">
+              Le champ commentaire est requis.
+            </mat-error> --> 
           </mat-form-field>
         </div>
       </div>
@@ -64,10 +76,10 @@
     </div>
   </div>
   <div fxLayout="row wrap" fxLayout.lt-sm="column">
-    <div fxFlex="50" class="pr-16">
-      <button type="submit"  mat-raised-button color="primary" (click)="submit()">Enregistrer</button>
-      <span fxFlex></span>
-      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+    <div fxFlex="50" class="pr-16" style="display: flex; justify-content: space-between;">
+      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Annuler</button>
+      <button type="submit" style="margin-left: 5cm;" mat-raised-button color="primary" (click)="submit()">Enregistrer</button>
     </div>
+    
   </div>
 </form>

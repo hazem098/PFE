@@ -12,6 +12,7 @@ import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.s
 import { Employee } from 'app/shared/models/Employee';
 import { TaskViewComponent } from './taskPopup/taskView.component';
 import { ModifTaskComponent } from '../../add projet/modifTaskPopup/modifTask.component';
+import { taskPhase } from 'app/shared/models/Task';
 
 
 @Component({
@@ -76,7 +77,7 @@ toggleSubtaskPanel(task: any) {
   this.isSubtaskPanelOpen = !this.isSubtaskPanelOpen;
 }
 getDisplayedColumns() {
-  return ['Titre' ,'Description' ,'Resource' ,'Tache' , 'DateDébut' , 'DateFin','Actions'];
+  return ['Tache','Titre' ,'Description' , 'DateDébut' , 'DateFin','Resource' ,'Etat','Actions'];
 }
 isEndDateExpired(row: any): boolean {
   const endDate = new Date(row.endDate);
@@ -243,6 +244,15 @@ this.resources=data
         console.error('An error occurred while opening the dialog:', error);
         // Handle the error appropriately (e.g., display an error message)
       });
-    }
-    
+  
+      
+
+   
+}
+taskPhaseMap={
+  [taskPhase.A_FAIRE]:'à faire',
+  [taskPhase.EN_COURS]:'en cours',
+  [taskPhase.TERMINE]:'terminée',
+  [taskPhase.TEST]:'test',
+}
 }

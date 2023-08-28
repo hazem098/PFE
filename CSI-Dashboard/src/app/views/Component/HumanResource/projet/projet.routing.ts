@@ -9,7 +9,7 @@ export const ProjetRoutes: Routes = [
     { 
       path:'projet', 
       component: ProjetComponent,
-      data: { title: 'list' , breadcrumb: '' } 
+      data: { title: 'list' , breadcrumb: 'Liste des projets' } 
     },
     
       {

@@ -35,7 +35,7 @@
             <mat-card style="height: 100%;">
               <mat-card-content class="pt-0">
                 <mat-list>
-                  <mat-list-item><strong>Status de la tache &nbsp;:&nbsp; </strong>{{task.taskPhase}}</mat-list-item>
+                  <mat-list-item><strong>Status de la tache &nbsp;:&nbsp; </strong>{{taskPhaseMap[task.taskPhase]}}</mat-list-item>
                   <mat-list-item><strong>progression &nbsp;:&nbsp; </strong>{{task.progression}}%</mat-list-item>
                     <mat-list-item><strong>reste a faire &nbsp;:&nbsp; </strong>{{task.remaining}}</mat-list-item>
 

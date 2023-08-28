@@ -25,8 +25,11 @@
           <mat-form-field appearance="outline" [style.width.cm]=10>
             <mat-label>Type du projet</mat-label>
             <mat-select  [formControlName]="'projectType'">
-                <mat-option *ngFor="let x of ProjectType" [value]="x">{{ x }}</mat-option>
+                <mat-option *ngFor="let x of ProjectType" [value]="x">{{ typeMap[x] }}</mat-option>
               </mat-select>
+              <mat-error *ngIf="itemForm.controls['projectType'].invalid && itemForm.controls['projectType'].touched">
+                Le champ type du projet est requis.
+              </mat-error>
           </mat-form-field>
         </div>
        
@@ -39,6 +42,9 @@
             type="text"
             [formControlName]="'name'"
             placeholder="Titre">
+            <mat-error *ngIf="itemForm.controls['name'].invalid && itemForm.controls['name'].touched">
+              Le champ titre du projet est requis.
+            </mat-error>
           </mat-form-field>
         </div>
 
@@ -47,7 +53,9 @@
        
           <mat-label>Date  début</mat-label>
           <input matInput name="startDate" formControlName="startDate" placeholder="Date début"  type="date" />
-         
+          <mat-error *ngIf="itemForm.controls['startDate'].invalid && itemForm.controls['startDate'].touched">
+            Le champ date de début est requis.
+          </mat-error>
         </mat-form-field>
        
       </div>
@@ -55,20 +63,22 @@
         <mat-form-field appearance="outline" [style.width.cm]=10>
           <mat-label>Date fin</mat-label>
           <input matInput name="endDate" formControlName="endDate"  placeholder="Date fin"  type="date" />
+          <mat-error *ngIf="itemForm.controls['endDate'].invalid && itemForm.controls['endDate'].touched">
+            Le champ date de fin est requis.
+          </mat-error>
         </mat-form-field>
-        <mat-error *ngIf="itemForm.get('endDate').errors?.min">
-          La date de fin doit être postérieure à la date de début.
-        </mat-error>
+       
       </div>
       <div fxFlex="50"  class="pr-16">
         <mat-form-field appearance="outline" [style.width.cm]=10>
-          <mat-label>Reference de la commande</mat-label>
+          <mat-label>Référence de la commande</mat-label>
           <input
           matInput
           name="commande"
           type="text"
           [formControlName]="'commande'"
-          placeholder="Reference de la commande">
+          placeholder="Référence de la commande">
+         
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
@@ -80,6 +90,9 @@
           name="lieu"
           [formControlName]="'lieu'"
           placeholder="Lieu du projet">
+          <mat-error *ngIf="itemForm.controls['lieu'].invalid && itemForm.controls['lieu'].touched">
+            Le champ lieu du projet est requis.
+          </mat-error> 
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
@@ -88,9 +101,13 @@
           <input
           matInput
           type="number"
-          name="budget"
+          name="workingHourNumber"
           [formControlName]="'workingHourNumber'"
           placeholder="Nbre d'heures du travail par jours">
+          <mat-error *ngIf="itemForm.controls['workingHourNumber'].invalid && itemForm.controls['workingHourNumber'].touched">
+            Le champ heures de travail est requis.
+          </mat-error> 
+                              
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
@@ -102,6 +119,7 @@
           name="nbr"
           
           placeholder="Nbre total des jours du travail">
+    
         </mat-form-field>
       </div>
       <div fxFlex="50"  class="pr-16">
@@ -113,8 +131,8 @@
           name="budget"
           [formControlName]="'budget'"
           placeholder="budget"
-          
           >
+          
         </mat-form-field>
       </div>
      
@@ -127,6 +145,9 @@
           [formControlName]="'description'"
           placeholder="commentaire">
         </mat-form-field>
+        <mat-error *ngIf="itemForm.controls['description'].invalid && itemForm.controls['description'].touched">
+          Le champ commentaire est requis.
+        </mat-error> 
       </div>
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
   
@@ -162,8 +183,11 @@
         [formControlName]="'projectStatus'"
         placeholder="Etat du projet">
       </mat-form-field>
+      <mat-error *ngIf="itemForm.controls['projectStatus'].invalid && itemForm.controls['projectStatus'].touched">
+        Le champ état est requis.
+      </mat-error> 
     </div>
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
   
   <div fxFlex="50"  class="pr-16" *ngIf="!data.isNew">
     <mat-form-field appearance="outline" [style.width.cm]=10>
@@ -203,6 +227,7 @@
         name="nom"
        formControlName="firstName"
         placeholder="Nom">
+       
       </mat-form-field>
      
   </div>
@@ -215,6 +240,7 @@
       name="prénom"
       formControlName="lastName"
       placeholder="Prénom">
+  
     </mat-form-field>
    
 </div>
@@ -290,7 +316,7 @@
        
             <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">people</mat-icon>
-              <span class="tab-label" style="color: #0077C2;">Affectation des resources</span>
+              <span class="tab-label" style="color: #0077C2;">Affectation des ressources</span>
             </ng-template>
             <mat-card  style="border: 5px; width: auto"  >
               <mat-card-content class="p-0">
@@ -340,9 +366,9 @@
          
          </mat-card>
          <div fxFlex="100" class="mt-16">
-          <button type="submit" mat-raised-button color="primary">{{ "SAVE" }}</button>
+          <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Annuler</button>
           <span fxFlex></span>
-          <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+          <button type="submit" mat-raised-button color="primary">{{ "Affecter" }}</button>
         </div>
             </mat-tab>
       </mat-tab-group>

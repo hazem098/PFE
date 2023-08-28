@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { ProjetService } from "../../../projet.service";
 import { ActivatedRoute } from "@angular/router";
+import { taskPhase } from "app/shared/models/Task";
 
 @Component({
     selector: 'taskView',
@@ -22,5 +23,11 @@ import { ActivatedRoute } from "@angular/router";
         this.task= data.task;
         
      
+          }
+          taskPhaseMap={
+            [taskPhase.A_FAIRE]:'à faire',
+            [taskPhase.EN_COURS]:'en cours',
+            [taskPhase.TERMINE]:'terminée',
+            [taskPhase.TEST]:'test',
           }
   }

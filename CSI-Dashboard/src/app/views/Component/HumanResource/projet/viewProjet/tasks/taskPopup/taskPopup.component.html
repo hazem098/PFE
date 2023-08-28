@@ -18,6 +18,15 @@
           </mat-select>
         </mat-form-field>
     </div>
+    <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50" class="pr-16">
+      
+      <mat-form-field appearance="outline" [style.width.cm]=10>
+        <mat-label>Phase</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let res of phases" [value]="res.id">{{res.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
       <div *ngIf="itemForm.get('status').value === 'option2'" fxFlex="50" class="pr-16">
       
           <mat-form-field appearance="outline" [style.width.cm]=10>
@@ -74,19 +83,19 @@
         <mat-form-field appearance="outline" [style.width.cm]=10>
      
         <mat-label>Date  début</mat-label>
-        <input matInput name="startDate" formControlName="startDate" [min]="projectStartDate" [max]="projectEndDate" placeholder="Date début" [matDatepicker]="appDatepicker1" />
-        <mat-datepicker-toggle matSuffix [for]="appDatepicker1"></mat-datepicker-toggle>
+        <input matInput name="startDate" formControlName="startDate" [min]="projectStartDate" [max]="projectEndDate" placeholder="Date début" type="date" />
+  
       
       </mat-form-field>
-      <mat-datepicker #appDatepicker1></mat-datepicker>
+     
     </div>
     <div fxFlex="50"  class="pr-16">
       <mat-form-field appearance="outline" [style.width.cm]=10>
         <mat-label>Date fin</mat-label>
-        <input matInput name="endDate" formControlName="endDate"   [min]="projectStartDate" [max]="projectEndDate" placeholder="Date fin" [matDatepicker]="endDatePicker" />
-        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <input matInput name="endDate" formControlName="endDate"   [min]="projectStartDate" [max]="projectEndDate" placeholder="Date fin" type="date" />
+
       </mat-form-field>
-      <mat-datepicker #endDatePicker></mat-datepicker>
+     
      
       <mat-error *ngIf="itemForm.get('endDate').errors?.min">
         La date de fin doit être postérieure à la date de début.
@@ -127,9 +136,11 @@
             </mat-form-field>
           </div>
     <div fxFlex="100" class="mt-16">
-      <button mat-raised-button color="primary" >{{"SAVE" | translate }}</button>
+
+      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Annuler</button>
       <span fxFlex></span>
-      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+      
+      <button mat-raised-button color="primary" >{{"Enregistrer" | translate }}</button>
     </div>
   </div>
   </form>

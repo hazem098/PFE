@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Civility, Employee, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Projet } from 'app/shared/models/Projet';
+import { ProjectType, Projet } from 'app/shared/models/Projet';
 import { ProjetService } from '../projet.service';
 import { ProjetPopupComponent } from './projetPopup/ProjetPopup.component';
 import { ResourceService } from '../../resource/resource.service';
@@ -100,7 +100,7 @@ export class ProjetComponent implements OnInit {
     let title = isNew ? 'Nouveau projet' : 'Modifier projet';
     let dialogRef: MatDialogRef<any> = this.dialog.open(ProjetPopupComponent, {
       width: '920px',
-      height:'650px',
+      height:'530px',
       disableClose: true,
       data: { title: title, payload: data , isNew: isNew }
     })
@@ -135,7 +135,7 @@ export class ProjetComponent implements OnInit {
   openPopUp2(projectId: number , isNew?) {
     let title = isNew ? 'Nouvelle Phase' : 'Ajouter phase';
     let dialogRef: MatDialogRef<any> = this.dialog.open(PhaseComponent, {
-      width: '900px',
+      width: '1000px',
       height:'400px',
       disableClose: true,
       data: { title: title, payload: projectId , isNew: isNew }
@@ -183,5 +183,10 @@ deleteItem(row) {
  
  }
  
- 
+ typeMap={
+  [ProjectType.INTERN] :'Interne',
+  [ProjectType.EXTERN_FORFAIT] : 'Forfait_Externe',
+  [ProjectType.EXTERN_T_AND_M] : 'T_et_M_Externe'
+
+ }
 }

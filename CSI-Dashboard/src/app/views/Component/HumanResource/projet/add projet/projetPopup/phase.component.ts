@@ -9,9 +9,19 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
     
    
   })
+  
   export class PhaseComponent implements OnInit {
     public itemForm: FormGroup;
     public formItems: FormArray;
+    formErrorMessages = {
+      name:'Le nom est requis',
+      startDate: 'La date de débute est requise',
+      endDate: 'La date de fin est requise',
+      livrable: 'Le livrable est requis',
+      description: "La description   est requise",
+     
+  
+    };
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
         public dialogRef: MatDialogRef<PhaseComponent>,
@@ -37,7 +47,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
      
       return this.fb.group({
         name: [null, Validators.required], 
-        livrable:[null , Validators.required]
+        livrable:[null , Validators.required],
+        startDate:[null , Validators.required],
+        endDate:[null , Validators.required],
+        description:[null , Validators.required],
       });
     }
   
@@ -52,7 +65,27 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
   }
       this.formItems.removeAt(index);
     }
+
+    submit() {
+      if (this.itemForm.valid) {
+        this.dialogRef.close(this.itemForm.value);
+      } else {
+        // Mark all the form controls as touched to display the validation messages
+        this.markFormGroupTouched(this.itemForm);
+      }
+    }
     
+    private markFormGroupTouched(formGroup: FormGroup) {
+      // Recursively mark all form controls as touched to trigger the validation
+      Object.values(formGroup.controls).forEach(control => {
+        if (control instanceof FormGroup) {
+          this.markFormGroupTouched(control);
+        } else {
+          control.markAsTouched();
+        }
+      });
+    }
+    /*
     submit() {
       if (this.itemForm.invalid) {
         return;
@@ -66,6 +99,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
       this.dialogRef.close(formItemsValue);
             console.log(this.data.payload)
             console.log(this.itemForm.value)
-        }
+        }*/
    
   }
